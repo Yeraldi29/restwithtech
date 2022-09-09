@@ -1,3 +1,14 @@
 {
-    "placeholder":"Search..."
+    "placeholder":"Search...",
+    "change-language":"Language to {{changeTo}}",
+    "account":"Account",
+    "log-in":"Log in",
+    "sign-in":"Sign in",
+    "categories":{
+        "mobile":"Mobiles",
+        "code":"Code",
+        "tech":"Technologies",
+        "os":"OS",
+        "C&P":"Computers & Portables"
+    }
 }

@@ -1,3 +1,14 @@
 {
-    "placeholder":"Buscar..."
+    "placeholder":"Buscar...",
+    "change-language":"Idioma a {{changeTo}}",
+    "account":"Cuenta",
+    "log-in":"Iniciar sesión",
+    "sign-in":"Registrate",
+    "categories":{
+        "mobile":"Móviles",
+        "code":"Código",
+        "tech":"Tecnologías",
+        "os":"SO",
+        "C&P":"Computadoras y Portátiles"
+    }
 }
