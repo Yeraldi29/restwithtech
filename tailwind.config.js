@@ -11,21 +11,30 @@ module.exports = {
         "Blue-Gray":"#7796CB"
       },
       colors:{ 
+        "Lavender-Blue":"#D1D2F9",
         "Blue-Gray":"#7796CB",
         "BabyBlueEyes":"#A3BCF9",
       },
       keyframes: {
         wiggle: {
-          "0%, 100%": { transform: "rotate(48deg)"},
-          "50%": {transform: "rotate(-48deg)"}
-        }
+          "0%, 100%": { transform: "rotate(10deg)"},
+          "50%": {transform: "rotate(-10deg)"}
+        },
+        expand: {
+          "0%,50%": {
+              transform: "scale(0)"
+         },
+         "100%":{transform: "scale(1)"}
+         }
        },
        animation: {
-          wiggle:"wiggle 700ms ease-in-out"
+          wiggle:"wiggle 700ms ease-in-out",
+          expand:" expand 1s ease-in"
        }
     },
   },
   plugins: [
-     require("@tailwindcss/forms")
+     require("@tailwindcss/forms"),
+     require('tailwind-scrollbar'),
   ],
 }
