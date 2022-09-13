@@ -8,7 +8,7 @@ const MyApp = ({ Component, pageProps }: AppProps) =>{
     return (
         <StateClick>
             <Layout>
-            <Component {...pageProps} />
+                <Component {...pageProps} />
             </Layout>
         </StateClick>
     )

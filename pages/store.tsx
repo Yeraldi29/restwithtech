@@ -17,7 +17,7 @@ const StateClick = ({children}:{children: React.ReactNode}) => {
    
     const handleClick = (clicked: boolean) => {
         setClickMenu(clicked)
-      }
+    }
 
     return <menuClick.Provider value={{clickMenu,handleClick}}>{children}</menuClick.Provider>
 }

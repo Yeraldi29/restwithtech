@@ -8,17 +8,18 @@ interface Props {
 }
 
 const Layout = ({children}:Props) => {
-  const clickState = useContext(menuClick)
+   const clickState = useContext(menuClick)
 
   return (
-    <div className=" max-w-7xl mx-auto h-screen">
+    <div className=" max-w-7xl mx-auto h-screen ">
       <Header />
       <main>
       <style jsx global>{`
              ${clickState.clickMenu && 'body {background: #000000ad}' }
           `}
       </style>
-        {children}</main>
+        {children}
+      </main>
     </div>
   )
 }

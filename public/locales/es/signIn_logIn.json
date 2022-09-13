@@ -1,0 +1,13 @@
+{
+    "email":"Correo electrónico",
+    "password":"Contraseña",
+    "logIn":{
+        "login":"Iniciar sesión",
+        "forgotPassword":"¿Has olvidado tu contraseña?",
+        "account":"¿Necesitas una cuenta?"
+    },
+    "signIn":{
+        "signin":"Registrarse",
+        "areUser": "¿Eres un usuario?"
+    }
+}

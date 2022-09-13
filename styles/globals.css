@@ -10,8 +10,8 @@
         font-family:'Kanit', sans-serif;
     }
     body {
-        contain:content;
-        @apply text-white bg-BabyBlueEyes/30 scrollbar  scrollbar-thumb-black
+        @apply text-white bg-BabyBlueEyes/30 scrollbar-thin scrollbar-track-white
+        scrollbar-thumb-DarkBlueGray
     }
     h1,h2,h3,h4,h5,h5{
         font-family: 'Shadows Into Light', cursive;
@@ -24,5 +24,8 @@
     }
     .divLine{
         @apply border-[3px] w-10 my-1 transform duration-300 ease-out transition
+    }
+    .input{
+        @apply rotate-0/1 bg-Lavender-Blue rounded-2xl  focus:border-none focus:outline-none border-none text-DarkBlueGray
     }
 }

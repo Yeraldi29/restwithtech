@@ -8,7 +8,7 @@ const Language = () => {
   const [changeTo,flag] = useChangeLng()
     
   return (
-    <Link href={"/"} locale={changeTo} >
+    <Link href={""} locale={changeTo} >
       <div className={`${click && "animate-wiggle"} w-6 h-6 relative cursor-pointer -rotate-12 border border-Lavender-Gray rounded-md hover:rotateItem hover:group overflow-hidden`}
       onClick={()=>setClick(true)} onAnimationEnd={()=>setClick(false)}>
         <Image src={flag} layout="fill"  className=" rounded-md hover:scale-150 duration-300" alt='change language'/> : 
