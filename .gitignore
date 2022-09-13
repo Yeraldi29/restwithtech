@@ -27,7 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
-restwithtech-firebase-admin
+restwithtech-firebase-admin.json
 
 # vercel
 .vercel
