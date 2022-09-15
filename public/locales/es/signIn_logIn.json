@@ -1,13 +1,25 @@
 {
     "email":"Correo electrónico",
     "password":"Contraseña",
+    "try":"O INTENTA CON: ",
     "logIn":{
         "login":"Iniciar sesión",
         "forgotPassword":"¿Has olvidado tu contraseña?",
-        "account":"¿Necesitas una cuenta?"
+        "account":"¿Necesitas una cuenta?",
+        "remember":"¿Recuérdame?"
     },
     "signIn":{
         "signin":"Registrarse",
         "areUser": "¿Eres un usuario?"
+    },
+    "errors":{
+        "email":{
+            "empty":"¡El correo electrónico es requerido!",
+            "valid":"¡Esto no es un formato de correo electrónico válido!"
+        },
+        "password":{
+            "empty":"¡La contraseña es requerida!",
+            "valid":"La contraseña debe contener al menos 1 número, 1 letra en mayúscula y 1 caracter especial y las contraseñas no puede tener más de 16 caracteres."
+        }
     }
 }

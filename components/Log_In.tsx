@@ -1,19 +1,21 @@
 import { useTranslation } from "next-i18next"
 import FormContainer from "./FormContainer"
 
-const Sign_In = () => {
+const Log_In = () => {
   const { t } = useTranslation("signIn_logIn")
     
   return (
     <FormContainer 
-    title={t("signIn.signin")}  
+    title={t("logIn.login")}  
     email={t("email")}
     password={t("password")}
     tryAccount={t("try")}
-    account={t("signIn.areUser")}
-    change={t("logIn.login")}
+    account={t("logIn.account")}
+    change={t("signIn.signin")}
+    forgotPassword={t("logIn.forgotPassword")}
+    remember={t("logIn.remember")}
     />
   )
 }
 
-export default Sign_In
+export default Log_In

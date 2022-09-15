@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const withMT = require("@material-tailwind/react/utils/withMT")
+
+module.exports = withMT({
   content: ["./pages/**/*.{js,ts,jsx,tsx}",
   "./components/**/*.{js,ts,jsx,tsx}",],
   theme: {
@@ -31,14 +33,13 @@ module.exports = {
       animation: {
          wiggle:"wiggle 700ms ease-in-out",
          expand:" expand 1s ease-in"
-      },
-      rotate:{
-        "0/1":"0.5deg"
       }
     },
   },
   plugins: [
-     require("@tailwindcss/forms"),
-     require('tailwind-scrollbar'),
+    require('tailwind-scrollbar'),
+    require('@tailwindcss/forms')({
+      strategy: 'base'
+    }),
   ],
-}
+})

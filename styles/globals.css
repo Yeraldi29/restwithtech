@@ -26,6 +26,6 @@
         @apply border-[3px] w-10 my-1 transform duration-300 ease-out transition
     }
     .input{
-        @apply rotate-0/1 bg-Lavender-Blue rounded-2xl  focus:border-none focus:outline-none border-none text-DarkBlueGray
+        @apply rotate-1 bg-Lavender-Blue rounded-xl  focus:border-none focus:outline-none border-none text-DarkBlueGray mb-4 w-full h-12 focus:ring-2 focus:ring-Blue-Gray caret-Blue-Gray
     }
 }

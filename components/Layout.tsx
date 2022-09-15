@@ -11,16 +11,15 @@ const Layout = ({children}:Props) => {
    const clickState = useContext(menuClick)
 
   return (
+    <>
+    <div className={`${clickState.clickMenu ? "bg-black/50  absolute inset-0 backdrop-blur-sm z-30 " : " hidden"}`}></div>
     <div className=" max-w-7xl mx-auto h-screen ">
       <Header />
       <main>
-      <style jsx global>{`
-             ${clickState.clickMenu && 'body {background: #000000ad}' }
-          `}
-      </style>
         {children}
       </main>
     </div>
+    </>
   )
 }
 

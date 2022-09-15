@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tailwindcss/forms": "^0.5.3",
+    "@material-tailwind/react": "^1.2.4",
     "core-js": "^3.25.0",
     "firebase": "^9.9.4",
     "next": "12.2.5",
@@ -21,6 +21,7 @@
     "tailwind-scrollbar": "^2.0.1"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@types/node": "18.7.14",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
