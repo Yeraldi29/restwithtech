@@ -1,7 +1,5 @@
 import { useTranslation } from "next-i18next"
 import FormContainer from "./FormContainer"
-import { auth } from "../firebase"
-import { createUserWithEmailAndPassword } from "firebase/auth"
 
 const Sign_In = () => {
   const { t } = useTranslation("signIn_logIn")
