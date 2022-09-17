@@ -15,11 +15,14 @@
     "errors":{
         "email":{
             "empty":"¡El correo electrónico es requerido!",
-            "valid":"¡Esto no es un formato de correo electrónico válido!"
+            "valid":"¡Esto no es un formato de correo electrónico válido!",
+            "exists": "¡Este usuario ya existe!",
+            "doesn't-exists": "¡Este usuario no existe!"
         },
         "password":{
             "empty":"¡La contraseña es requerida!",
             "valid":"La contraseña debe contener al menos 1 número, 1 letra en mayúscula y 1 caracter especial y las contraseñas no puede tener más de 16 caracteres."
-        }
+        },
+        "internet":"no network connection"
     }
 }

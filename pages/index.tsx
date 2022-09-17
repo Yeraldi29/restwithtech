@@ -9,7 +9,7 @@ const Home: NextPage = () => {
         <title>Restwithtech</title>
         <link rel="icon" href="/icon.png" />
       </Head>
-    </>
+  </>
   )
 }
 
