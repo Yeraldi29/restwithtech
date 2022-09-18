@@ -24,5 +24,12 @@
             "valid":"La contraseña debe contener al menos 1 número, 1 letra en mayúscula y 1 caracter especial y las contraseñas no puede tener más de 16 caracteres."
         },
         "internet":"no network connection"
+    },
+    "verification":{
+        "titlePage": "Verificación",
+        "title":"Verifica la dirección de tu correo electrónico.",
+        "message":"Se ha enviado un correo electrónico de verificación a ",
+        "suggestion":"Sigue las intrucciones en el correo electrónico para verificar la cuenta.",
+        "resend":"Reenviar correo"
     }
 }

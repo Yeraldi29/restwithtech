@@ -1,10 +1,10 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import {serverSideTranslations} from "next-i18next/serverSideTranslations"
 import { useTranslation } from 'next-i18next'
 import Sign_In from '../../components/Sign_In'
+import { NextPageWithLayout } from '../_app'
 
-const SignIn: NextPage = () => {
+const SignIn: NextPageWithLayout = () => {
     const { t } = useTranslation("signIn_logIn")
 
   return (
@@ -23,5 +23,7 @@ export const getStaticProps = async ({ locale }:{locale:string}) => ({
     ...await serverSideTranslations(locale, ['signIn_logIn','header']),
   },
 })
+
+SignIn.getLayout = (page) => page
 
 export default SignIn

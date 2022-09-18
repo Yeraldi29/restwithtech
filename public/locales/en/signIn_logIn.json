@@ -24,5 +24,12 @@
             "valid":"Password must contain al least 1 number, 1 uppercase and 1 spacial character and passwords cannot be more that 16 chacacters."
         },
         "internet":"no network connection"
+    },
+    "verification":{
+        "titlePage": "Verification",
+        "title":"Verify you email address.",
+        "message":"A verification email has been sent to ",
+        "suggestion":"Follow the instruction in the email to verify your account.",
+        "resend":"Resend email"
     }
 }

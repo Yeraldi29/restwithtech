@@ -2,11 +2,9 @@ import { useTranslation } from "next-i18next"
 import { useEffect, useState } from "react"
 import { BiHide, BiShow } from "react-icons/bi" 
 import { Checkbox } from "@material-tailwind/react"
-import useValidation from "../Hooks/useValidation"
-import Link from "next/link"
 import { useRouter } from "next/router"
-import { createUserWithEmailAndPassword, sendEmailVerification, getAuth } from "firebase/auth"
-import { auth } from "../firebase"
+import useValidation from "../Hooks/useValidation"
+import UserActions from "./functions/UserActions"
 
 const initialValues = {
     email: "",
@@ -18,12 +16,13 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
     const [submit, setSubmit] = useState(false)
     const [validation, setValidation] = useState(false)
     const [showPassword, setShowPassword] = useState({show:true, hide:false})
+
     const [formValues, setFormValues] = useState(initialValues)
     const [formErrors, setFormErros] = useState(initialValues)
+    
     const {errors, setValues, values, other, setOther, messageErrorFirebase} = useValidation()
     
     const { t } = useTranslation("signIn_logIn")
-
     const path = useRouter().asPath
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -51,22 +50,12 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
         setFormErros(errors)
         setSubmit(true)
 
-        const Auth = getAuth();
-
-        console.log("🚀 ~ file: FormInputs.tsx ~ line 56 ~ handleSubmit ~ validation", validation)
-        if(validation && path === "/sign-in"){
-            createUserWithEmailAndPassword(auth, formValues.email, formValues.password ).then(userCredentials=>{
-                sendEmailVerification(userCredentials.user).then(()=>{
-                    console.log(userCredentials.user);
-                })
-                Auth.signOut()
-            }).catch(err => {
-                setOther(err.message)
-                setFormErros(errors)
-                console.log("🚀 ~ file: FormInputs.tsx ~ line 64 ~ createUserWithEmailAndPassword ~ err.message", err.message)
-            })
+        const handleOther = (err:string) => {
+            setOther(err)
+            setFormErros(errors)
         }
 
+        UserActions({validation,formValues,path,handleOther})
     }
 
   return (
