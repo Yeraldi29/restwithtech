@@ -1,5 +1,6 @@
 import { auth } from "../../firebase"
-import { createUserWithEmailAndPassword, sendEmailVerification, getAuth } from "firebase/auth"
+import { createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth"
+import type { NextRouter } from "next/router"
 
 interface PropsUserActions{
     validation: boolean
@@ -7,19 +8,22 @@ interface PropsUserActions{
         email: string
         password: string
     }
-    path: string
     handleOther: (err:string) => void
+    handleTimeActive: (time: boolean) => void
+    Router: NextRouter
 }
 
-const UserActions = ({validation, formValues, path, handleOther}: PropsUserActions) => {
-    const Auth = getAuth();
+const UserActions = ({validation, formValues, handleOther, handleTimeActive, Router}: PropsUserActions) => {
+    const path = Router.asPath
+    const locale = Router.locale
 
-    if(validation && path === "/sign-in"){
+    if(validation && `${locale}${path}` ===  `${locale}/sign-in` ){
         createUserWithEmailAndPassword(auth, formValues.email, formValues.password ).then(userCredentials=>{
             sendEmailVerification(userCredentials.user).then(()=>{
-                console.log(userCredentials.user);
+                handleTimeActive(true)
+                Router.push(`${locale === "es/" ? locale : "" } sign-in/verification`)
+                console.log(userCredentials.user.email);
             })
-            // Auth.signOut()
         }).catch(err => {
             handleOther(err.message)
             console.log("🚀 ~ file: FormInputs.tsx ~ line 64 ~ createUserWithEmailAndPassword ~ err.message", err.message)

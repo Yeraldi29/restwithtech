@@ -2,9 +2,10 @@ import { useTranslation } from "next-i18next"
 import { useEffect, useState } from "react"
 import { BiHide, BiShow } from "react-icons/bi" 
 import { Checkbox } from "@material-tailwind/react"
-import { useRouter } from "next/router"
+import Router from "next/router"
 import useValidation from "../Hooks/useValidation"
 import UserActions from "./functions/UserActions"
+import { useAuthValue } from "../pages/AuthContext"
 
 const initialValues = {
     email: "",
@@ -23,8 +24,8 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
     const {errors, setValues, values, other, setOther, messageErrorFirebase} = useValidation()
     
     const { t } = useTranslation("signIn_logIn")
-    const path = useRouter().asPath
-
+    const {handleTimeActive} = useAuthValue()
+    
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {value, name} = e.target
         setFormValues({...formValues,[name]:value})
@@ -55,7 +56,7 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
             setFormErros(errors)
         }
 
-        UserActions({validation,formValues,path,handleOther})
+        UserActions({validation,formValues,handleOther,handleTimeActive, Router})
     }
 
   return (
@@ -92,17 +93,17 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
              <small>{formErrors.password}</small>
          </p>
         
-        <div className={`relative flex items-center ${!remember && " hidden "}`}>
-            <Checkbox className=" w-6 h-6 -rotate-12 text-Lavender-Blue focus:border-Lavender-Blue focus:ring-Lavender-Blue" color="pink"  defaultChecked />
-            <p>{remember}</p>
-        </div>
-        <button type="submit" className={`${animation && " animate-wiggle "} bg-Lavender-Blue  mx-auto p-3 rounded-xl -rotate-12 my-4 active:bg-white text-red-600  cursor-pointer lg:hover:opacity-50`}
-         onClick={()=>{
-             setAnimation(true)
-         }}
-          onAnimationEnd={()=>{setAnimation(false)}}>
-             <p className=" font-bold text-xl ">{title.toUpperCase()}</p>
-         </button>   
+            <div className={`relative flex items-center h-8 ${!remember && " hidden "}`}>
+                <Checkbox className=" w-6 h-6 -rotate-12 text-Lavender-Blue focus:border-Lavender-Blue focus:ring-Lavender-Blue" color="pink"  defaultChecked />
+                <p>{remember}</p>
+            </div>
+            <button type="submit" className={`${animation && " animate-wiggle "} bg-Lavender-Blue  mx-auto p-3 rounded-xl -rotate-12 my-4 active:bg-white text-red-600  cursor-pointer lg:hover:opacity-50`}
+                onClick={()=>{
+                    setAnimation(true)
+                }}
+                 onAnimationEnd={()=>{setAnimation(false)}}>
+                    <p className=" font-bold text-xl ">{title.toUpperCase()}</p>
+            </button>
      </form>
   )
 }

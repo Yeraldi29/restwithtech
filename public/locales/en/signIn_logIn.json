@@ -28,8 +28,8 @@
     "verification":{
         "titlePage": "Verification",
         "title":"Verify you email address.",
-        "message":"A verification email has been sent to ",
-        "suggestion":"Follow the instruction in the email to verify your account.",
+        "message":"A verification email has been sent to: ",
+        "suggestion":"Follow the instructions in the email to verify your account.",
         "resend":"Resend email"
     }
 }
