@@ -6,11 +6,12 @@ import { useState, useEffect } from "react"
 import { useTranslation } from "next-i18next"
 import { useAuthValue } from "../../AuthContext"
 import { auth } from "../../../firebase"
-import { sendEmailVerification} from "firebase/auth"
+import { sendEmailVerification, signOut} from "firebase/auth"
 
 const Verification: NextPageWithLayout = () => {
    const {t} = useTranslation("signIn_logIn")
    const [animation, setAnimation] = useState(false)
+   const [render, setRender] = useState(false)
    const [time, setTime] = useState(60)
 
    const {currentUser, timeActive, handleTimeActive} = useAuthValue()
@@ -21,7 +22,7 @@ const Verification: NextPageWithLayout = () => {
       sendEmailVerification(auth.currentUser).then( () => {
         handleTimeActive(true)
       }).catch(err => {
-        alert(err.message)
+        console.log("🚀 ~ file: index.tsx ~ line 25 ~ sendEmailVerification ~ err.message", err.message)
       })
     }
 
@@ -48,14 +49,26 @@ const Verification: NextPageWithLayout = () => {
       currentUser?.reload().then(()=>{
         if(currentUser?.emailVerified){
           clearInterval(interval)
-          Router.push("/log-in")
+          signOut(auth).then(()=>{
+            Router.push("/log-in")
+          }).catch(err => {
+            console.log("🚀 ~ file: index.tsx ~ line 54 ~ signOut ~ err", err)
+          })
         }
       }).catch(err=>{
-        alert(err.message)
+        console.log("🚀 ~ file: index.tsx ~ line 60 ~ currentUser?.reload ~ err.message", err.message)
       })
     },1000)
+    
+    if(!currentUser){
+      Router.push("/sign-in")
+      setRender(false)
+    }else{
+      setRender(true)
+    }
+    
    },[currentUser])
-   
+  
   return (
     <>
     <Head>
@@ -63,7 +76,8 @@ const Verification: NextPageWithLayout = () => {
       <link rel="icon" href="/icon.png" />
     </Head>
 
-    <div className=" bg-DarkBlueGray flex flex-col items-center space-y-5 mx-auto w-[21rem] -rotate-1 rounded-2xl py-10 px-6 mt-24  md:w-[30rem] xl:mt-36">
+    { render && (
+      <div className=" bg-DarkBlueGray flex flex-col items-center space-y-5 mx-auto w-[21rem] -rotate-1 rounded-2xl py-10 px-6 mt-24  md:w-[30rem] xl:mt-36">
       <h1 className=" text-xl text-center">{t("verification.title")}</h1>
       <p className="text-center">
         <strong>{t("verification.message")}</strong>
@@ -82,15 +96,17 @@ const Verification: NextPageWithLayout = () => {
         <p>{t("verification.resend")}<span className={`${timeActive && "ml-2 text-white  bg-DarkBlueGray rounded-md p-1"}`}>{timeActive && time}</span></p>
       </button>      
     </div>
+      )
+    }
     </>
   )
 }
 
-export const getStaticProps = async ({ locale }:{locale:string}) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['signIn_logIn','header']),
-  },
-})
+export const getStaticProps = async ({ locale }:{locale:string}) => {
+  return {
+    props: {...await serverSideTranslations(locale, ['signIn_logIn','header']),}
+  }
+}
 
 Verification.getLayout = (page) => page
 

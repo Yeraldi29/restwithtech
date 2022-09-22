@@ -20,8 +20,8 @@ const UserActions = ({validation, formValues, handleOther, handleTimeActive, Rou
     if(validation && `${locale}${path}` ===  `${locale}/sign-in` ){
         createUserWithEmailAndPassword(auth, formValues.email, formValues.password ).then(userCredentials=>{
             sendEmailVerification(userCredentials.user).then(()=>{
-                handleTimeActive(true)
                 Router.push(`${locale === "es/" ? locale : "" } sign-in/verification`)
+                handleTimeActive(true)
                 console.log(userCredentials.user.email);
             })
         }).catch(err => {

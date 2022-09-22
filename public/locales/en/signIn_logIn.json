@@ -1,7 +1,7 @@
 {
     "email":"Email",
     "password":"Password",
-    "try":"OR TRY WITH: ",
+    "try":"OR TRY FAST WITH: ",
     "logIn":{
         "login":"Log in",
         "forgotPassword":"Did you forget your password?",

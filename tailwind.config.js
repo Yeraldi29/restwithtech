@@ -28,11 +28,19 @@ module.exports = withMT({
               transform: "scale(0)"
          },
          "100%":{transform: "scale(1)"}
-         }
+         },
+         expand_close: {
+          "0%, 25%": {
+            transform: "scale(0)"
+           },
+          "25%,50%":{transform: "scale(1)"},
+          "100%":{transform: "scale(0)"}
+       },
        },
       animation: {
          wiggle:"wiggle 700ms ease-in-out",
-         expand:" expand 1s ease-in"
+         expand:" expand 1s ease-in ",
+         expand_close: " expand_close 1.1s ease-in-out infinite"
       }
     },
   },

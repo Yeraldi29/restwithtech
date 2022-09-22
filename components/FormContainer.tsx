@@ -3,6 +3,8 @@ import {AiOutlineGithub, AiOutlineGoogle} from "react-icons/ai"
 import FormInputs from "./FormInputs"
 import { useState } from "react"
 import { useRouter } from "next/router"
+import Image from "next/image"
+import Language from "./header/Language"
 
 interface PropsInput {
     title: string
@@ -20,15 +22,22 @@ const FormContainer = ({title,email,password,tryAccount,account,change,forgotPas
         animation:false,
         icon:0
     })
-  const router = useRouter()
-  const path = router.asPath
     
   return (
-    <div className=" bg-DarkBlueGray border -rotate-1 mx-auto mt-2 rounded-2xl w-[21.5rem] shadow-2xl py-10 px-6 sm:w-96 sm:mt-6 sm:px-8 xl:mt-16">
-    <h2 className="text-center text-2xl mb-4">{title.toUpperCase()}</h2>
+    <div className=" relative bg-DarkBlueGray border -rotate-1 mx-auto mt-2 rounded-2xl w-[21.5rem] shadow-2xl py-10 px-6 sm:w-96 sm:mt-6 sm:px-8 xl:mt-16">
+    <div className=" absolute inset-0 left-4 top-4">
+        <Language />
+    </div>
+    
+    <div className="flex items-center justify-center mb-4">
+        <Link href={"/"}>
+            <Image src={"/icon.png"} className=" -rotate-12 cursor-pointer" height={60} width={60} alt=""/>
+        </Link>
+        <h2 className="text-center text-2xl ">{title.toUpperCase()}</h2>
+    </div>
     <FormInputs email={email} password={password} title={title} remember={remember}/>
 
-    <p className=" text-sm text-right mb-4 opacity-90 cursor-pointer">{forgotPassword}</p>
+    <p className=" text-sm text-right mb-4 opacity-90 cursor-pointer lg:hover:opacity-50">{forgotPassword}</p>
     
     <p className="text-center mt-2">{tryAccount}</p>
     <hr className="border-2 bg-white  rounded-sm"/>
@@ -44,7 +53,7 @@ const FormContainer = ({title,email,password,tryAccount,account,change,forgotPas
     </div>
     <div className="flex justify-center items-center space-x-3">
         <p>{account}</p>
-        <Link href={`${ path === "/log-in" ? "/sign-in" : "/log-in"}`} locale={router.locale}>
+        <Link href={`${ useRouter().asPath === "/log-in" ? "/sign-in" : "/log-in"}`} locale={useRouter().locale}>
             <div className={`${(animation.animation && animation.icon === 3) && " animate-wiggle "} bg-Lavender-Blue rounded-xl text-DarkBlueGray font-semibold p-2 border -rotate-12 active:bg-white hover:opacity-50 cursor-pointer`}
             onClick={()=>setAnimation({animation:true,icon:3})} onAnimationEnd={()=>setAnimation({animation:false,icon:0})}>
                 <p >{change}</p>

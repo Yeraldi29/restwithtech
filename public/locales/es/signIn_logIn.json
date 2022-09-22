@@ -1,7 +1,7 @@
 {
     "email":"Correo electrónico",
     "password":"Contraseña",
-    "try":"O INTENTA CON: ",
+    "try":"O INTENTA RAPIDO CON: ",
     "logIn":{
         "login":"Iniciar sesión",
         "forgotPassword":"¿Has olvidado tu contraseña?",
