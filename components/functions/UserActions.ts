@@ -1,6 +1,7 @@
 import { auth } from "../../firebase"
-import { createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth"
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword} from "firebase/auth"
 import type { NextRouter } from "next/router"
+import type { TFunction } from "next-i18next"
 
 interface PropsUserActions{
     validation: boolean
@@ -8,28 +9,49 @@ interface PropsUserActions{
         email: string
         password: string
     }
-    handleOther: (err:string) => void
+    handleOther: (err:string|boolean) => void
     handleTimeActive: (time: boolean) => void
+    title: string
     Router: NextRouter
+    t: TFunction
 }
 
-const UserActions = ({validation, formValues, handleOther, handleTimeActive, Router}: PropsUserActions) => {
-    const path = Router.asPath
+const UserActions = ({validation, formValues, handleOther, handleTimeActive, title,Router, t}: PropsUserActions) =>{
     const locale = Router.locale
 
-    if(validation && `${locale}${path}` ===  `${locale}/sign-in` ){
-        createUserWithEmailAndPassword(auth, formValues.email, formValues.password ).then(userCredentials=>{
-            sendEmailVerification(userCredentials.user).then(()=>{
-                Router.push(`${locale === "es/" ? locale : "" } sign-in/verification`)
-                handleTimeActive(true)
-                console.log(userCredentials.user.email);
-            })
-        }).catch(err => {
-            handleOther(err.message)
-            console.log("🚀 ~ file: FormInputs.tsx ~ line 64 ~ createUserWithEmailAndPassword ~ err.message", err.message)
-        })
+    if(validation){
+        switch(title){
+            case (t("signIn.signin")):{
+                createUserWithEmailAndPassword(auth, formValues.email, formValues.password ).then(userCredentials=>{
+                sendEmailVerification(userCredentials.user).then(()=>{
+                    Router.push(`${locale === "es/" ? locale : "" } sign-in/verification`)
+                    handleTimeActive(true)
+                    console.log(userCredentials.user.email);
+                })
+            }).catch(err => {
+                handleOther(err.message)
+                console.log("🚀 ~ file: FormInputs.tsx ~ line 64 ~ createUserWithEmailAndPassword ~ err.message", err.message)
+            })  
+            break
+            }
+            case (t("logIn.login")):{
+                signInWithEmailAndPassword(auth,formValues.email,formValues.password)
+                .then(userCredantials => {
+                    const user = userCredantials.user
+                    if(user.emailVerified){
+                    Router.push("/")
+                    }else{
+                        handleOther(user.emailVerified)
+                    }
+                })
+                .catch(err => {
+                    handleOther(err.message)
+                    console.log("🚀 ~ file: UserActions.ts ~ line 38 ~ UserActions ~ err.message", err.message)
+                })
+                break
+            }
+        }    
     }
-
 }
 
 export default UserActions

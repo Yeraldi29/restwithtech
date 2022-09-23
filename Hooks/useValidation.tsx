@@ -5,7 +5,7 @@ import { useState } from "react"
 const useValidation = () => {
     const path = useRouter().asPath
     const [values, setValues] = useState({email: "",password: ""})
-    const [other, setOther] = useState("")
+    const [other, setOther] = useState<string | boolean>("")
     const { t } = useTranslation("signIn_logIn")
     
     const errors = {email:"", password: ""}
@@ -26,10 +26,27 @@ const useValidation = () => {
         errors.password = t("errors.password.valid")
     }  
 
-    if(other === "Firebase: Error (auth/email-already-in-use)."){
-        messageErrorFirebase = t("errors.email.exists")
-    }else if(other === "Firebase: Error (auth/network-request-failed)."){
-        messageErrorFirebase = t("errors.internet")
+    switch(other){
+        case ("Firebase: Error (auth/email-already-in-use)."):{
+            messageErrorFirebase = t("errors.email.exists")
+            break
+        }
+        case ("Firebase: Error (auth/network-request-failed)."):{
+            messageErrorFirebase = t("errors.internet")
+            break
+        }
+        case ("Firebase: Error (auth/wrong-password)."):{
+            messageErrorFirebase = t("errors.password.wrong")
+            break
+        }
+        case (false):{
+            messageErrorFirebase = t("errors.emailVerification")
+            break
+        }
+        case ("Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests)."):{
+            messageErrorFirebase = t("erros.password.manyRequests")
+            break
+        }
     }
 
     return {errors, setValues, values, other, setOther, messageErrorFirebase}

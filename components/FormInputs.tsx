@@ -32,6 +32,7 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
         const {value, name} = e.target
         setFormValues({...formValues,[name]:value})
         setOther("")
+        setSubmit(false)
     }
 
     useEffect(()=>{
@@ -53,16 +54,12 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
         setFormErros(errors)
         setSubmit(true)
 
-        const handleOther = (err:string) => {
+        const handleOther = (err:string|boolean) => {
             setOther(err)
             setFormErros(errors)
         }
 
-        UserActions({validation,formValues,handleOther,handleTimeActive, Router})
-
-        // if(validation && timeActive){
-        //     setFormValues({email:"", password:""})
-        // }
+        UserActions({validation,formValues,handleOther,handleTimeActive,title, Router, t})
     }
 
   return (

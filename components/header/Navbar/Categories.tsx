@@ -7,10 +7,10 @@ const Categories = () => {
   return (
     <>
      <Category count={0} text={t("categories.tech")}/>
-      <Category count={1} text={t("categories.mobile")}/>
-      <Category count={2} text={t("categories.C&P")}/>
-      <Category count={3} text={t("categories.os")}/>
-      <Category count={4} text={t("categories.code")}/>   
+     <Category count={1} text={t("categories.mobile")}/>
+     <Category count={2} text={t("categories.C&P")}/>
+     <Category count={3} text={t("categories.os")}/>
+     <Category count={4} text={t("categories.code")}/>   
     </>
   )
 }

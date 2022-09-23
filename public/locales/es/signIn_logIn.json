@@ -21,9 +21,12 @@
         },
         "password":{
             "empty":"¡La contraseña es requerida!",
-            "valid":"La contraseña debe contener al menos 1 número, 1 letra en mayúscula y 1 caracter especial y las contraseñas no puede tener más de 16 caracteres."
+            "valid":"La contraseña debe contener al menos 1 número, 1 letra en mayúscula y 1 caracter especial y las contraseñas no puede tener más de 16 caracteres.",
+            "wrong": "¡La contraseña es incorrecta!",
+            "manyRequests": "El acceso a esta cuenta se ha inhabilitado temporalmente debido a muchos intentos fallidos de inicio de sesión. Puede restaurarlo inmediatamente restableciendo su contraseña o puede volver a intentarlo más tarde."
         },
-        "internet":"no network connection"
+        "internet":"no network connection",
+        "emailVerification": "No has verificado la dirección de tu correo electrónico aún."
     },
     "verification":{
         "titlePage": "Verificación",

@@ -52,7 +52,7 @@ const Verification: NextPageWithLayout = () => {
           signOut(auth).then(()=>{
             Router.push("/log-in")
           }).catch(err => {
-            console.log("🚀 ~ file: index.tsx ~ line 54 ~ signOut ~ err", err)
+            console.log("🚀 ~ file: index.tsx ~ line 54 ~ signOut ~ err", err.message)
           })
         }
       }).catch(err=>{
