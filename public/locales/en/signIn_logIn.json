@@ -34,5 +34,13 @@
         "message":"A verification email has been sent to: ",
         "suggestion":"Follow the instructions in the email to verify your account.",
         "resend":"Resend email"
+    },
+    "CompleteProfile":{
+        "title":"Complete Profile",
+        "announced":"Wait a minute please!",
+        "before":"Before you start enjoying to your account, you need to complete the following fields:",
+        "userName": "Username",
+        "chooseImage": "Choose an image for your profile or upload an image from your device.",
+        "save": "Save"
     }
 }

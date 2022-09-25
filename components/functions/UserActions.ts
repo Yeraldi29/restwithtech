@@ -25,8 +25,7 @@ const UserActions = ({validation, formValues, handleOther, handleTimeActive, tit
                 createUserWithEmailAndPassword(auth, formValues.email, formValues.password ).then(userCredentials=>{
                 sendEmailVerification(userCredentials.user).then(()=>{
                     Router.push(`${locale === "es/" ? locale : "" } sign-in/verification`)
-                    handleTimeActive(true)
-                    console.log(userCredentials.user.email);
+                        handleTimeActive(true)
                 })
             }).catch(err => {
                 handleOther(err.message)
@@ -39,7 +38,11 @@ const UserActions = ({validation, formValues, handleOther, handleTimeActive, tit
                 .then(userCredantials => {
                     const user = userCredantials.user
                     if(user.emailVerified){
-                    Router.push("/")
+                        if(user.displayName === "" && user.photoURL === ""){
+                            Router.push(`${locale === "es/" ? locale : "" }log-in/completeProfile`)
+                        }else{
+                            Router.push("/")
+                        }
                     }else{
                         handleOther(user.emailVerified)
                     }

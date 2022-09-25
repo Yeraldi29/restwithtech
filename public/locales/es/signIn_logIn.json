@@ -34,5 +34,13 @@
         "message":"Se ha enviado un correo electrónico de verificación a: ",
         "suggestion":"Sigue las instrucciones en el correo electrónico para verificar la cuenta.",
         "resend":"Reenviar correo"
+    },
+    "CompleteProfile":{
+        "title":"Completar perfil",
+        "announced":"¡Espera un momento por favor!",
+        "before":"Antes de que empieces a disfrutar de tu cuenta, necesitas completar los siguientes campos:",
+        "userName": "Nombre de usuario",
+        "chooseImage": "Escoge una imagen para tu perfil o sube una imagen de tu dispositivo.",
+        "save": "Salvar"
     }
 }

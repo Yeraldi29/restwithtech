@@ -3,18 +3,17 @@ import { useEffect, useState, useRef } from "react"
 import { BiHide, BiShow } from "react-icons/bi" 
 import { Checkbox } from "@material-tailwind/react"
 import Router from "next/router"
-import useValidation from "../Hooks/useValidation"
-import UserActions from "./functions/UserActions"
-import { useAuthValue } from "../pages/AuthContext"
-import BubblesLoading from "./BubblesLoading"
+import useValidation from "../../Hooks/useValidation"
+import UserActions from "../functions/UserActions"
+import { useAuthValue } from "../../pages/AuthContext"
+import ButtonForms from "./ButtonForms"
 
 const initialValues = {
     email: "",
     password: ""
 }
 
-const FormInputs = ({email, password, title, remember}:{email:string, password: string, title: string, remember?:string}) => {
-    const [animation, setAnimation] = useState(false)
+const FormInputsS_L = ({email, password, title, remember}:{email:string, password: string, title: string, remember?:string}) => {
     const [submit, setSubmit] = useState(false)
     const [validation, setValidation] = useState(false)
     const [showPassword, setShowPassword] = useState({show:true, hide:false})
@@ -107,17 +106,9 @@ const FormInputs = ({email, password, title, remember}:{email:string, password: 
              <p>{remember}</p>
          </div>
          
-         <button type="submit" className={`${(animation && validation )&& " animate-wiggle "} relative bg-Lavender-Blue  mx-auto p-3 rounded-xl -rotate-12 my-4 active:bg-white text-red-600  cursor-pointer lg:hover:opacity-50`}
-             onSubmit={()=>{
-                 setAnimation(true)
-             }}
-              onAnimationEnd={()=>{setAnimation(false)}}>
-                 <p className=" font-bold text-xl ">{title.toUpperCase()}</p>
-         <BubblesLoading  validation={validation} submit={submit}/>
-         </button>
-
+         <ButtonForms validation={validation} title={title} submit={submit} />
      </form>
   )
 }
 
-export default FormInputs
+export default FormInputsS_L

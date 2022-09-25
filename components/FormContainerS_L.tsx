@@ -1,6 +1,6 @@
 import Link from "next/link"
 import {AiOutlineGithub, AiOutlineGoogle} from "react-icons/ai"
-import FormInputs from "./FormInputs"
+import FormInputsS_L from "./forms/FormInputsS_L"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import Image from "next/image"
@@ -17,7 +17,7 @@ interface PropsInput {
     remember?:string
 }
 
-const FormContainer = ({title,email,password,tryAccount,account,change,forgotPassword,remember}:PropsInput) => {
+const FormContainerS_L = ({title,email,password,tryAccount,account,change,forgotPassword,remember}:PropsInput) => {
     const [animation, setAnimation] = useState({
         animation:false,
         icon:0
@@ -35,7 +35,7 @@ const FormContainer = ({title,email,password,tryAccount,account,change,forgotPas
         </Link>
         <h2 className="text-center text-2xl ">{title.toUpperCase()}</h2>
     </div>
-    <FormInputs email={email} password={password} title={title} remember={remember}/>
+    <FormInputsS_L email={email} password={password} title={title} remember={remember}/>
 
     <p className=" text-sm text-right mb-4 opacity-90 cursor-pointer lg:hover:opacity-50">{forgotPassword}</p>
     
@@ -64,4 +64,4 @@ const FormContainer = ({title,email,password,tryAccount,account,change,forgotPas
   )
 }
 
-export default FormContainer
+export default FormContainerS_L
