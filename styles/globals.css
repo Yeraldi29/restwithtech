@@ -26,9 +26,9 @@
         @apply border-[3px] w-10 my-1 transform duration-300 ease-out transition
     }
     .input{
-        @apply rotate-1 bg-Lavender-Blue rounded-xl  focus:border-none focus:outline-none border-none text-DarkBlueGray mb-4 w-full h-12 focus:ring-2 focus:ring-Blue-Gray caret-Blue-Gray
+        @apply rotate-1 bg-Lavender-Blue rounded-xl focus:border-none focus:outline-none border-none text-DarkBlueGray mb-4 w-full h-12 focus:ring-2 focus:ring-Blue-Gray caret-Blue-Gray
     }
     .imageProfile {
-        @apply w-11 h-11 -rotate-12 rounded-xl
+        @apply w-11 h-11 border -rotate-12 even:rotate-12 rounded-xl cursor-pointer overflow-hidden bg-white/30 
     }
 }

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import BubblesLoading from "../BubblesLoading"
+import BubblesLoading from "../loading/BubblesLoading"
 
 interface ButtonFormsProps {
     validation: boolean

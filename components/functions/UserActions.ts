@@ -38,7 +38,7 @@ const UserActions = ({validation, formValues, handleOther, handleTimeActive, tit
                 .then(userCredantials => {
                     const user = userCredantials.user
                     if(user.emailVerified){
-                        if(user.displayName === "" && user.photoURL === ""){
+                        if(user.displayName === null && user.photoURL === null){
                             Router.push(`${locale === "es/" ? locale : "" }log-in/completeProfile`)
                         }else{
                             Router.push("/")

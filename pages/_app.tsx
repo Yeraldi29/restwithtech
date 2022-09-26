@@ -4,7 +4,7 @@ import type { ReactElement, ReactNode } from 'react'
 import type { NextPage } from 'next'
 import Layout from '../components/Layout'
 import {appWithTranslation} from 'next-i18next'
-import { StateClick } from './store'
+import { State } from './store'
 import { AuthProvider } from './AuthContext'
 import { ThemeProvider } from "@material-tailwind/react";
 
@@ -21,9 +21,9 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) =>{
     return (
        <ThemeProvider>
         <AuthProvider >
-          <StateClick>
+          <State>
                 {getLayout(<Component {...pageProps} />)}
-          </StateClick>
+          </State>
         </AuthProvider>
        </ThemeProvider>
     )

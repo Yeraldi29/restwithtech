@@ -1,26 +1,42 @@
 import { createContext, useState } from "react"
 
-const initialState = {
+const initialStateState = {
     clickMenu: false,
     handleClick: () => {}
 }
 
-const menuClick = createContext<Click>(initialState)
+const initialStateImageProfile = {
+    imageProfile: "",
+    handleClickImage: () => {}
+}
 
 interface Click{
      clickMenu: boolean
      handleClick: (clicked: boolean) => void
 }
 
-const StateClick = ({children}:{children: React.ReactNode}) => {
+interface ImageProfile{
+    imageProfile: string
+    handleClickImage: (image: string) => void
+}
+
+export const menuClick = createContext<Click>(initialStateState)
+export const profileImage = createContext<ImageProfile>(initialStateImageProfile)
+
+export const State = ({children}:{children: React.ReactNode}) => {
     const [clickMenu, setClickMenu] = useState(false)
+    const [imageProfile, setImageProfile] = useState("")
    
     const handleClick = (clicked: boolean) => {
         setClickMenu(clicked)
     }
-
-    return <menuClick.Provider value={{clickMenu,handleClick}}>{children}</menuClick.Provider>
+    const handleClickImage = (image:string) => {
+        setImageProfile(image)
+    }
+    
+    return (
+        <profileImage.Provider value={{imageProfile,handleClickImage}}>
+            <menuClick.Provider value={{clickMenu,handleClick}}>{children}</menuClick.Provider>
+        </profileImage.Provider>
+    )
 }
-
-export {menuClick, StateClick }
-

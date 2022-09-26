@@ -22,7 +22,7 @@ const CompleteProfile:NextPageWithLayout = () => {
     </Head>
     
     <div className=" relative bg-DarkBlueGray border -rotate-1 mx-auto mt-2 rounded-2xl w-[21.5rem] shadow-2xl py-10 px-6 sm:w-96 sm:mt-6 sm:px-8 xl:mt-16">
-        <div className=" absolute inset-0 left-4 top-4">
+        <div className=" absolute inset-0 left-4 top-4 w-0 h-0">
         <Language />
         </div>
         <h2 className="text-center text-2xl my-4">{t("CompleteProfile.announced")}</h2>
@@ -30,7 +30,7 @@ const CompleteProfile:NextPageWithLayout = () => {
         <form className="flex flex-col">
           <InputUsername />
           <ChooseImageProfile />
-          <ButtonForms validation={validation} title={t("save")} submit={submit} />
+          <ButtonForms validation={validation} title={t("CompleteProfile.save")} submit={submit} />
         </form>
     </div>
     </>

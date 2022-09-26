@@ -41,6 +41,7 @@
         "before":"Antes de que empieces a disfrutar de tu cuenta, necesitas completar los siguientes campos:",
         "userName": "Nombre de usuario",
         "chooseImage": "Escoge una imagen para tu perfil o sube una imagen de tu dispositivo.",
+        "upload":"Subir imagen",
         "save": "Salvar"
     }
 }
