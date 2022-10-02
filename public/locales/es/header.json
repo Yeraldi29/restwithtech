@@ -3,11 +3,13 @@
     "account":"Cuenta",
     "log-in":"Iniciar sesión",
     "sign-in":"Registrarse",
+    "sign-out":"Cerrar sesión",
     "categories":{
         "mobile":"Móviles",
         "code":"Código",
         "tech":"Tecnologías",
         "os":"SO",
         "C&P":"Computadoras y Portátiles"
-    }
+    },
+    "postNew":"Postea"
 }

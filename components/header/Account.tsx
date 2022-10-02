@@ -1,5 +1,6 @@
 import { useTranslation } from "next-i18next"
 import { useState } from "react"
+import { useAuthValue } from "../../pages/AuthContext"
 import Bubbles from "./Navbar/Bubbles"
 import UserAccount from "./Navbar/UserAccount"
 
@@ -7,6 +8,7 @@ const Account = () => {
     const [click, setClick] = useState(false)
     const [animation, setAnimation] = useState(false)
     const {t} = useTranslation("header")
+    const { currentUser } = useAuthValue()
 
   return (
     <>

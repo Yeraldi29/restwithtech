@@ -10,7 +10,7 @@ const Logo = () => {
       </div>
     </Link>
     <Link href="/">
-     <div className="relative hidden md:block w-48 h-14  cursor-pointer lg:hover:scale-105 lg:hover:rotate-2 transform duration-200 ease-in">
+     <div className="relative hidden md:block w-44 -ml-4 h-14  cursor-pointer lg:hover:scale-105 lg:hover:rotate-2 transform duration-200 ease-in">
         <Image src="/logo_size.png" alt="logo image"  layout='fill'  objectFit='contain' priority={true}/>
      </div>
     </Link>

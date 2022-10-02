@@ -42,6 +42,11 @@
         "userName": "Nombre de usuario",
         "chooseImage": "Escoge una imagen para tu perfil o sube una imagen de tu dispositivo.",
         "upload":"Subir imagen",
-        "save": "Salvar"
+        "save": "Salvar",
+        "error":{
+            "username":"El nombre de usuario no puede estar vacio.",
+            "selectImage":"Necesitas seleccionar una imagen o subir una imagen.",
+            "usernameChange": "Este nombre de usuario ya existe, por favor cambialo."
+        }
     }
 }

@@ -3,11 +3,13 @@
     "account":"Account",
     "log-in":"Log in",
     "sign-in":"Sign in",
+    "sign-out":"Sign out",
     "categories":{
         "mobile":"Mobiles",
         "code":"Code",
         "tech":"Technologies",
         "os":"OS",
         "C&P":"Computers & Portables"
-    }
+    },
+    "postNew":"Post"
 }

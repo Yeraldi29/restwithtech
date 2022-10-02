@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^1.2.4",
+    "base64url": "^3.0.1",
     "core-js": "^3.25.0",
     "firebase": "^9.9.4",
     "next": "12.2.5",

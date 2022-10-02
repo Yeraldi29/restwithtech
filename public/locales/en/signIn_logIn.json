@@ -42,6 +42,11 @@
         "userName": "Username",
         "chooseImage": "Choose an image for your profile or upload an image from your device.",
         "upload":"Upload image",
-        "save": "Save"
+        "save": "Save",
+        "error":{
+            "username":"Username cannot be empty.",
+            "selectImage":"You need to select an image or upload an image.",
+            "usernameChange": "This username already exists please change it."
+        }
     }
 }

@@ -18,19 +18,19 @@ const profileImages = [
   "/profileImages/ugo-mendes-donelli-e4FbcDByhjI-unsplash.jpg"
 ]
 
-const ChooseImageProfile = () => {
+const ChooseImageProfile = ({submit,handleClick}:{submit: boolean, handleClick:()=>void}) => {
     const { t } = useTranslation("signIn_logIn")
     
   return (
     <>
      <label className="text-center">{t("CompleteProfile.chooseImage")}</label> 
-     <div className="flex justify-center items-center my-6 ">
-      <BigImageProfile />
+     <div className="flex justify-center items-center my-6 flex-col ">
+      <BigImageProfile submit={submit}/>
      </div>
-     <div className="grid grid-cols-4 gap-3 mx-auto mt-4 ">
+     <div className="grid grid-cols-4 gap-3 mx-auto mt-4 " onClick={handleClick}>
       {profileImages.map(src => <ImageProfile key={src} src={src}/> )}
      </div>
-     <UploadImage />
+     <UploadImage handleClick={handleClick} />
     </>
   )
 }
