@@ -1,5 +1,4 @@
-import { auth } from "../../firebase"
-import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword} from "firebase/auth"
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, signInWithEmailAndPassword} from "firebase/auth"
 import type { NextRouter } from "next/router"
 import type { TFunction } from "next-i18next"
 
@@ -17,6 +16,7 @@ interface PropsUserActions{
 }
 
 const UserActions = ({validation, formValues, handleOther, handleTimeActive, title,Router, t}: PropsUserActions) =>{
+    const auth = getAuth()
     const locale = Router.locale
 
     if(validation){
@@ -36,6 +36,7 @@ const UserActions = ({validation, formValues, handleOther, handleTimeActive, tit
             case (t("logIn.login")):{
                 signInWithEmailAndPassword(auth,formValues.email,formValues.password)
                 .then(userCredantials => {
+                    debugger
                     const user = userCredantials.user
                     if(user.emailVerified){
                         if(user.displayName === null && user.photoURL === null){

@@ -1,7 +1,6 @@
 import { useContext, createContext } from "react"
-import { useState, useEffect } from "react"
-import { onAuthStateChanged, signOut, User } from 'firebase/auth'
-import { auth } from '../firebase'
+import { useState, useEffect} from "react"
+import { getAuth, onAuthStateChanged, signOut, User } from 'firebase/auth'
 
 const initialStateAuth = {
   currentUser: null,
@@ -24,10 +23,14 @@ export const AuthProvider = ({children}: { children:  React.ReactNode}) => {
     const [profile, setProfile] = useState("wait")
     const [timeActive, setTimeActive] = useState(false)
   
+    const auth = getAuth()
+    
     useEffect(()=>{
       onAuthStateChanged(auth, user => {
         setCurrentUser(user)
-        if(user?.displayName !== "" && user?.photoURL !== ""){
+        if(user === null){
+          setProfile("account")
+        }else if(user?.displayName !== "" && user?.photoURL !== ""){
           setProfile("profile")
         }else{
           setProfile("account")

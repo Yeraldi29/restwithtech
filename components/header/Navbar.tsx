@@ -6,7 +6,7 @@ const Navbar = () => {
     
   return (
     <>
-    <div className="hidden lg:flex  border p-2 px-3 rounded-xl bg-Blue-Gray/80 ">
+    <div className="hidden lg:flex  rounded-xl  ">
       <Categories />      
     </div>
     <div>

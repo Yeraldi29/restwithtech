@@ -3,9 +3,16 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations"
 import { useTranslation } from 'next-i18next'
 import Sign_In from '../../components/Sign_In'
 import { NextPageWithLayout } from '../_app'
+import { useAuthValue } from '../AuthContext'
+import Router from 'next/router'
 
 const SignIn: NextPageWithLayout = () => {
     const { t } = useTranslation("signIn_logIn")
+    const { profile } = useAuthValue() 
+
+    if( profile === "profile"){
+      Router.push("/") 
+     }
 
   return (
     <>

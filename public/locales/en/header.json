@@ -11,5 +11,6 @@
         "os":"OS",
         "C&P":"Computers & Portables"
     },
-    "postNew":"Post"
+    "postNew":"Post",
+    "profile": "Profile"
 }

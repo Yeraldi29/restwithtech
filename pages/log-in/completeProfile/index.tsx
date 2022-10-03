@@ -14,7 +14,7 @@ import Router from "next/router"
 
 const CompleteProfile:NextPageWithLayout = () => {
   const { t } = useTranslation("signIn_logIn")
-  const { currentUser } = useAuthValue()
+  const { currentUser, profile } = useAuthValue()
   const profileImg = useContext(profileImage)
   const { imageProfile } = profileImg
   
@@ -57,6 +57,10 @@ const CompleteProfile:NextPageWithLayout = () => {
     setUserName(value)
   }
   
+  if( profile === "profile"){
+    Router.push("/") 
+  }
+
   return (
     <>
     <Head>

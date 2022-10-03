@@ -22,7 +22,7 @@ return (
         <Navbar />
         <div className="flex items-center space-x-3">
         <Input placeholder={t("placeholder")}/>
-        <div className={`${ NewExpand && "hidden"}`}>
+        <div className={`${ NewExpand && "lg:hidden"}`}>
           <Language />
         </div>
         {
@@ -30,7 +30,7 @@ return (
             <Account />
           ): profile === "profile" &&(
             <>
-            <div className={`${ NewExpand && "hidden"}`}>
+            <div className={`${ NewExpand && "lg:hidden"}`}>
               <Profile />
             </div>
               <div className=" hidden lg:flex">
