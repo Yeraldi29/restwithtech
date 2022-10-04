@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { menuClick } from "../pages/store"
+import { menuClick } from "../store/store"
 import Header from "./Header"
 import {useContext} from 'react'
 

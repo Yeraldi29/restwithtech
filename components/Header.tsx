@@ -6,9 +6,9 @@ import Account from "./header/Account"
 import Navbar from "./header/Navbar"
 import Language from "./header/Language"
 import Profile from "./profile/Profile"
-import { useAuthValue } from "../pages/AuthContext"
+import { useAuthValue } from "../store/AuthContext"
 import PostNew from "./header/PostNew"
-import { postNewExpand } from "../pages/store"
+import { postNewExpand } from "../store/store"
 
 const Header= () => {
   const { t } = useTranslation('header')

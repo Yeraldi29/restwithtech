@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { NextPageWithLayout } from "../../_app"
 import { useState, useEffect } from "react"
 import { useTranslation } from "next-i18next"
-import { useAuthValue } from "../../AuthContext"
+import { useAuthValue } from "../../../store/AuthContext"
 import { auth } from "../../../firebase"
 import { sendEmailVerification, signOut} from "firebase/auth"
 

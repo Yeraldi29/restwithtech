@@ -5,22 +5,18 @@ import { Checkbox } from "@material-tailwind/react"
 import Router from "next/router"
 import useValidation from "../../Hooks/useValidation"
 import UserActions from "../functions/UserActions"
-import { useAuthValue } from "../../pages/AuthContext"
+import { useAuthValue } from "../../store/AuthContext"
 import ButtonForms from "./ButtonForms"
+import { useFormContextS_L } from "../../store/FormContextS_L"
+import InputEmail from "./InputEmail"
+import InputPassword from "./InputPassword"
 
-const initialValues = {
-    email: "",
-    password: ""
-}
-
-const FormInputsS_L = ({email, password, title, remember}:{email:string, password: string, title: string, remember?:string}) => {
+const FormInputsS_L = ({ title, remember}:{title: string, remember?:string}) => {
     const [submit, setSubmit] = useState(false)
     const [validation, setValidation] = useState(false)
-    const [showPassword, setShowPassword] = useState({show:true, hide:false})
+    const [validationBubbles, setValidationBubbles ] = useState(false)
     const inputPassword = useRef<HTMLInputElement | null>(null)
-    
-    const [formValues, setFormValues] = useState(initialValues)
-    const [formErrors, setFormErros] = useState(initialValues)
+    const { formValues, formErrors, handleFormValues, handleFormErrors} = useFormContextS_L()
     
     const {errors, setValues, values, other, setOther, messageErrorFirebase} = useValidation()
     
@@ -29,84 +25,63 @@ const FormInputsS_L = ({email, password, title, remember}:{email:string, passwor
     
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {value, name} = e.target
-        setFormValues({...formValues,[name]:value})
+        handleFormValues(name, value)
         setOther("")
         setSubmit(false)
     }
 
     useEffect(()=>{
         setValues(formValues)
-        setFormErros(errors)
+        handleFormErrors(errors)
     },[formValues, values, other])
 
     useEffect(()=>{
-        if(((formErrors.email ===  "") && (formErrors.password === "") && (messageErrorFirebase === ""))){
+        if((formErrors.email ===  "") && (formErrors.password === "") ){
             setValidation(true)
         }else{
-            setValidation(false)
+          setValidation(false)
         }
+     
+       if(((formErrors.email ===  "") && (formErrors.password === "")) && messageErrorFirebase === "") {
+        setValidationBubbles(true)
+       }else if(formErrors.password ===  "" && messageErrorFirebase === ""){
+        setValidationBubbles(true)
+       }else{
+        setValidationBubbles(false)
+       }
+
     },[formErrors, messageErrorFirebase])
     
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setValues(formValues)
-        setFormErros(errors)
+        handleFormErrors(errors)
+
         setSubmit(true)
 
         const handleOther = (err:string|boolean) => {
             setOther(err)
-            setFormErros(errors)
+            handleFormErrors(errors)
         }
 
         UserActions({validation,formValues,handleOther,handleTimeActive,title, Router, t})
     }
 
+    const handleSetSubmit = () => {
+        setSubmit(false)
+    }
+
   return (
     <form className=" flex flex-col " onSubmit={handleSubmit} >
-        <label>
-            <p>{email}</p>
-        </label>
-            <input 
-            className={` input ${(formErrors.email === t("errors.email.empty") && submit || formErrors.email === t("errors.email.valid")) && " bg-red-300 focus:ring-red-500 "}`}
-            type="text" name="email" value={formValues.email} onChange={handleChange} onClick={()=> setSubmit(false)}
-            onKeyDown={e => {
-                if(formErrors.email === ""){
-                    e.key === "Enter" && inputPassword.current?.focus()
-                }
-            }}/>
+        <InputEmail formErrorsEmail={formErrors.email} submit={submit} formValuesEmail={formValues.email} handleChange={handleChange} messageErrorFirebase={messageErrorFirebase} handleSetSubmit={handleSetSubmit}/>
+        <InputPassword formErrorsPassword={formErrors.password} submit={submit} formValuesPassword={formValues.password} handleChange={handleChange} inputPassword={inputPassword} handleSetSubmit={handleSetSubmit} />
 
-           <p className={`${((formErrors.email === t("errors.email.empty") && !submit) || formErrors.email === "") ? "hidden " : "text-red-300 -mt-4 rotate-1"}`}>
-                <small>{formErrors.email}</small>
-           </p>
-           <p className={`${messageErrorFirebase === "" ? "hidden" : " text-red-300 -mt-4 rotate-1"}`}>
-            <small>{messageErrorFirebase}</small>
-           </p>
-
-         <label>
-             <p>{password}</p>
-         </label>
-         <div className=" relative ">
-             <input ref={inputPassword}
-             className={` input ${(formErrors.password === t("errors.password.empty") && submit || formErrors.password  === t("errors.password.valid")) && " bg-red-300 focus:ring-red-500 "}`} 
-             type={showPassword.hide ? "text" : "password" } name="password" value={formValues.password} onChange={handleChange} onClick={()=> setSubmit(false)} />
-
-             <BiShow className={` ${showPassword.hide ? "hidden ":" cursor-pointer w-8 h-8 text-DarkBlueGray absolute top-2 right-1 "}`} 
-             onClick={()=>setShowPassword({...showPassword,show:!showPassword.show, hide:!showPassword.hide})}/>
-             <BiHide className={`${showPassword.show ? "hidden ":" cursor-pointer w-8 h-8 text-DarkBlueGray absolute top-2 right-1 " }`}
-             onClick={()=>setShowPassword({...showPassword,hide:!showPassword.hide, show:!showPassword.show})}/>
-        </div>
-        
-         <p className={`${((formErrors.password === t("errors.password.empty") && !submit) ||
-          formErrors.password === "") ? "hidden " : "text-red-300 -mt-4 rotate-1"}`}>
-             <small>{formErrors.password}</small>
-         </p>
-     
-         <div className={`relative flex items-center h-8 ${!remember && " hidden "}`}>
+        <div className={`relative flex items-center h-8 ${!remember && " hidden "}`}>
              <Checkbox className=" w-6 h-6 -rotate-12 text-Lavender-Blue focus:border-Lavender-Blue focus:ring-Lavender-Blue" color="pink"  defaultChecked />
              <p>{remember}</p>
-         </div>
+        </div> 
          
-         <ButtonForms validation={validation} title={title} submit={submit} />
+         <ButtonForms validation={validationBubbles} title={title} submit={submit} />
      </form>
   )
 }

@@ -3,7 +3,7 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations"
 import { useTranslation } from 'next-i18next'
 import Sign_In from '../../components/Sign_In'
 import { NextPageWithLayout } from '../_app'
-import { useAuthValue } from '../AuthContext'
+import { useAuthValue } from '../../store/AuthContext'
 import Router from 'next/router'
 
 const SignIn: NextPageWithLayout = () => {

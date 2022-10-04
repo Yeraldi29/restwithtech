@@ -7,9 +7,9 @@ import InputUsername from "../../../components/forms/InputUsername"
 import Language from "../../../components/header/Language"
 import type { NextPageWithLayout } from "../../_app"
 import { useState, useContext } from "react"
-import { useAuthValue } from "../../AuthContext"
+import { useAuthValue } from "../../../store/AuthContext"
 import { updateProfile } from "firebase/auth"
-import { profileImage } from "../../store"
+import { profileImage } from "../../../store/store"
 import Router from "next/router"
 
 const CompleteProfile:NextPageWithLayout = () => {

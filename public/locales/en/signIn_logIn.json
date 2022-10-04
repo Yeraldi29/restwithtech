@@ -35,6 +35,13 @@
         "suggestion":"Follow the instructions in the email to verify your account.",
         "resend":"Resend email"
     },
+    "recoverPassword":{
+        "title":"Recover Password",
+        "messageEmail":"Fill the next field with your address email and we'll send a email to you can recover your password",
+        "comeBack":"Come back if you already changed your password",
+        "send":"Send",
+        "resend":"Resend email"
+    },
     "CompleteProfile":{
         "title":"Complete Profile",
         "announced":"Wait a minute please!",

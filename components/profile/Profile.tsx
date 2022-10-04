@@ -1,6 +1,6 @@
 import { useTranslation } from "next-i18next"
 import { useState } from "react"
-import { useAuthValue } from "../../pages/AuthContext"
+import { useAuthValue } from "../../store/AuthContext"
 import Bubbles from "../header/Navbar/Bubbles"
 import SignOut from "../header/SignOut"
 import ImageProfile from "./ImageProfile"

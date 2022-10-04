@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { useTranslation } from "next-i18next"
 import { BiPlus } from "react-icons/bi"
-import { postNewExpand } from "../../pages/store"
+import { postNewExpand } from "../../store/store"
 
 const PostNew = () => {
     const { t } = useTranslation("header") 

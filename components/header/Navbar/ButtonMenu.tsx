@@ -1,5 +1,5 @@
 import {useContext} from "react"
-import { menuClick } from "../../../pages/store"
+import { menuClick } from "../../../store/store"
 
 const ButtonMenu = () => {
     const clickState = useContext(menuClick)

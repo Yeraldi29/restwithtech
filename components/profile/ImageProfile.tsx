@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { useState, useContext } from "react"
-import { profileImage } from "../../pages/store"
+import { profileImage } from "../../store/store"
 
 const ImageProfile = ({src}:{src:string}) => {
   const [animation, setAnimation] = useState(false)

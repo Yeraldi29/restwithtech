@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next"
 import  Link  from "next/link"
 import { useRouter } from "next/router"
 import { useContext } from "react"
-import { menuClick } from "../../../pages/store" 
+import { menuClick } from "../../../store/store" 
 
 const UserAccount = () => {
   const { t } = useTranslation("header")

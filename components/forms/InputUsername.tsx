@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next"
 import { useState, useEffect, useContext } from "react"
 import useValidation from "../../Hooks/useValidation"
-import { profileImage } from "../../pages/store"
+import { profileImage } from "../../store/store"
 
 interface InputUsernameProps {
   userName:string

@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next"
 import Image from "next/image"
 import { useContext } from "react" 
-import { profileImage } from "../../pages/store"
+import { profileImage } from "../../store/store"
 
 const BigImageProfile = ({submit}:{submit: boolean})  => {
   const profileImg = useContext(profileImage)

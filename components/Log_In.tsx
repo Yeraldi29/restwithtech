@@ -7,8 +7,6 @@ const Log_In = () => {
   return (
     <FormContainerS_L 
     title={t("logIn.login")}  
-    email={t("email")}
-    password={t("password")}
     tryAccount={t("try")}
     account={t("logIn.account")}
     change={t("signIn.signin")}

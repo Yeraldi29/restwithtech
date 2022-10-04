@@ -1,9 +1,9 @@
 import {useContext} from "react"
-import { menuClick } from "../../../pages/store"
+import { menuClick } from "../../../store/store"
 import Categories from "./Categories"
 import Bubbles from "./Bubbles"
 import UserAccount from "./UserAccount"
-import { useAuthValue } from "../../../pages/AuthContext"
+import { useAuthValue } from "../../../store/AuthContext"
 import PostNew from "../PostNew"
 import SignOut from "../SignOut"
 

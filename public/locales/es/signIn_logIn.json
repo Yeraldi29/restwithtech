@@ -35,6 +35,13 @@
         "suggestion":"Sigue las instrucciones en el correo electrónico para verificar la cuenta.",
         "resend":"Reenviar correo"
     },
+    "recoverPassword":{
+        "title":"Recuperar Constraseña",
+        "messageEmail":"Llena el siguiente campo con la dirección de tu correo electrónico y nosotros te enviaremos un correo para que puedas recuperar tu contraseña",
+        "comeBack":"Vuelve si tu ya cambiaste tu contraseña",
+        "send":"Enviar",
+        "resend":"Reenviar correo"
+    },
     "CompleteProfile":{
         "title":"Completar perfil",
         "announced":"¡Espera un momento por favor!",
