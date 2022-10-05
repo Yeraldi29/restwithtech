@@ -5,8 +5,7 @@
     "logIn":{
         "login":"Iniciar sesión",
         "forgotPassword":"¿Has olvidado tu contraseña?",
-        "account":"¿Necesitas una cuenta?",
-        "remember":"¿Recuérdame?"
+        "account":"¿Necesitas una cuenta?"
     },
     "signIn":{
         "signin":"Registrarse",

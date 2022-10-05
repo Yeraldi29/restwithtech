@@ -7,7 +7,6 @@ import {appWithTranslation} from 'next-i18next'
 import { State } from '../store/store'
 import { AuthProvider } from '../store/AuthContext'
 import { FormS_LProvider } from '../store/FormContextS_L'
-import { ThemeProvider } from "@material-tailwind/react";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -20,7 +19,6 @@ type AppPropsWithLayout = AppProps & {
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) =>{
   const getLayout = Component.getLayout ?? Layout
     return (
-       <ThemeProvider>
         <AuthProvider >
           <State>
             <FormS_LProvider>
@@ -28,7 +26,6 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) =>{
             </FormS_LProvider>
           </State>
         </AuthProvider>
-       </ThemeProvider>
     )
 }
 

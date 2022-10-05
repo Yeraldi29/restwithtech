@@ -1,7 +1,5 @@
 import { useTranslation } from "next-i18next"
 import { useEffect, useState, useRef } from "react"
-import { BiHide, BiShow } from "react-icons/bi" 
-import { Checkbox } from "@material-tailwind/react"
 import Router from "next/router"
 import useValidation from "../../Hooks/useValidation"
 import UserActions from "../functions/UserActions"
@@ -11,10 +9,11 @@ import { useFormContextS_L } from "../../store/FormContextS_L"
 import InputEmail from "./InputEmail"
 import InputPassword from "./InputPassword"
 
-const FormInputsS_L = ({ title, remember}:{title: string, remember?:string}) => {
+const FormInputsS_L = ({title}:{title: string}) => {
     const [submit, setSubmit] = useState(false)
     const [validation, setValidation] = useState(false)
     const [validationBubbles, setValidationBubbles ] = useState(false)
+
     const inputPassword = useRef<HTMLInputElement | null>(null)
     const { formValues, formErrors, handleFormValues, handleFormErrors} = useFormContextS_L()
     
@@ -51,7 +50,7 @@ const FormInputsS_L = ({ title, remember}:{title: string, remember?:string}) => 
        }
 
     },[formErrors, messageErrorFirebase])
-    
+
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setValues(formValues)
@@ -63,8 +62,8 @@ const FormInputsS_L = ({ title, remember}:{title: string, remember?:string}) => 
             setOther(err)
             handleFormErrors(errors)
         }
-
-        UserActions({validation,formValues,handleOther,handleTimeActive,title, Router, t})
+        
+        UserActions({validation,formValues,handleOther,handleTimeActive,title, Router, t,handleFormValues})
     }
 
     const handleSetSubmit = () => {
@@ -72,15 +71,10 @@ const FormInputsS_L = ({ title, remember}:{title: string, remember?:string}) => 
     }
 
   return (
-    <form className=" flex flex-col " onSubmit={handleSubmit} >
-        <InputEmail formErrorsEmail={formErrors.email} submit={submit} formValuesEmail={formValues.email} handleChange={handleChange} messageErrorFirebase={messageErrorFirebase} handleSetSubmit={handleSetSubmit}/>
+    <form className=" flex flex-col " onSubmit={handleSubmit} autoSave="on" >
+        <InputEmail formErrorsEmail={formErrors.email} submit={submit} formValuesEmail={formValues.email} handleChange={handleChange} inputPassword={inputPassword} messageErrorFirebase={messageErrorFirebase} handleSetSubmit={handleSetSubmit}/>
         <InputPassword formErrorsPassword={formErrors.password} submit={submit} formValuesPassword={formValues.password} handleChange={handleChange} inputPassword={inputPassword} handleSetSubmit={handleSetSubmit} />
 
-        <div className={`relative flex items-center h-8 ${!remember && " hidden "}`}>
-             <Checkbox className=" w-6 h-6 -rotate-12 text-Lavender-Blue focus:border-Lavender-Blue focus:ring-Lavender-Blue" color="pink"  defaultChecked />
-             <p>{remember}</p>
-        </div> 
-         
          <ButtonForms validation={validationBubbles} title={title} submit={submit} />
      </form>
   )

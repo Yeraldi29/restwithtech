@@ -17,9 +17,9 @@ interface FormContextS_LProps {
     email:string
     password: string
   }
-  handleFormValues: (name:string, value: string) => void
+  handleFormValues: (name:string, value: string | null) => void
   formErrors: {
-    email:string
+    email:string 
     password: string
   }
   handleFormErrors: (errors: { email: string, password: string}) => void
@@ -31,7 +31,7 @@ export const FormS_LProvider = ({children}:{children: React.ReactNode}) => {
   const [formValues, setFormValues] = useState(initialValues)
   const [formErrors, setFormErros] = useState(initialValues)
 
-  const handleFormValues = (name:string, value:string) => {
+  const handleFormValues = (name:string , value:string | null) => {
     setFormValues({...formValues, [name] : value})
   }
 

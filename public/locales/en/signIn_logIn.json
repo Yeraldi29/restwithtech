@@ -5,8 +5,7 @@
     "logIn":{
         "login":"Log in",
         "forgotPassword":"Did you forget your password?",
-        "account":"Do you need an account?",
-        "remember":"Remeber me?"
+        "account":"Do you need an account?"
     },
     "signIn":{
         "signin":"Sign in",
