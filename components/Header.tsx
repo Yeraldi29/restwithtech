@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import Logo from "./header/Logo"
 import Input from "./header/Input"
 import { useTranslation } from "next-i18next"
