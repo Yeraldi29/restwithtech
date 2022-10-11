@@ -13,7 +13,7 @@ const BigImageProfile = ({submit}:{submit: boolean})  => {
     <div className="relative imageProfile w-24 h-24 drop-shadow-lg shadow-lg ">
       {
         imageProfile && (
-          <Image src={imageProfile} alt="image profile" layout="fill"/>
+          <Image src={imageProfile} alt="image profile" layout="fill" priority/>
         )
       }
     </div>

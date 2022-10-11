@@ -25,7 +25,8 @@
             "manyRequests": "El acceso a esta cuenta se ha inhabilitado temporalmente debido a muchos intentos fallidos de inicio de sesión. Puede restaurarlo inmediatamente restableciendo su contraseña o puede volver a intentarlo más tarde."
         },
         "internet":"no network connection",
-        "emailVerification": "No has verificado la dirección de tu correo electrónico aún."
+        "emailVerification": "No has verificado la dirección de tu correo electrónico aún.",
+        "userName":"¡El nombre de usuario ya existe! por favor cambialo"
     },
     "verification":{
         "titlePage": "Verificación",

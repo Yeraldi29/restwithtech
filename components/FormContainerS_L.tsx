@@ -5,9 +5,9 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 import Image from "next/image"
 import Language from "./header/Language"
-import useGithubSession from "../Hooks/useGithubSession"
+import useGithubSession from "../Hooks/firebase/useGithubSession"
 import BubblesLoading from "./loading/BubblesLoading"
-import useGoogleSession from "../Hooks/useGoogleSession"
+import useGoogleSession from "../Hooks/firebase/useGoogleSession"
 
 interface PropsInput {
     title: string

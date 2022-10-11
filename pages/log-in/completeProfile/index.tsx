@@ -6,38 +6,56 @@ import ChooseImageProfile from "../../../components/forms/ChooseImageProfile"
 import InputUsername from "../../../components/forms/InputUsername"
 import Language from "../../../components/header/Language"
 import type { NextPageWithLayout } from "../../_app"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { useAuthValue } from "../../../store/AuthContext"
 import { updateProfile } from "firebase/auth"
 import { profileImage } from "../../../store/store"
 import Router from "next/router"
+import { db } from "../../../firebase"
+import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore"
 
 const CompleteProfile:NextPageWithLayout = () => {
   const { t } = useTranslation("signIn_logIn")
   const { currentUser, profile } = useAuthValue()
   const profileImg = useContext(profileImage)
   const { imageProfile } = profileImg
-  
+
   const [userName, setUserName] = useState("")
   const [validation, setValidation] = useState(false)
   const [submit, setSubmit] = useState(false)
+  const [error, setError] = useState("")
 
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSubmit(true)
-    
+    setError("")
     if(validation){
       if(currentUser){
-        updateProfile(currentUser, {
-          displayName: userName,
-          photoURL: imageProfile
-        }).then(()=>{
-          Router.push("/")
+        const queryDisplayName = query(collection(db, "users"), where("userName","==", userName)) 
+        const {docs} = await getDocs(queryDisplayName)
+        const {uid} = currentUser
 
-        }).catch(err => {
-          console.log("🚀 ~ file: index.tsx ~ line 39 ~ handleSubmit ~ err.message", err.message)
-        })
-      }
+        if(docs.length === 0){
+          const docRef = doc(db, `users/${uid}`)
+          await setDoc(docRef,{
+              userName,
+              uid
+          })
+          updateProfile(currentUser, {
+            displayName: userName,
+            photoURL: imageProfile
+          }).then(()=>{
+            Router.push("/")
+          }).catch(err => {
+            setError(err.message)
+            setSubmit(false)
+            console.log("🚀 ~ file: index.tsx ~ line 39 ~ handleSubmit ~ err.message", err.message)
+          })
+        }else{
+            setError(t("errors.userName"))
+            setSubmit(false)
+          }
+        }
     }
   }
 
@@ -78,6 +96,7 @@ const CompleteProfile:NextPageWithLayout = () => {
           <InputUsername userName={userName} handleUserName={handleUsername} submit={submit} handleClick={handleClick} handleValidation={handleValidation} 
           handleChangeUserName={handleChangeUserName}/>
           <ChooseImageProfile submit={submit}  handleClick={handleClick}/>
+          <small className={`${(error === t("errors.userName")) ? "rotate-1 text-red-300 -mt-3 text-center" : "hidden"}`}>{error}</small>
           <ButtonForms validation={validation} title={t("CompleteProfile.save")} submit={submit} />
         </form>
     </div>

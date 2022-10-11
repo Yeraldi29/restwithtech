@@ -12,7 +12,7 @@ import { postNewExpand } from "../store/store"
 
 const Header= () => {
   const { t } = useTranslation('header')
-  const { profile } = useAuthValue() 
+  const { profile, currentUser } = useAuthValue() 
   const expand = useContext(postNewExpand)
   const { NewExpand } = expand
 

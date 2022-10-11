@@ -19,7 +19,6 @@ interface PropsUserActions{
 const UserActions = ({validation, formValues, handleOther, handleTimeActive, title,Router, t, handleFormValues}: PropsUserActions) =>{
     const auth = getAuth()
     const locale = Router.locale
-
     if(validation){
         switch(title){
             case (t("signIn.signin")):{

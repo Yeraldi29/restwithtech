@@ -23,25 +23,24 @@ export const AuthProvider = ({children}: { children:  React.ReactNode}) => {
     const [profile, setProfile] = useState("wait")
     const [timeActive, setTimeActive] = useState(false)
   
-    const auth = getAuth()
-    
     useEffect(()=>{
-      onAuthStateChanged(auth, user => {
+      const auth = getAuth()
+      onAuthStateChanged(auth,user => {
         setCurrentUser(user)
         if(user === null){
-          setProfile("account")
-        }else if(user?.displayName !== "" && user?.photoURL !== ""){
-          setProfile("profile")
-        }else{
           setProfile("account")
           signOut(auth).then(()=>{
           }).catch(err => {
             console.log("🚀 ~ file: AuthContext.tsx ~ line 37 ~ signOut ~ err.message", err.message)
           })
+        }else if(user?.displayName !== null && user?.photoURL !== null){
+          setProfile("profile")
+        }else if(user.emailVerified === false){
+          setProfile("account")
         }
       })
-    },[])
-
+    },[currentUser])
+    
     const handleTimeActive = (time: boolean) => {
       setTimeActive(time)
     }
