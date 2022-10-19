@@ -1,0 +1,22 @@
+export const mobile = [
+    {
+        "image":"/Feed/mobile/ben-kolde-cpLsWmMEa1Q-unsplash.jpg",
+        "name":"ben-kolde"
+    },
+    {
+        "image":"/Feed/mobile/d-c-tr-nh-NEv65ZXjuLg-unsplash.jpg",
+        "name":"iphones"
+    },
+    {
+        "image":"/Feed/mobile/daniel-romero-4P3jflrqJhA-unsplash.jpg",
+        "name":"xiaomi"
+    },
+    {
+        "image":"/Feed/mobile/mailchimp-KR0WW6bjtt0-unsplash.jpg",
+        "name":"mailchimp"
+    },
+    {
+        "image":"/Feed/mobile/sun-lingyan-k7lb5oYYYAw-unsplash.jpg",
+        "name":"xiaomi"
+    },
+]

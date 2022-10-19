@@ -6,6 +6,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 
 @layer base {
+    * {
+        box-sizing: border-box;
+    }
     html {
         font-family:'Kanit', sans-serif;
     }

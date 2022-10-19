@@ -40,6 +40,9 @@ module.exports = {
          wiggle:"wiggle 700ms ease-in-out",
          expand:" expand 1s ease-in ",
          expand_close: " expand_close 1.1s ease-in-out infinite"
+      },
+      screens: {
+        '3xl':'1300px'
       }
     },
   },
@@ -48,5 +51,6 @@ module.exports = {
     require('@tailwindcss/forms')({
       strategy: 'base'
     }),
+    require('tailwind-scrollbar-hide')
   ],
 }

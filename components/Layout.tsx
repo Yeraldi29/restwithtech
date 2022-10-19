@@ -12,8 +12,8 @@ const Layout = ({children}:Props) => {
 
   return (
     <>
-    <div className={`${clickState.clickMenu ? "bg-black/50  absolute inset-0 backdrop-blur-sm z-30 " : " hidden"}`}></div>
-    <div className=" max-w-7xl mx-auto h-screen ">
+    <div className={`${clickState.clickMenu ? "bg-black/50 fixed inset-0 backdrop-blur-sm z-30" : " hidden"}`}></div>
+    <div className=" max-w-7xl mx-2 lg:mx-4 xl:mx-6 3xl:mx-auto ">
       <Header />
       <main>
         {children}
