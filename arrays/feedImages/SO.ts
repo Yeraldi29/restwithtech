@@ -1,14 +1,20 @@
 export const SO = [
     {
-        "image":"/Feed/SO/dell-xIodDks1cQ8-unsplash.jpg",
-        "name":"windows10"
+        "image":"/Feed/SO/sumudu-mohottige-bIgpii04UIg-unsplash.jpg",
+        "name":"macOS",
+        "category":"OS",
+        "time":"29"
     },
     {
         "image":"/Feed/SO/lukas-NLSXFjl_nhc-unsplash.jpg",
-        "name":"debian"
+        "name":"debian",
+        "category":"OS",
+        "time":"28"
     },
     {
-        "image":"/Feed/SO/sumudu-mohottige-bIgpii04UIg-unsplash.jpg",
-        "name":"macOS"
+        "image":"/Feed/SO/dell-xIodDks1cQ8-unsplash.jpg",
+        "name":"windows10",
+        "category":"OS",
+        "time":"12"
     },
 ]

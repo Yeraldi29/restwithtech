@@ -1,1 +1,11 @@
-{}
+{
+    "recent":"The most recent",
+    "categories":{
+        "mobile":"Mobiles",
+        "code":"Code",
+        "tech":"Technologies",
+        "os":"OS",
+        "C&P":"Computers & Portables"
+    },
+    "hour":"{{time}} hours ago"
+}

@@ -1,9 +1,10 @@
-import Carousel from "./feed/Carousel"
+import Recomendations from "./feed/Recomendations"
 
 const Feed = () => {
   return (
     <>
-     <Carousel /> 
+      <Recomendations />
+      
     </>
   )
 }

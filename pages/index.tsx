@@ -20,7 +20,7 @@ const Home: NextPageWithLayout = () => {
 
 export const getStaticProps = async ({ locale }:{locale:string}) => ({
   props: {
-    ...await serverSideTranslations(locale, ['signIn_logIn','header']),
+    ...await serverSideTranslations(locale, ['header','common']),
   },
 })
 

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi";
-import { randomCategories } from "../../arrays/feedImages/allCategories";
+import { categoriesAnItem } from "../../arrays/feedImages/allCategories";
 import ItemCarousel from "./ItemCarousel";
 
 const Carousel = () => {
@@ -8,11 +8,11 @@ const Carousel = () => {
   const maxScrollWidth = useRef(0)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [disable, setDisable] = useState({prev:false,next:false})
+  const [animation, setAnimation] = useState({left:false,right:false})
   const carousel = useRef<HTMLDivElement | null>(null)
 
   useEffect(()=>{
-    setCategories(randomCategories)
-
+    setCategories(categoriesAnItem)
   },[])
 
   useEffect(()=>{
@@ -38,28 +38,32 @@ const Carousel = () => {
     if ( currentIndex > 0 ) {
       setCurrentIndex(prev => prev - 1)
     }
+    setAnimation({...animation,left:true})
   }
   
   const moveNext = () => {
     if(carousel.current !== null && carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current){
       setCurrentIndex(prev => prev + 1)
     }
+    setAnimation({...animation,right:true})
   }
   
   return (
     <>
-      <div className="relative overflow-hidden w-full h-96 bg-gray-400 mt-4 rounded-xl -rotate-1 sm:h-[27rem] md:h-[32rem] ">
-      <div className="flex justify-between items-center absolute w-full h-full px-3 z-10 md:px-6">
+      <div className="relative overflow-hidden w-full h-96 bg-gray-400 mt-4 rounded-xl -rotate-1 sm:h-[27rem] md:h-[30rem] lg:h-[32rem] md:col-span-2 lg:row-span-3">
+      <div className="flex justify-between items-center absolute w-full h-full px-3  md:px-6">
         <button 
-        className="w-12 h-12 md:w-14 md:h-14 flex justify-center items-center rounded-lg -rotate-12 bg-Blue-Gray/70 disabled:opacity-0 disabled:transition disabled:duration-300 disabled:ease-in lg:hover:bg-DarkBlueGray group"
+        className={`w-12 h-12 md:w-14 md:h-14 z-10 flex justify-center items-center rounded-lg -rotate-12 bg-Blue-Gray/70 disabled:opacity-0 disabled:transition disabled:duration-300 disabled:ease-in lg:hover:bg-DarkBlueGray group ${animation.left && "animate-wiggle"}`}
         onClick={movePrev}
+        onAnimationEnd={()=>setAnimation({...animation,left:false})}
         disabled={disable.prev}
         >
           <BiLeftArrow className="w-10 h-10 md:w-12 md:h-12 lg:group-hover:text-Lavender-Blue" />
         </button>
         <button 
-        className="w-12 h-12 md:w-14 md:h-14 flex justify-center items-center rounded-lg rotate-12 bg-Blue-Gray/70 disabled:opacity-0 disabled:transition disabled:duration-300 disabled:ease-in lg:hover:bg-DarkBlueGray group"
+        className={`w-12 h-12 md:w-14 md:h-14 z-10 flex justify-center items-center rounded-lg rotate-12 bg-Blue-Gray/70 disabled:opacity-0 disabled:transition disabled:duration-300 disabled:ease-in lg:hover:bg-DarkBlueGray group ${animation.right && "animate-wiggle"}`}
         onClick={moveNext}
+        onAnimationEnd={()=>setAnimation({...animation,right:false})}
         disabled={disable.next}
         >
         <BiRightArrow className="w-10 h-10 md:w-12 md:h-12 lg:group-hover:text-Lavender-Blue" />
