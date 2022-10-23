@@ -7,7 +7,7 @@ export const code = [
     },
     {
         "image":"/Feed/code/kevin-horvat-Pyjp2zmxuLk-unsplash.jpg",
-        "name":"programming",
+        "name":"hacker",
         "category":"code",
         "time":"29"
     },

@@ -7,7 +7,7 @@ export const mobile = [
     },
     {
         "image":"/Feed/mobile/daniel-romero-4P3jflrqJhA-unsplash.jpg",
-        "name":"xiaomi",
+        "name":"xiaomi-camara",
         "category":"mobile",
         "time":"25"
     },

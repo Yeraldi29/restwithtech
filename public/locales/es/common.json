@@ -7,5 +7,12 @@
         "os":"SO",
         "C&P":"Computadoras y Portátiles"
     },
-    "hour":"Hace {{time}} horas"
+    "hour":"Hace {{time}} horas",
+    "message":{
+        "mobile":"Aquí es donde puedes leer todo acerca de noticias de móviles y con las empresas más populares de teléfonos inteligentes como: Aplee ,Xiaomi, Samsung, Blue, LG, Nokia etc...",
+        "code":"Aquí es una bonita section porque puedes encontrar consas interesantes acerca de código y sus tecnologias, tu sabes cosas como javascript, typescript, php, node.js, react, java etc... ",
+        "tech":"Aquí es una sección explosiva donde encontraras noticias de tecnologías y nunca estarás en el pasado.",
+        "os":"Aquí es una simple sección donde hay todo acerca de sistemas operativos.",
+        "C&P":"Aquí es donde toda esa gente que ama las computadoras y los portátiles pueden estar y eso es porque obviamente aquí esta todo acerca de eso :)"
+    }
 }

@@ -6,7 +6,6 @@ import Layout from '../components/Layout'
 import Feed from '../components/Feed'
 
 const Home: NextPageWithLayout = () => {
-  
   return (
     <>
       <Head>
