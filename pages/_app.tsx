@@ -22,7 +22,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) =>{
         <AuthProvider >
           <State>
             <FormS_LProvider>
-                {getLayout(<Component {...pageProps} />)}
+              {getLayout(<Component {...pageProps} />)}
             </FormS_LProvider>
           </State>
         </AuthProvider>

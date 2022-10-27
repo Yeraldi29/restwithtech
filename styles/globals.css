@@ -11,10 +11,8 @@
     }
     html {
         font-family:'Kanit', sans-serif;
-    }
-    body {
-        @apply text-white bg-BabyBlueEyes/30 scrollbar-thin scrollbar-track-white
-        scrollbar-thumb-DarkBlueGray
+        @apply text-white bg-BabyBlueEyes/30 scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-track-transparent scrollbar-thumb-DarkBlueGray;
+        @apply overflow-x-hidden scroll-smooth
     }
     h1,h2,h3,h4,h5,h5{
         font-family: 'Shadows Into Light', cursive;

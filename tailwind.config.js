@@ -43,11 +43,14 @@ module.exports = {
       },
       screens: {
         '3xl':'1300px'
+      },
+      transformOrigin: {
+        "zero":"0%"
       }
     },
   },
   plugins: [
-    require('tailwind-scrollbar'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
     require('@tailwindcss/forms')({
       strategy: 'base'
     }),
