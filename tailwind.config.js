@@ -16,6 +16,7 @@ module.exports = {
         "Blue-Gray":"#7796CB",
         "DarkBlueGray":"#576490",
         "BabyBlueEyes":"#A3BCF9",
+        "BlueDarker":"rgb(39 58 92)"
       },
       keyframes: {
         wiggle: {

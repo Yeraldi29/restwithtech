@@ -5,20 +5,30 @@ import { useRouter } from "next/router"
 import Layout from "../../components/Layout"
 import { NextPageWithLayout } from '../_app'
 import { mobile } from '../../arrays/feedImages/mobile'
+import NewInformation from '../../components/NewInformation'
+import { newData } from '../../initialProps'
 
 const New: NextPageWithLayout = () => {
     const router = useRouter()
     const { newPost } = router.query 
+    const [getData, setGetData] = useState<itemProps | undefined>(newData)
 
+    useEffect(()=>{
+      const falseData = mobile.find(data => data.title === newPost )
+      setGetData(falseData)
+    },[newPost])
+    
   return (
     <>
      <Head>
         <title> {newPost} </title>
         <link rel="icon" href="/icon.png" />
       </Head>
-      <div>
-        <p className="text-black">New {newPost}</p>
-      </div>
+      {
+       getData && (
+         <NewInformation image={getData.image} title={getData.title} category={getData.category} alt={getData.alt} />
+      ) 
+      }
     </>
   )
 }
@@ -33,7 +43,7 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   const paths = mobile.flatMap(item => {
     return locales.map(locale => {
       return {
-        params: { newPost : item.name},
+        params: { newPost : item.title},
         locale: locale
       }
     }
@@ -41,5 +51,11 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   
   return {paths, fallback: false}
 } 
+
+New.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <Layout>{page}</Layout>
+  )
+}
 
 export default New

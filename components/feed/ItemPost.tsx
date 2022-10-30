@@ -6,7 +6,7 @@ import { BsNewspaper } from "react-icons/bs"
 import { useRouter } from "next/router"
 import Link from "next/link"
 
-const ItemPost = ({image,alt,category,time,index}:itemProps) => {
+const ItemPost = ({image,alt,category,time,index, title}:itemProps) => {
     const [categoryItem,setCategoryItem] = useState("")
     const [animation,setAnimation] = useState({hover:false,clicked:false})
     const { t } = useTranslation("common")
@@ -20,7 +20,7 @@ const ItemPost = ({image,alt,category,time,index}:itemProps) => {
             case "mobile":
                 setCategoryItem(t("categories.mobile"))
             break
-            case "computers":
+            case "computers&laptops":
                 setCategoryItem(t("categories.C&P"))
             break
             case "OS":
@@ -33,7 +33,7 @@ const ItemPost = ({image,alt,category,time,index}:itemProps) => {
     },[category])
     
   return (
-    <Link href={`/${category}/${alt}`} >
+    <Link href={`/${category}/${title}`} >
       <div className={`flex items-center group bg-DarkBlueGray w-full -rotate-1 even:rotate-1 h-52 sm:h-56 rounded-xl cursor-pointer ${(index=== 0 || index === 1) && "lg:col-span-1"} ${(router.asPath !== "/" && index === 0) && "lg:mt-2"}`}
       onMouseOver={()=>setAnimation({...animation,hover:true})}
       onMouseLeave={()=>setAnimation({...animation,hover:false})}
@@ -53,7 +53,7 @@ const ItemPost = ({image,alt,category,time,index}:itemProps) => {
           <motion.h1 className="relative text-sm sm:text-md px-2 text-center mt-1 sm:mt-4 w-48 sm:w-64 md:w-48 mx-auto"
           animate={animation.hover || animation.clicked ? {opacity:0,scale:0.20} : {opacity:100,scale:1}}
           transition={{duration:0.3}}>
-            <strong>dui nam nisl et cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.</strong>
+            <strong>{title}</strong>
           </motion.h1>
           <p className={`absolute bottom-1 text-xs sm:text-sm text-Lavender-Blue ${index !== undefined && index % 2 === 0 ? "left-2" :"right-1"}`}>
             {t("hour",{time})}

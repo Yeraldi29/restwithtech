@@ -4,7 +4,7 @@ import { categoriesAnItem } from "../../arrays/feedImages/allCategories";
 import ItemCarousel from "./ItemCarousel";
 
 const Carousel = () => {
-  const [categories, setCategories] = useState([{image:"",name:""}])
+  const [categories, setCategories] = useState([{image:"",name:"",category:""}])
   const maxScrollWidth = useRef(0)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [disable, setDisable] = useState({prev:false,next:false})
@@ -71,8 +71,8 @@ const Carousel = () => {
       </div>
       <div ref={carousel} className="relative flex gap-1 overflow-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory touch-pan-x z-0 h-full">
         {
-          categories.map((category:{image:string,name:string}) => (
-            <ItemCarousel image={category.image} alt={category.name} key={category.name}/>
+          categories.map((category:{image:string,name:string,category:string}) => (
+            <ItemCarousel image={category.image} alt={category.name} category={category.category} key={category.name}/>
         ))
         }
       </div>

@@ -9,6 +9,7 @@ interface NewSectionProps {
         image: string
         name: string
         category: string
+        title: string
         time: string
     }[]
     title:string
@@ -28,7 +29,7 @@ const NewSection = ({section,title, message,presentationImage}:NewSectionProps) 
       </div>
       {
          section.map((post,index) => (
-          <ItemPost image={post.image} category={post.category} time={post.time} alt={post.name} key={post.name} index={index}/>
+          <ItemPost image={post.image} category={post.category} time={post.time} alt={post.name} key={post.name} index={index} title={post.title}/>
          ))
        }
     </div>
