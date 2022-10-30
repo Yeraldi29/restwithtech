@@ -72,7 +72,7 @@ export const mostRecents = [
     {
         "image":"/Feed/technoligies/possessed-photography-jIBMSMs4_kA-unsplash.jpg",
         "name":"hand robot",
-        "category":"tech",
+        "category":"technologies",
         "title":"cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum, fermentum ultricies.",
         "time":"24"
     },

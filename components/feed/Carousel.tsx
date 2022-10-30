@@ -4,7 +4,7 @@ import { categoriesAnItem } from "../../arrays/feedImages/allCategories";
 import ItemCarousel from "./ItemCarousel";
 
 const Carousel = () => {
-  const [categories, setCategories] = useState([{image:"",name:"",category:""}])
+  const [categories, setCategories] = useState([{image:"",name:"",category:"",title:""}])
   const maxScrollWidth = useRef(0)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [disable, setDisable] = useState({prev:false,next:false})
@@ -50,7 +50,7 @@ const Carousel = () => {
   
   return (
     <>
-      <div className="relative overflow-hidden w-full h-96 bg-gray-400 mt-4 rounded-xl -rotate-1 sm:h-[27rem] md:h-[30rem] lg:h-[32rem] md:col-span-2 lg:row-span-3">
+      <div className="relative overflow-hidden w-full h-[22rem] bg-gray-400 mt-4 rounded-xl -rotate-1 sm:h-[27rem] md:h-[30rem] lg:h-[32rem] md:col-span-2 lg:row-span-3">
       <div className="flex justify-between items-center absolute w-full h-full px-3  md:px-6">
         <button 
         className={`w-12 h-12 md:w-14 md:h-14 z-10 flex justify-center items-center rounded-lg -rotate-12 bg-Blue-Gray/70 disabled:opacity-0 disabled:transition disabled:duration-300 disabled:ease-in lg:hover:bg-DarkBlueGray group ${animation.left && "animate-wiggle"}`}
@@ -71,8 +71,8 @@ const Carousel = () => {
       </div>
       <div ref={carousel} className="relative flex gap-1 overflow-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory touch-pan-x z-0 h-full">
         {
-          categories.map((category:{image:string,name:string,category:string}) => (
-            <ItemCarousel image={category.image} alt={category.name} category={category.category} key={category.name}/>
+          categories.map((category) => (
+            <ItemCarousel image={category.image} alt={category.name} category={category.category} key={category.name} title={category.title}/>
         ))
         }
       </div>
