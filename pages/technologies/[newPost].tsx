@@ -11,10 +11,10 @@ import { newData } from '../../initialProps'
 const New: NextPageWithLayout = () => {
     const router = useRouter()
     const { newPost } = router.query 
-    const [getData, setGetData] = useState<itemProps | undefined>(newData)
+    const [getData, setGetData] = useState<Array<itemProps> | undefined>(newData)
 
     useEffect(()=>{
-      const falseData = tech.find(data => data.title === newPost )
+      const falseData = tech.filter(data => data.title === newPost)
       setGetData(falseData)
     },[newPost])
     
@@ -26,7 +26,7 @@ const New: NextPageWithLayout = () => {
       </Head>
       {
        getData && (
-         <NewInformation image={getData.image} title={getData.title} category={getData.category} alt={getData.alt} />
+         <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time}/>
       ) 
       }
     </>
@@ -35,7 +35,7 @@ const New: NextPageWithLayout = () => {
 
 export const getStaticProps = async ({ locale }:{locale:string}) => ({
   props: {
-    ...await serverSideTranslations(locale, ['header','common']),
+    ...await serverSideTranslations(locale, ['header','newPost']),
   },
 })
 

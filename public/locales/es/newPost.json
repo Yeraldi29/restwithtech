@@ -1,0 +1,12 @@
+{
+    "categories":{
+        "mobile":"Móviles",
+        "code":"Código",
+        "tech":"Tecnologías",
+        "os":"SO",
+        "C&P":"Computadoras y Portátiles"
+    },
+    "published":"Publicado",
+    "hour":"Hace {{time}} horas",
+    "by":"por"
+}

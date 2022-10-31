@@ -14,7 +14,7 @@ const ItemPost = ({image,alt,category,time,index, title}:itemProps) => {
 
     useEffect(()=>{
         switch (category) {
-            case "tech":
+            case "technologies":
                 setCategoryItem(t("categories.tech"))
             break
             case "mobile":
@@ -33,7 +33,7 @@ const ItemPost = ({image,alt,category,time,index, title}:itemProps) => {
     },[category])
     
   return (
-    <Link href={`/${category}/${title}`} >
+    <Link href={`/${category}/${title}`} locale={router.locale}>
       <div className={`flex items-center group bg-DarkBlueGray w-full -rotate-1 even:rotate-1 h-52 sm:h-56 rounded-xl cursor-pointer ${(index=== 0 || index === 1) && "lg:col-span-1"} ${(router.asPath !== "/" && index === 0) && "lg:mt-2"}`}
       onMouseOver={()=>setAnimation({...animation,hover:true})}
       onMouseLeave={()=>setAnimation({...animation,hover:false})}

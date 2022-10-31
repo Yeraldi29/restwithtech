@@ -25,7 +25,7 @@ const NewSection = ({section,title, message,presentationImage}:NewSectionProps) 
       {title === t("recent") ? (<Carousel />): (router.asPath !== "/" && message && presentationImage)  && (<Presentation message={message} presentationImage={presentationImage} title={title}/>)}
 
       <div className={`md:col-span-2 mx-auto ${(title === t("recent")) ? "lg:col-span-1": router.asPath !== "/" ? "hidden":"lg:col-span-3 mt-4"}`}>      
-        <h1 className="text-Blue-Gray text-2xl rotate-1 px-2 border-b-4 border-white w-fit">{title}</h1>
+        <h2 className="text-Blue-Gray text-2xl rotate-1 px-2 border-b-4 border-white w-fit">{title}</h2>
       </div>
       {
          section.map((post,index) => (

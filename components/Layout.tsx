@@ -33,7 +33,7 @@ const Layout = ({children}:Props) => {
   return (
     <>
     <div className={`${clickState.clickMenu ? "bg-black/50 fixed inset-0 backdrop-blur-sm z-30" : " hidden"}`}></div>
-    <div className="relative max-w-7xl mx-2 lg:mx-4 xl:mx-6 3xl:mx-auto ">
+    <div className="relative max-w-7xl mx-2 sm:mx-3 lg:mx-4 xl:mx-6 3xl:mx-auto ">
       <Header />
       <motion.div className={`fixed bottom-2 right-4 w-16 h-16 bg-Lavender-Blue flex items-center justify-center rounded-xl cursor-pointer group transform duration-300  ${appear ? "z-30":"-z-50"}`}
       onClick={handleUp}

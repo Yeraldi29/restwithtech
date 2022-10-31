@@ -1,6 +1,6 @@
 interface itemProps{
     image:string
-    alt?:string
+    name:string
     category:string
     title: string
     time?:string

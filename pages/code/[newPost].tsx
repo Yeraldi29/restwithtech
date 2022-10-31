@@ -12,31 +12,31 @@ const New: NextPageWithLayout = () => {
     const router = useRouter()
     const { newPost } = router.query 
 
-    const [getData, setGetData] = useState<itemProps | undefined>(newData)
+    const [getData, setGetData] = useState<Array<itemProps> | undefined>(newData)
 
     useEffect(()=>{
-      const falseData = code.find(data => data.title === newPost )
+      const falseData = code.filter(data => data.title === newPost)
       setGetData(falseData)
     },[newPost])
     
-  return (
-    <>
-     <Head>
-        <title> {newPost} </title>
-        <link rel="icon" href="/icon.png" />
-      </Head>
-      {
-       getData && (
-         <NewInformation image={getData.image} title={getData.title} category={getData.category} alt={getData.alt} />
-      ) 
-      }
-    </>
-  )
+    return (
+      <>
+       <Head>
+          <title> {newPost} </title>
+          <link rel="icon" href="/icon.png" />
+        </Head>
+        {
+         getData && (
+           <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time}/>
+        ) 
+        }
+      </>
+    )
 }
 
 export const getStaticProps = async ({ locale }:{locale:string}) => ({
   props: {
-    ...await serverSideTranslations(locale, ['header','common']),
+    ...await serverSideTranslations(locale, ['header','newPost']),
   },
 })
 

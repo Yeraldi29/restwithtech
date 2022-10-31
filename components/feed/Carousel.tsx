@@ -72,7 +72,7 @@ const Carousel = () => {
       <div ref={carousel} className="relative flex gap-1 overflow-scroll scrollbar-hide scroll-smooth snap-x snap-mandatory touch-pan-x z-0 h-full">
         {
           categories.map((category) => (
-            <ItemCarousel image={category.image} alt={category.name} category={category.category} key={category.name} title={category.title}/>
+            <ItemCarousel image={category.image} name={category.name} category={category.category} key={category.name} title={category.title}/>
         ))
         }
       </div>

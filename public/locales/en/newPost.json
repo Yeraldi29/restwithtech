@@ -1,0 +1,12 @@
+{
+    "categories":{
+        "mobile":"Mobiles",
+        "code":"Code",
+        "tech":"Technologies",
+        "os":"OS",
+        "C&P":"Computers & Portables"
+    },
+    "published":"Published",
+    "hour":"{{time}} hours ago",
+    "by":"by"
+}
