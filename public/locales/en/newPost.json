@@ -8,5 +8,7 @@
     },
     "published":"Published",
     "hour":"{{time}} hours ago",
-    "by":"by"
+    "by":"by",
+    "skills":"Skills:",
+    "thisUser":"This user is:"
 }

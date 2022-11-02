@@ -6,7 +6,7 @@ import { BsNewspaper } from "react-icons/bs"
 import { useRouter } from "next/router"
 import Link from "next/link"
 
-const ItemPost = ({image,alt,category,time,index, title}:itemProps) => {
+const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
     const [categoryItem,setCategoryItem] = useState("")
     const [animation,setAnimation] = useState({hover:false,clicked:false})
     const { t } = useTranslation("common")
@@ -42,7 +42,7 @@ const ItemPost = ({image,alt,category,time,index, title}:itemProps) => {
         {
           (index !== undefined && index % 2 === 0) && (
           <picture className="relative z-20 w-full h-full rounded-l-xl overflow-hidden">
-            <img className="w-full h-full bg-white/40 rounded-l-xl object-cover lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={alt} />
+            <img className="w-full h-full bg-white/40 rounded-l-xl object-cover lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name} />
           </picture>
           )
         }
@@ -75,7 +75,7 @@ const ItemPost = ({image,alt,category,time,index, title}:itemProps) => {
          {
            (index !== undefined && index % 2 !== 0) && (
              <picture className="relative z-20 w-full h-full rounded-r-xl overflow-hidden">
-            <img className="w-full h-full rounded-r-xl object-cover group-hover:scale-125 duration-300 transform ease-in" src={image} alt={alt}  />
+            <img className="w-full h-full rounded-r-xl object-cover group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name}  />
           </picture>
           )
         }

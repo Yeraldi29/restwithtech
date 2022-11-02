@@ -8,7 +8,6 @@ const Language = () => {
   const [click, setClick] = useState(false)
   const [changeTo,flag] = useChangeLng()
   const router = useRouter()
-
   return (
     <Link href={router.query.newPost === undefined ? "" : {pathname:"", query:{newPost:router.query.newPost}}} locale={changeTo} >
       <div className={`${click && "animate-wiggle"} w-6 h-6 relative cursor-pointer rotate-12 border border-Lavender-Gray rounded-md hover:rotateItem hover:group overflow-hidden`}

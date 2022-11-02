@@ -21,7 +21,7 @@ const Account = () => {
             {t("account")}
           </h2>
         </button>
-        <div className={`transition duration-500 ease-in absolute top-24 bg-DarkBlueGray w-32 h-28 flex items-center justify-center rounded-2xl z-50 right-10 ${!click && "opacity-0 -z-10"}`}>
+        <div className={`transition duration-500 ease-in absolute top-24 bg-DarkBlueGray w-32 h-28 flex items-center justify-center rounded-2xl right-10 ${click ? "z-50": "opacity-0 -z-10 -translate-y-60"}`}>
           <UserAccount />
           <Bubbles click={click}/>
         </div>

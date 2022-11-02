@@ -14,7 +14,7 @@ const ImageProfile = ({src}:{src:string}) => {
   
   return (
     <div className={`${animation && "animate-wiggle "} imageProfile relative `} onClick={handleClick} onAnimationEnd={()=>setAnimation(false)}>
-      <Image src={src} className=" rounded-xl lg:hover:scale-125 duration-200 ease-out" alt=""  fill={true}/>
+      <Image src={src} className=" rounded-xl lg:hover:scale-125 duration-200 ease-out" alt=""  fill={true} sizes="(max-width:2000px)"/>
     </div>
   )
 }

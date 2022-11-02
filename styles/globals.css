@@ -32,4 +32,7 @@
     .imageProfile {
         @apply w-11 h-11 border -rotate-12 even:rotate-12 rounded-xl cursor-pointer overflow-hidden bg-white/30 
     }
+    .square {
+        @apply absolute w-4 h-4 rounded-md  bg-Blue-Gray 
+    }
 }

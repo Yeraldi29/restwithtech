@@ -18,7 +18,7 @@ const Layout = ({children}:Props) => {
 
    useEffect(()=>{
     scrollY.onChange(lasted => {
-      if(lasted > 50){
+      if(lasted > 300){
         setAppear(true)
       }else{
         setAppear(false)
