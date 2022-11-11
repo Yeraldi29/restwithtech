@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next"
 import ImageProfile from "../profile/ImageProfile"
 import ArrowDesktop from "./ArrowDesktop"
-import ArrowMobile from "./arrowMobile"
+import ArrowMobile from "./ArrowMobile"
 
 const PreviousInformationProfile = ({name}:{name:string}) => {
   const { t } = useTranslation("newPost")

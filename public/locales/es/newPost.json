@@ -10,5 +10,18 @@
     "hour":"Hace {{time}} horas",
     "by":"por",
     "skills":"Habilidades:",
-    "thisUser":"Este usuario es:"
+    "thisUser":"Este usuario es:",
+    "comments":"Comentarios",
+    "createComment":{
+        "noAccount":{
+            "you":"No estás en tu cuenta entonces si quieres crear un comentario aparecerás como un",
+            "anonymous":"Anonimo",
+            "or":"o puedes",
+            "log-in":"Iniciar sesión",
+            "sign-in":"Registrarse"
+        },
+        "placeholder":"Escribe tu propia opinión."
+    },
+    "noComment":"No hay comentarios.",
+    "cancel":"cancelar"
 }

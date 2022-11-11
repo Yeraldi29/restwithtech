@@ -10,5 +10,18 @@
     "hour":"{{time}} hours ago",
     "by":"by",
     "skills":"Skills:",
-    "thisUser":"This user is:"
+    "thisUser":"This user is:",
+    "comments":"Comments",
+    "createComment":{
+        "noAccount":{
+            "you":"You aren't in your account so if you want creating a comment you will appear like an",
+            "anonymous":"Anonymous",
+            "or":"or you can",
+            "log-in":"Log in",
+            "sign-in":"Sign in"
+        },
+        "placeholder":"Write your own opinion."
+    },
+    "noComment":"No comments.",
+    "cancel":"cancel"
 }

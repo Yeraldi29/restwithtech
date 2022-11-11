@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useContext } from "react"
 
 const initialStateState = {
     clickMenu: false,
@@ -48,8 +48,8 @@ export const State = ({children}:{children: React.ReactNode}) => {
 
     const handleNewExpand = (expand: boolean) => {
         setNewExpand(expand)
-    }
-    
+    } 
+
     return (
         <profileImage.Provider value={{imageProfile,handleClickImage}}>
             <menuClick.Provider value={{clickMenu,handleClick}}>

@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^1.2.4",
+    "@types/draft-js": "^0.11.9",
+    "and": "^0.0.3",
     "base64url": "^3.0.1",
     "core-js": "^3.25.0",
     "firebase": "^9.9.4",
@@ -20,6 +22,9 @@
     "react-dom": "^18.2.0",
     "react-icon": "^1.0.0",
     "react-icons": "^4.4.0",
+    "slate": "^0.84.0",
+    "slate-history": "^0.66.0",
+    "slate-react": "^0.83.2",
     "tailwind-scrollbar": "^2.0.1",
     "tailwind-scrollbar-hide": "^1.1.7"
   },
@@ -28,6 +33,7 @@
     "@types/node": "18.7.14",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
+    "@types/react-draft-wysiwyg": "^1.13.4",
     "autoprefixer": "^10.4.8",
     "eslint": "8.23.0",
     "eslint-config-next": "^13.0.0",

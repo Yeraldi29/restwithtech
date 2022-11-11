@@ -1,5 +1,6 @@
 import { useTranslation } from "next-i18next"
 import { useEffect, useState } from "react"
+import Comments from "./newInformation/Comments"
 import PreviousInformationProfile from "./newInformation/PreviousInformationProfile"
 import ImageProfile from "./profile/ImageProfile"
 
@@ -42,7 +43,7 @@ const NewInformation = ({image,title,category, name, time}:itemProps) => {
               <ImageProfile src={`https://i.pravatar.cc/150?u=${name}`}/>
             </div>
             <picture className=" col-span-3 relative">
-                <img className="w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] rounded-xl rotate-1" src={image} alt={name} />
+                <img className="w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl rotate-1" src={image} alt={name} />
             </picture>
             <div className="border-4 border-DarkBlueGray mt-4 rounded-xl p-4 xl:text-lg">
               <p>
@@ -54,6 +55,7 @@ const NewInformation = ({image,title,category, name, time}:itemProps) => {
           </div>
           <PreviousInformationProfile name={name}/>
         </div>
+        <Comments />
     </>
   )
 }

@@ -29,7 +29,7 @@ const NewSection = ({section,title, message,presentationImage}:NewSectionProps) 
       </div>
       {
          section.map((post,index) => (
-          <ItemPost image={post.image} category={post.category} time={post.time} alt={post.name} key={post.name} index={index} title={post.title}/>
+          <ItemPost image={post.image} category={post.category} time={post.time} name={post.name} key={post.name} index={index} title={post.title}/>
          ))
        }
     </div>

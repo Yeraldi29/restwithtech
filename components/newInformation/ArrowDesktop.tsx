@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 
 const ArrowDesktop = () => {
   return (
-    <div className="relative h-[5.5rem] hidden lg:block">
+    <div className="relative mt-2 h-[5.5rem] hidden lg:block">
     <motion.div className=" square "
     transition={{duration:0.5, delay:2}}
     initial={{bottom: 60,scale:1.5}}
