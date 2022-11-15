@@ -20,8 +20,16 @@
             "log-in":"Log in",
             "sign-in":"Sign in"
         },
-        "placeholder":"Write your own opinion."
+        "placeholder":"Write your own opinion.",
+        "help":{
+            "bold":"Bold",
+            "italic":"Italic",
+            "strikethrough":"Strikethrough",
+            "underline":"Underline",
+            "link":"Create a link"
+        }
     },
     "noComment":"No comments.",
-    "cancel":"cancel"
+    "cancel":"cancel",
+    "url":"Please enter an url."
 }

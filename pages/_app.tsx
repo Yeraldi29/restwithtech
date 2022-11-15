@@ -7,6 +7,7 @@ import {appWithTranslation} from 'next-i18next'
 import { State } from '../store/store'
 import { AuthProvider } from '../store/AuthContext'
 import { FormS_LProvider } from '../store/FormContextS_L'
+import { CreateContentContext } from '../store/CreateContentContext'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -22,7 +23,9 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) =>{
         <AuthProvider >
           <State>
             <FormS_LProvider>
-              {getLayout(<Component {...pageProps} />)}
+              <CreateContentContext>
+                {getLayout(<Component {...pageProps} />)}
+              </CreateContentContext>
             </FormS_LProvider>
           </State>
         </AuthProvider>

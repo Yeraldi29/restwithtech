@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next"
-import { BiMessageAltX, BiMessageSquare, BiNoEntry } from "react-icons/bi"
+import { BiMessageAltX, BiMessageSquare } from "react-icons/bi"
 import { mostRecents } from "../../arrays/feedImages/allCategories"
 import { useAuthValue } from "../../store/AuthContext"
 import CreateParagraph from "../createContent/CreateParagraph"
@@ -8,7 +8,6 @@ import ItemPost from "../feed/ItemPost"
 const Comments = () => {
     const { t } = useTranslation("newPost")
     const { currentUser } = useAuthValue()
-    // absolute -top-8 left-28
   return (
     <>
      <div className="relative mt-8 mb-4 flex -space-x-2">

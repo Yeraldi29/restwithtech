@@ -20,8 +20,16 @@
             "log-in":"Iniciar sesión",
             "sign-in":"Registrarse"
         },
-        "placeholder":"Escribe tu propia opinión."
+        "placeholder":"Escribe tu propia opinión.",
+        "help":{
+            "bold":"Negrita",
+            "italic":"Itálica",
+            "strikethrough":"Línea en medio",
+            "underline":"Subrayar",
+            "link":"Crea un link"
+        }
     },
     "noComment":"No hay comentarios.",
-    "cancel":"cancelar"
+    "cancel":"cancelar",
+    "url":"Por favor ingresa un url."
 }

@@ -1,17 +1,22 @@
 import { useTranslation } from "next-i18next"
 import { useState, useEffect, useCallback, useMemo } from "react"
 import { BiSend } from "react-icons/bi"
-import { createEditor, Descendant, BaseEditor } from "slate"
-import { Slate, Editable, withReact, ReactEditor, RenderLeafProps} from "slate-react"
+import { createEditor, Descendant, BaseEditor, Node, Range, Transforms} from "slate"
+import { Slate, Editable, withReact, ReactEditor, RenderLeafProps, RenderElementProps} from "slate-react"
+import { withHistory, HistoryEditor } from "slate-history"
+import { isKeyHotkey } from 'is-hotkey'
+import Link from "./Link"
+import withLinks from "./plugins/withLinks"
 import Toolbar from "./Toolbar"
 
-type CustomElement = { type: 'paragraph'; children: CustomText[]}
-type CustomText = { text: string, bold: boolean, italic:boolean,strikethrough:boolean,underline:boolean,code:boolean}
+type LinkElement = {type: 'link', url:string,children:Descendant[]}
+type CustomText = { text: string, bold?: boolean, italic?:boolean,strikethrough?:boolean,underline?:boolean}
+type CustomEditor = BaseEditor & ReactEditor & HistoryEditor
 
 declare module 'slate' {
   interface CustomTypes {
-    Editor: BaseEditor & ReactEditor 
-    Element: CustomElement
+    Editor: CustomEditor
+    Element: LinkElement
     Text: CustomText
   }
 }
@@ -19,32 +24,75 @@ declare module 'slate' {
 const CreateParagraph = () => {
   const { t } = useTranslation("newPost")
 
-  const editor = useMemo(()=> withReact(createEditor()),[])
+  const editor = useMemo(()=> withLinks(withHistory(withReact(createEditor()))),[])
   const [ grow, setGrow ] = useState(false)
+  const [ space, setSpace ] = useState("")
   const [ editablecomponent, setEditableComponent] = useState<JSX.Element | null>(null)
-  const [ contentSlate, setContentSlate] = useState("")
+  const [ contentSlate, setContentSlate] = useState<Descendant[]>([])
+  const [ slatePlainText, setSlatePlainText] = useState("")
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])
 
-  const initialValue: Descendant[] =[
-    {
-    type: 'paragraph',
-    children: [{ text: '',bold:false,italic:false,strikethrough:false,underline:false,code:false}],
-    },
-  ]
+  const renderElement = (props: RenderElementProps) => {
+    switch(props.element.type){
+      case "link":
+        return <Link {...props} />
+      default:
+        return (
+          <p {...props.attributes}>{props.children}</p>
+        )
+    }
+  }
+
+  const checkout = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('content') as string) : null
+
+  const initialValue: Descendant[] = useMemo(
+    () => 
+    checkout|| [
+      {
+      type: 'paragraph',
+      children: [{ text: '',bold:false,italic:false,strikethrough:false,underline:false,code:false}],
+      },
+    ],
+    []
+  )
+
+  const onKeyDown:React.KeyboardEventHandler<HTMLInputElement> = (event)=>{
+    const { selection } = editor
+
+    if (selection && Range.isCollapsed(selection)) {
+      const { nativeEvent } = event
+      if (isKeyHotkey('left', nativeEvent)) {
+        event.preventDefault()
+        Transforms.move(editor, { unit: 'offset', reverse: true })
+        return
+      }
+      if (isKeyHotkey('right', nativeEvent)) {
+        event.preventDefault()
+        Transforms.move(editor, { unit: 'offset' })
+        return
+      }
+    }
+    setSpace(event.key)
+  }
   
   useEffect(()=>{
     // I put the Editable component in an useState with an useEffect 'cause I had problems with hydratation when I reload the page
     setEditableComponent( 
-      <Editable 
-        renderLeaf={renderLeaf}
-        spellCheck={false}
-        placeholder={t("createComment.placeholder")}
-      />
+      <div className="w-full col-span-9 sm:col-span-13 lg:col-span-15">
+        <Editable 
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          spellCheck={false}
+          placeholder={t("createComment.placeholder")}
+          onKeyDown={onKeyDown}
+          />
+      </div>
     )
   },[])
 
-  // useEffect(()=>{
-  // },[contentSlate])
+  const serialize = (value:Descendant[]) => {
+    return value.map(n => Node.string(n)).join('\n')
+  }
 
   const handleChangeSlate = (value:Descendant[]) =>{
     const isChange = editor.operations.some(
@@ -52,8 +100,9 @@ const CreateParagraph = () => {
     )
     if(isChange){
       const content = JSON.stringify(value)
-      setContentSlate(content)
-      localStorage.setItem('content',content)
+      localStorage.setItem('content', content)
+      setContentSlate(value)
+      setSlatePlainText(serialize(value))
     }
   }
 
@@ -61,31 +110,24 @@ const CreateParagraph = () => {
     <>
     <div className={`w-full h-fit bg-Lavender-Blue/40 rounded-xl border-4 text-BlueDarker md:text-lg xl:text-xl border-BabyBlueEyes focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
     onClick={()=>setGrow(true)} >
-      <Toolbar editor={editor} grow={grow}/>
-      <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
-        <div className="w-full col-span-9 sm:col-span-13 lg:col-span-15">
-          <Slate editor={editor} value={initialValue}
-           onChange={handleChangeSlate} >
-            {editablecomponent}
-          </Slate>
+      <Slate editor={editor} value={initialValue}
+       onChange={handleChangeSlate} >
+        <Toolbar grow={grow} slatePlainText={slatePlainText} space={space}/>
+        <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
+          {editablecomponent}
+          <div className={`relative sm:col-span-1 lg:hover:opacity-50 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}>
+            <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`} />
+          </div>
         </div>
-        <div className={`relative sm:col-span-1 lg:hover:opacity-50 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}>
-          <BiSend className={`absolute -bottom-[0.1rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`} />
-        </div>
-      </div>
+      </Slate>
     </div>
     </>
   )
 }
 
 const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
-
   if(leaf.bold){
     children = <strong>{children}</strong>
-  }
-
-  if(leaf.code){
-    children = <code>{children}</code>
   }
 
   if(leaf.italic){
@@ -100,7 +142,9 @@ const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
     children = <u className=" underline">{children}</u>
   }
 
-  return <span {...attributes}>{children}</span>
+  return <span className={`${leaf.text === '' ? " pl-[0.1px]": null}`}
+   {...attributes}>{children}
+   </span>
 }
 
 export default CreateParagraph
