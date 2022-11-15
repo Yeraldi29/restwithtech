@@ -33,6 +33,10 @@ const Comments = () => {
             </div>
           </div>
         </div>
+      <div className="w-full h-96 -rotate-1">
+        <iframe src="https://giphy.com/embed/aer096d3vD4rYVsgNn" width="480" height="480" frameBorder="0" className="giphy-embed w-full h-full rounded-xl" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bunny-rabbit-lofirabbit-aer096d3vD4rYVsgNn"></a></p>
+      </div>
+      {/* <iframe src="https://giphy.com/embed/NFA61GS9qKZ68" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reading-dot-strategies-NFA61GS9qKZ68">via GIPHY</a></p> */}
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
       {
