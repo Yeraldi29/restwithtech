@@ -14,10 +14,9 @@
     "comments":"Comments",
     "createComment":{
         "noAccount":{
-            "you":"You aren't in your account so if you want creating a comment you will appear like an",
-            "anonymous":"Anonymous",
-            "or":"or you can",
+            "you":"You aren't in your account if you want to comment",
             "log-in":"Log in",
+            "or":"or",
             "sign-in":"Sign in"
         },
         "placeholder":"Write your own opinion.",

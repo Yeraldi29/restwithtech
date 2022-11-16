@@ -1,13 +1,25 @@
+import { useState,useEffect } from "react"
 import { useTranslation } from "next-i18next"
 import { BiMessageAltX, BiMessageSquare } from "react-icons/bi"
 import { mostRecents } from "../../arrays/feedImages/allCategories"
-import { useAuthValue } from "../../store/AuthContext"
 import CreateParagraph from "../createContent/CreateParagraph"
 import ItemPost from "../feed/ItemPost"
+import { useAuthValue } from "../../store/AuthContext"
+import Link from "next/link"
 
 const Comments = () => {
     const { t } = useTranslation("newPost")
-    const { currentUser } = useAuthValue()
+    const [ cannotComment, setCannotComment ] = useState(false)
+    const { profile } = useAuthValue()
+
+    useEffect(()=>{
+      if(profile !== "profile"){
+        setCannotComment(true)
+      }else{
+        setCannotComment(false)
+      }
+    },[])
+    
   return (
     <>
      <div className="relative mt-8 mb-4 flex -space-x-2">
@@ -22,8 +34,18 @@ const Comments = () => {
      <div>
       <div className="lg:grid lg:grid-cols-5 gap-x-8">
         <div className=" lg:col-span-3">
-          <div className=" border-4 border-DarkBlueGray rounded-xl p-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:h-fit ">
-            <CreateParagraph />
+          <div className="relative border-4 border-DarkBlueGray rounded-xl p-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:h-fit " >
+            <CreateParagraph cannotComment={cannotComment}/>
+            {cannotComment && (
+              <div className=" w-full h-full flex items-center justify-center rounded-lg -rotate-1 mt-4 p-4 bg-DarkBlueGray">
+                <h1 className=" text-xl md:text-2xl rotate-1 text-center">
+                  {t("createComment.noAccount.you")}<br /> 
+                  <Link href={"/log-in"}><span className=" text-Lavender-Blue lg:hover:text-3xl "> {t("createComment.noAccount.log-in")}</span></Link>
+                  <span> {t("createComment.noAccount.or")}</span>
+                  <Link href="/sign-in" ><span className=" text-BabyBlueEyes lg:hover:text-3xl"> {t("createComment.noAccount.sign-in")}</span></Link>
+                </h1>
+              </div>
+             )}
           </div>
           {/* here will be all the comments for this post */}
           <div className="h-52 my-6 sm:mx-16 md:mx-36 lg:mx-10 lg:my-10 flex items-center space-x-1 justify-center border-4 border-gray-500 bg-Lavender-Blue/40 rounded-xl rotate-1">
@@ -33,8 +55,8 @@ const Comments = () => {
             </div>
           </div>
         </div>
-      <div className="w-full h-96 -rotate-1">
-        <iframe src="https://giphy.com/embed/aer096d3vD4rYVsgNn" width="480" height="480" frameBorder="0" className="giphy-embed w-full h-full rounded-xl" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bunny-rabbit-lofirabbit-aer096d3vD4rYVsgNn"></a></p>
+      <div className="w-full h-96 rotate-1 my-3 sm:my-6 lg:col-span-2 lg:m-0 lg:mb-6 lg:mt-10 sticky top-20">
+          <iframe src="https://giphy.com/embed/aer096d3vD4rYVsgNn" width="650" height="650"  frameBorder="0" className="giphy-embed w-full h-full " allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bunny-rabbit-lofirabbit-aer096d3vD4rYVsgNn"></a></p>
       </div>
       {/* <iframe src="https://giphy.com/embed/NFA61GS9qKZ68" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reading-dot-strategies-NFA61GS9qKZ68">via GIPHY</a></p> */}
       </div>
@@ -46,14 +68,6 @@ const Comments = () => {
        }
       </div>
      </div>
-     {/* <div>
-      <p>
-        {t("createComment.noAccount.you")} <span className=" font-shadow">{t("createComment.noAccount.anonymous")}</span> 
-        <span>{t("createComment.noAccount.or")}</span>
-        <span>{t("createComment.noAccount.sign-in")}/</span>
-        <span>{t("createComment.noAccount.log-in")}</span>
-      </p>
-     </div> */}
     </>
   )
 }

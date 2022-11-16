@@ -19,10 +19,9 @@ export const CreateContentContext = ({children}:{children: React.ReactNode}) => 
         setAppear(option)
     }
 
-    
   return (
     <helpContent.Provider value={{appear,handleAppear}}>
-         {children}
+      {children}
     </helpContent.Provider>
   )
 }

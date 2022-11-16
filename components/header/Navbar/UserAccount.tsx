@@ -20,7 +20,7 @@ const UserAccount = () => {
           </Link>
         </div>
         <div className=" hover:opacity-50 active:opacity-100 active:text-DarkBlueGray active:bg-white rounded-b-2xl" onClick={()=>handleClick(false)}>
-        <Link href={"/log-in"} locale={router.locale}>
+        <Link href="/log-in" locale={router.locale}>
           <h2 className="text-2xl flex items-center justify-center p-2 lg:py-1  hover:cursor-pointer lg:text-base xl:text-lg ">{t("log-in")}</h2>
         </Link>
         </div>

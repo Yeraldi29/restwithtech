@@ -21,7 +21,7 @@ declare module 'slate' {
   }
 }
 
-const CreateParagraph = () => {
+const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
   const { t } = useTranslation("newPost")
 
   const editor = useMemo(()=> withLinks(withHistory(withReact(createEditor()))),[])
@@ -110,14 +110,15 @@ const CreateParagraph = () => {
     <>
     <div className={`w-full h-fit bg-Lavender-Blue/40 rounded-xl border-4 text-BlueDarker md:text-lg xl:text-xl border-BabyBlueEyes focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
     onClick={()=>setGrow(true)} >
-      <Slate editor={editor} value={initialValue}
+      <Slate editor={editor} value={initialValue} 
        onChange={handleChangeSlate} >
         <Toolbar grow={grow} slatePlainText={slatePlainText} space={space}/>
         <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
-          {editablecomponent}
-          <div className={`relative sm:col-span-1 lg:hover:opacity-50 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}>
-            <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`} />
-          </div>
+        {editablecomponent}
+        <div className={`relative sm:col-span-1 lg:hover:opacity-50 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}>
+          <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`} 
+          />
+        </div>
         </div>
       </Slate>
     </div>
