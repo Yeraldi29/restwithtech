@@ -108,7 +108,7 @@ const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
 
   return (
     <>
-    <div className={`w-full h-fit bg-Lavender-Blue/40 rounded-xl border-4 text-BlueDarker md:text-lg xl:text-xl border-BabyBlueEyes focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
+    <div className={`w-full h-fit bg-Lavender-Blue/40 rounded-xl border-4 text-BlueDarker md:text-lg xl:text-xl border-Blue-Gray focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
     onClick={()=>setGrow(true)} >
       <Slate editor={editor} value={initialValue} 
        onChange={handleChangeSlate} >

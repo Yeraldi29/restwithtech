@@ -33,7 +33,7 @@ const NewInformation = ({image,title,category, name, time}:itemProps) => {
     <>
         <div className=" lg:grid lg:grid-cols-5 gap-x-8">
           <div className=" text-BlueDarker md:text-lg col-span-3">
-            <h2 className="text-Blue-Gray text-lg xl:text-xl rotate-1 px-2 mb-3 sm:mt-4 border-b-4 border-white w-fit">{categoryItem}</h2>
+            <h2 className="text-Blue-Gray text-xl  xl:text-2xl rotate-1 px-2 mb-3 sm:mt-4 border-b-4 border-DarkBlueGray w-fit">{categoryItem}</h2>
             <h1 className="text-xl sm:text-2xl xl:text-3xl font-bold text-DarkBlueGray mb-2">{title}</h1>
             <div className="flex items-center space-x-1 mb-2">
               <p className=" text-BabyBlueEyes text-sm md:text-base xl:text-lg">
@@ -42,9 +42,11 @@ const NewInformation = ({image,title,category, name, time}:itemProps) => {
               </p>
               <ImageProfile src={`https://i.pravatar.cc/150?u=${name}`}/>
             </div>
-            <picture className=" col-span-3 relative">
-                <img className="w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl rotate-1" src={image} alt={name} />
-            </picture>
+            <div className=" col-span-3 relative bg-DarkBlueGray w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl rotate-1  border-4 border-DarkBlueGray">
+              <picture className="w-full h-full">
+                <img className="w-full h-full rounded-lg" src={image} alt={name} />
+              </picture>
+            </div>
             <div className="border-4 border-DarkBlueGray mt-4 rounded-xl p-4 xl:text-lg">
               <p>
                Lorem ipsum dolor sit amet consectetur adipiscing elit, fermentum egestas curabitur phasellus molestie. Ornare platea facilisis feugiat mauris sapien id lobortis, facilisi senectus taciti sed aliquet proin justo, volutpat interdum quis sociis conubia scelerisque. Sodales curae praesent sed vitae viverra aptent pulvinar primis quisque, nam lectus mollis diam hac congue fermentum laoreet etiam, porta litora habitasse curabitur malesuada ut potenti justo. Est justo turpis suscipit mattis dictumst aptent ultrices habitant a, potenti aliquam lectus pulvinar sem ut nullam hendrerit, id convallis erat fames lobortis euismod rutrum imperdiet. Vehicula eros nunc cubilia hendrerit potenti vulputate vestibulum curae, nam elementum mus euismod dis sollicitudin taciti nostra class, laoreet ridiculus bibendum dictumst himenaeos mattis maecenas.

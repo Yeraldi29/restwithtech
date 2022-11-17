@@ -6,6 +6,7 @@ import CreateParagraph from "../createContent/CreateParagraph"
 import ItemPost from "../feed/ItemPost"
 import { useAuthValue } from "../../store/AuthContext"
 import Link from "next/link"
+import Image from "next/image"
 
 const Comments = () => {
     const { t } = useTranslation("newPost")
@@ -22,13 +23,13 @@ const Comments = () => {
     
   return (
     <>
-     <div className="relative mt-8 mb-4 flex -space-x-2">
-      <h2 className="text-Blue-Gray text-lg xl:text-xl rotate-1 px-2 mb-3 sm:mt-4 border-b-4 border-white w-fit h-fit">
+     <div className="relative mt-8 mb-4 flex space-x-1">
+      <h2 className="text-Blue-Gray text-xl xl:text-2xl md:ml-36 lg:ml-0 rotate-1 px-2 mb-3 sm:mt-4 border-b-4 border-DarkBlueGray  w-fit h-fit">
        {t("comments")}
       </h2>
-      <div className="w-14 h-14 -mt-8 relative flex items-center justify-center">
-        <BiMessageSquare className="absolute top-0 w-full h-full -rotate-12 text-Blue-Gray" />
-        <span className="text-DarkBlueGray text-lg -rotate-12 font-semibold">0</span>
+      <div className="w-14 h-14 xl:w-16 xl:h-16  -mt-4 sm:-mt-1 relative flex items-center justify-center">
+        <BiMessageSquare className="absolute top-0 w-full h-full rotate-12 text-Blue-Gray" />
+        <span className="text-DarkBlueGray text-lg xl:text-xl rotate-12 font-semibold">0</span>
       </div>
      </div>
      <div>
@@ -37,8 +38,8 @@ const Comments = () => {
           <div className="relative border-4 border-DarkBlueGray rounded-xl p-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:h-fit " >
             <CreateParagraph cannotComment={cannotComment}/>
             {cannotComment && (
-              <div className=" w-full h-full flex items-center justify-center rounded-lg -rotate-1 mt-4 p-4 bg-DarkBlueGray">
-                <h1 className=" text-xl md:text-2xl rotate-1 text-center">
+              <div className=" w-full h-full flex items-center justify-center rounded-lg -rotate-1 mt-4 p-4 bg-DarkBlueGray border-4 border-Blue-Gray">
+                <h1 className=" text-2xl  rotate-1 text-center">
                   {t("createComment.noAccount.you")}<br /> 
                   <Link href={"/log-in"}><span className=" text-Lavender-Blue lg:hover:text-3xl "> {t("createComment.noAccount.log-in")}</span></Link>
                   <span> {t("createComment.noAccount.or")}</span>
@@ -51,14 +52,13 @@ const Comments = () => {
           <div className="h-52 my-6 sm:mx-16 md:mx-36 lg:mx-10 lg:my-10 flex items-center space-x-1 justify-center border-4 border-gray-500 bg-Lavender-Blue/40 rounded-xl rotate-1">
             <div>
               <h1 className="text-gray-500 text-2xl -rotate-1">{t("noComment")}</h1>
-              <BiMessageAltX className="w-12 h-12 mx-auto text-gray-500"/>
+              <BiMessageAltX className="w-12 h-12 xl:w-16 xl:h-16 mx-auto text-gray-500"/>
             </div>
           </div>
         </div>
-      <div className="w-full h-96 rotate-1 my-3 sm:my-6 lg:col-span-2 lg:m-0 lg:mb-6 lg:mt-10 sticky top-20">
-          <iframe src="https://giphy.com/embed/aer096d3vD4rYVsgNn" width="650" height="650"  frameBorder="0" className="giphy-embed w-full h-full " allowFullScreen></iframe><p><a href="https://giphy.com/gifs/bunny-rabbit-lofirabbit-aer096d3vD4rYVsgNn"></a></p>
+      <div className="w-full h-96 rotate-1 my-3  sm:my-6 lg:col-span-2 lg:m-0 lg:mb-6 lg:mt-10 sticky top-20">
+        <Image className="border-4 border-DarkBlueGray bg-DarkBlueGray rounded-xl mx-auto" src="/giphy.gif" alt="" width={360} height={430}/>
       </div>
-      {/* <iframe src="https://giphy.com/embed/NFA61GS9qKZ68" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/reading-dot-strategies-NFA61GS9qKZ68">via GIPHY</a></p> */}
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
       {

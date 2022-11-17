@@ -34,7 +34,7 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
     
   return (
     <Link href={`/${category}/${title}`} locale={router.locale}>
-      <div className={`flex items-center group bg-DarkBlueGray w-full -rotate-1 even:rotate-1 h-52 sm:h-56 rounded-xl cursor-pointer ${(index=== 0 || index === 1) && "lg:col-span-1"} ${(router.asPath !== "/" && index === 0) && "lg:mt-2"}`}
+      <div className={`flex items-center group bg-DarkBlueGray w-full -rotate-1 even:rotate-1 h-52 sm:h-56 rounded-xl cursor-pointer border-4 border-Blue-Gray ${(index=== 0 || index === 1) && "lg:col-span-1"} ${(router.asPath !== "/" && index === 0) && "lg:mt-2"}`}
       onMouseOver={()=>setAnimation({...animation,hover:true})}
       onMouseLeave={()=>setAnimation({...animation,hover:false})}
       onMouseDown={()=>setAnimation({...animation,clicked:true})}
@@ -47,7 +47,7 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
           )
         }
         <div className="w-full h-full relative">
-          <div className={`w-full bg-Lavender-Blue ${index !== undefined && index % 2 === 0 ? "rounded-tr-xl" : "rounded-tl-xl"}`}>
+          <div className={`w-full bg-Lavender-Blue ${index !== undefined && index % 2 === 0 ? "rounded-tr-lg" : "rounded-tl-lg"}`}>
             <h5 className="text-Blue-Gray text-center text-sm sm:text-md font-bold py-[2px]">{categoryItem}</h5>
           </div>
           <motion.h1 className="relative text-sm sm:text-md px-2 text-center mt-1 sm:mt-4 w-48 sm:w-64 md:w-48 mx-auto"
