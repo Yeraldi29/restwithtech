@@ -11,7 +11,7 @@ const Account = () => {
   return (
     <>
     <div className="hidden relative lg:flex items-center text-center rounded-xl -rotate-12">
-        <button className={`${animation && "animate-wiggle"} bg-DarkBlueGray p-2 rounded-xl border cursor-pointer group hover:bg-Lavender-Blue/50 hover:rotateItem focus:outline-none `} 
+        <button className={`${animation && "animate-wiggle"} p-2 rounded-xl border cursor-pointer group hover:bg-Lavender-Blue/50 ${click ? "bg-Lavender-Blue" : " bg-DarkBlueGray"} hover:rotateItem focus:outline-none `} 
         onClick={()=>{
           setAnimation(true)
           setClick(!click)

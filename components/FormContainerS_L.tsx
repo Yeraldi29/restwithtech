@@ -36,7 +36,7 @@ const FormContainerS_L = ({title,tryAccount,account,change,forgotPassword}:Props
     }
 
   return (
-    <div className=" relative bg-DarkBlueGray border -rotate-1 mx-auto mt-2 rounded-2xl w-[21.5rem] shadow-2xl py-10 px-6 sm:w-96 sm:mt-6 sm:px-8 xl:mt-16">
+    <div className=" relative bg-DarkBlueGray border-4 border-Blue-Gray -rotate-1 mx-auto mt-2 rounded-2xl w-[21.5rem] shadow-2xl py-10 px-6 sm:w-96 sm:mt-6 sm:px-8 xl:mt-16">
     <div className=" absolute inset-0 left-4 top-4">
         <Language />
     </div>
@@ -54,7 +54,7 @@ const FormContainerS_L = ({title,tryAccount,account,change,forgotPassword}:Props
     </Link>
     
     <p className="text-center mt-2">{tryAccount}</p>
-    <hr className="border-2 bg-white  rounded-sm"/>
+    <hr className="border-2 border-BlueDarker"/>
     <div className="flex items-center justify-center space-x-5 my-3">
         <div className={`${(animation.animation && animation.icon === 1) && " animate-wiggle "} w-10 h-10 rounded-xl -rotate-12 border-2 bg-Lavender-Blue flex items-center justify-center border-black active:bg-white group cursor-pointer`}
         onClick={handleGithub} 
@@ -94,7 +94,7 @@ const FormContainerS_L = ({title,tryAccount,account,change,forgotPassword}:Props
     <div className="flex justify-center items-center space-x-3">
         <p>{account}</p>
         <Link href={`${ useRouter().asPath === "/log-in" ? "/sign-in" : "/log-in"}`} locale={useRouter().locale}>
-            <div className={`${(animation.animation && animation.icon === 3) && " animate-wiggle "} bg-Lavender-Blue rounded-xl text-DarkBlueGray font-semibold p-2 border -rotate-12 active:bg-white hover:opacity-50 cursor-pointer`}
+            <div className={`${(animation.animation && animation.icon === 3) && " animate-wiggle "} bg-Lavender-Blue rounded-xl text-DarkBlueGray border-4 border-Blue-Gray font-semibold p-2 border -rotate-12 active:bg-white hover:opacity-50 cursor-pointer`}
             onClick={()=>setAnimation({animation:true,icon:3})} onAnimationEnd={()=>setAnimation({animation:false,icon:0})}>
                 <p >{change}</p>
         </div>

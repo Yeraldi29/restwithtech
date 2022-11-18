@@ -11,7 +11,7 @@ const ButtonForms = ({validation, title, submit}: ButtonFormsProps) => {
   const [animation, setAnimation] = useState(false)
     
   return (
-    <button type="submit" className={`${(animation && validation )&& " animate-wiggle "} relative bg-Lavender-Blue  mx-auto p-3 rounded-xl -rotate-12 my-4 active:bg-white text-red-600  cursor-pointer lg:hover:opacity-50`}
+    <button type="submit" className={`${(animation && validation )&& " animate-wiggle "} relative bg-Lavender-Blue border-4 border-Blue-Gray  mx-auto p-3 rounded-xl -rotate-12 my-4 active:bg-white text-red-600  cursor-pointer lg:hover:opacity-50`}
     onSubmit={()=>{
         setAnimation(true)
     }}

@@ -25,9 +25,9 @@ const InputPassword = ({formErrorsPassword, submit,formValuesPassword,handleChan
              className={` input ${(formErrorsPassword === t("errors.password.empty") && submit || formErrorsPassword  === t("errors.password.valid")) && " bg-red-300 focus:ring-red-500 "}`} 
              type={showPassword.hide ? "text" : "password" } name="password" value={formValuesPassword} onChange={handleChange} onClick={handleSetSubmit} />
 
-             <BiShow className={` ${showPassword.hide ? "hidden ":" cursor-pointer w-8 h-8 text-DarkBlueGray absolute top-2 right-1 "}`} 
+             <BiShow className={` ${showPassword.hide ? "hidden ":" cursor-pointer w-8 h-8 text-DarkBlueGray absolute top-[0.85rem] right-1 "}`} 
              onClick={()=>setShowPassword({...showPassword,show:!showPassword.show, hide:!showPassword.hide})}/>
-             <BiHide className={`${showPassword.show ? "hidden ":" cursor-pointer w-8 h-8 text-DarkBlueGray absolute top-2 right-1 " }`}
+             <BiHide className={`${showPassword.show ? "hidden ":" cursor-pointer w-8 h-8 text-DarkBlueGray absolute top-[0.85rem] right-1 " }`}
              onClick={()=>setShowPassword({...showPassword,hide:!showPassword.hide, show:!showPassword.show})}/>
         </div>
         
