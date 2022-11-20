@@ -42,8 +42,8 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
         >
           {
             (index !== undefined && index % 2 === 0) && (
-            <picture className="relative z-20 w-full h-full rounded-l-xl overflow-hidden">
-              <img className="w-full h-full bg-white/40 rounded-l-xl object-cover lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name} />
+            <picture className="relative z-20 w-full h-full rounded-l-lg overflow-hidden">
+              <img className="w-full h-full bg-white/40 rounded-l-lg object-cover lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name} />
             </picture>
             )
           }
@@ -75,8 +75,8 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
           </div>
            {
              (index !== undefined && index % 2 !== 0) && (
-               <picture className="relative z-20 w-full h-full rounded-r-xl overflow-hidden">
-              <img className="w-full h-full rounded-r-xl object-cover group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name}  />
+               <picture className="relative z-20 w-full h-full rounded-r-lg overflow-hidden">
+              <img className="w-full h-full rounded-r-lg object-cover group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name}  />
             </picture>
             )
           }

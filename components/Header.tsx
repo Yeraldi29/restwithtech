@@ -15,9 +15,9 @@ const Header= () => {
   const { profile } = useAuthValue() 
   const expand = useContext(postNewExpand)
   const { NewExpand } = expand
-
+  
 return (
-    <header className="sticky top-0 z-40 flex items-center justify-between h-[4.5rem] bg-Blue-Gray my-2 lg:my-4 lg:mb-2  rounded-xl -rotate-1  shadow-inner drop-shadow-md px-3 sm:px-4 md:px-5 shadow-Blue-Gray/50">
+    <header className="sticky top-0 z-40 flex items-center justify-between h-[4.5rem] xl:h-[5.5rem] bg-Blue-Gray my-2 lg:my-4 lg:mb-2  rounded-xl -rotate-1  shadow-inner drop-shadow-md px-3 sm:px-4 md:px-5 shadow-Blue-Gray/50">
         <Logo />
         <Navbar />
         <div className="flex items-center space-x-3">

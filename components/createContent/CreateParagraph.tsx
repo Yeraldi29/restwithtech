@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next"
-import { useState, useEffect, useCallback, useMemo } from "react"
+import { useState, useEffect, useCallback, useMemo, ReactNode } from "react"
 import { BiSend } from "react-icons/bi"
 import { createEditor, Descendant, BaseEditor, Node, Range, Transforms} from "slate"
 import { Slate, Editable, withReact, ReactEditor, RenderLeafProps, RenderElementProps} from "slate-react"
@@ -8,6 +8,8 @@ import { isKeyHotkey } from 'is-hotkey'
 import Link from "./Link"
 import withLinks from "./plugins/withLinks"
 import Toolbar from "./Toolbar"
+import { startSerialize } from "./plugins/serialize"
+import { useCommentContext } from "../../store/store"
 
 type LinkElement = {type: 'link', url:string,children:Descendant[]}
 type CustomText = { text: string, bold?: boolean, italic?:boolean,strikethrough?:boolean,underline?:boolean}
@@ -28,9 +30,10 @@ const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
   const [ grow, setGrow ] = useState(false)
   const [ space, setSpace ] = useState("")
   const [ editablecomponent, setEditableComponent] = useState<JSX.Element | null>(null)
-  const [ contentSlate, setContentSlate] = useState<Descendant[]>([])
   const [ slatePlainText, setSlatePlainText] = useState("")
+  const [ contentChangeSlate, setContentChange] = useState<Descendant[]>([])
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])
+  const { handleContentState} = useCommentContext()
 
   const renderElement = (props: RenderElementProps) => {
     switch(props.element.type){
@@ -101,11 +104,11 @@ const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
     if(isChange){
       const content = JSON.stringify(value)
       localStorage.setItem('content', content)
-      setContentSlate(value)
+      setContentChange(value)
       setSlatePlainText(serialize(value))
     }
   }
-
+  
   return (
     <>
     <div className={`w-full h-fit bg-Lavender-Blue/40 rounded-xl border-4 text-BlueDarker md:text-lg xl:text-xl border-Blue-Gray focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
@@ -115,8 +118,11 @@ const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
         <Toolbar grow={grow} slatePlainText={slatePlainText} space={space}/>
         <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
         {editablecomponent}
-        <div className={`relative sm:col-span-1 lg:hover:opacity-50 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}>
-          <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`} 
+        <div className={`relative sm:col-span-1 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}>
+          <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 lg:hover:text-white lg:hover:rotate-12   text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`} 
+          onClick ={ () => {
+            handleContentState(contentChangeSlate)
+          }}
           />
         </div>
         </div>

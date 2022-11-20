@@ -5,8 +5,10 @@ import { mostRecents } from "../../arrays/feedImages/allCategories"
 import CreateParagraph from "../createContent/CreateParagraph"
 import ItemPost from "../feed/ItemPost"
 import { useAuthValue } from "../../store/AuthContext"
-import Link from "next/link"
 import Image from "next/image"
+import CannotComment from "./comments/CannotComment"
+import NoComments from "./comments/NoComments"
+import Comment from "./comments/Comment"
 
 const Comments = () => {
     const { t } = useTranslation("newPost")
@@ -19,7 +21,7 @@ const Comments = () => {
       }else{
         setCannotComment(false)
       }
-    },[])
+    },[profile])
     
   return (
     <>
@@ -38,29 +40,19 @@ const Comments = () => {
           <div className="relative border-4 border-DarkBlueGray rounded-xl p-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:h-fit " >
             <CreateParagraph cannotComment={cannotComment}/>
             {cannotComment && (
-              <div className=" w-full h-full flex items-center justify-center rounded-lg -rotate-1 mt-4 p-4 bg-DarkBlueGray border-4 border-Blue-Gray">
-                <h1 className=" text-2xl  rotate-1 text-center">
-                  {t("createComment.noAccount.you")}<br /> 
-                  <Link href={"/log-in"}><span className=" text-Lavender-Blue lg:hover:text-3xl "> {t("createComment.noAccount.log-in")}</span></Link>
-                  <span> {t("createComment.noAccount.or")}</span>
-                  <Link href="/sign-in" ><span className=" text-BabyBlueEyes lg:hover:text-3xl"> {t("createComment.noAccount.sign-in")}</span></Link>
-                </h1>
-              </div>
+              <CannotComment />
              )}
           </div>
           {/* here will be all the comments for this post */}
-          <div className="h-52 my-6 sm:mx-16 md:mx-36 lg:mx-10 lg:my-10 flex items-center space-x-1 justify-center border-4 border-gray-500 bg-Lavender-Blue/40 rounded-xl rotate-1">
-            <div>
-              <h1 className="text-gray-500 text-2xl -rotate-1">{t("noComment")}</h1>
-              <BiMessageAltX className="w-12 h-12 xl:w-16 xl:h-16 mx-auto text-gray-500"/>
-            </div>
-          </div>
+          {/* <Comment /> */}
+          {/* no comments */}
+          <NoComments />
         </div>
       <div className="w-full h-96 rotate-1 my-3  sm:my-6 lg:col-span-2 lg:m-0 lg:mb-6 lg:mt-10 sticky top-20">
-        <Image className="border-4 border-DarkBlueGray bg-DarkBlueGray rounded-xl mx-auto" src="/giphy.gif" alt="" width={360} height={430}/>
+        <Image className="border-4 border-DarkBlueGray bg-DarkBlueGray rounded-xl mx-auto" src="/giphy.gif" alt="a person listen music" width={360} height={430}/>
       </div>
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+      <div className="grid gap-6 mt-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
       {
          mostRecents.map((post,index) => (
           <ItemPost image={post.image} category={post.category} time={post.time} name={post.name} key={post.name} index={index} title={post.title}/>

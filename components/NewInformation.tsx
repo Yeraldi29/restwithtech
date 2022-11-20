@@ -34,7 +34,7 @@ const NewInformation = ({image,title,category, name, time}:itemProps) => {
         <div className=" lg:grid lg:grid-cols-5 gap-x-8">
           <div className=" text-BlueDarker md:text-lg col-span-3">
             <h2 className="text-Blue-Gray text-xl  xl:text-2xl rotate-1 px-2 mb-3 sm:mt-4 border-b-4 border-DarkBlueGray w-fit">{categoryItem}</h2>
-            <h1 className="text-xl sm:text-2xl xl:text-3xl font-bold text-DarkBlueGray mb-2">{title}</h1>
+            <h1 className="text-2xl xl:text-3xl font-bold text-DarkBlueGray mb-2">{title}</h1>
             <div className="flex items-center space-x-1 mb-2">
               <p className=" text-BabyBlueEyes text-sm md:text-base xl:text-lg">
             {t("published")}    <span className=" text-Blue-Gray font-semibold">{t("hour",{time})}</span> {t("by")} 

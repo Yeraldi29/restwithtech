@@ -24,7 +24,7 @@ const serializeHtml:(node: Descendant) => JSX.Element | ReactFragment = (node : 
       return string
     }
 
-    const children: ReactNode = node.children.map(n =>serializeHtml(n))
+    const children: ReactNode = node.children.map((n) => serializeHtml(n)).concat(<br />)
 
     switch (node.type) {
     case 'link': 

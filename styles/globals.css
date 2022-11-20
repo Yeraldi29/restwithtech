@@ -30,7 +30,7 @@
         @apply rotate-1 bg-Lavender-Blue rounded-xl focus:border-none focus:outline-none border-2 border-Blue-Gray text-DarkBlueGray mt-1 mb-4 w-full h-12 focus:ring-2 focus:ring-BlueDarker caret-Blue-Gray
     }
     .imageProfile {
-        @apply w-11 h-11 border -rotate-12 even:rotate-12 rounded-xl cursor-pointer overflow-hidden bg-white/30 
+        @apply w-11 h-11 xl:w-14 xl:h-14 border -rotate-12 even:rotate-12 rounded-xl cursor-pointer overflow-hidden bg-white/30 
     }
     .square {
         @apply absolute w-4 h-4 rounded-md  bg-Blue-Gray 

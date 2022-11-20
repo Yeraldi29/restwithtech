@@ -15,7 +15,7 @@ const Language = () => {
   
   return (
     <Link href={router.query.newPost === undefined ? "" : {pathname:"", query:{newPost:router.query.newPost}}} locale={changeTo} >
-      <div className={`${click && "animate-wiggle"} w-6 h-6 relative cursor-pointer rotate-12 border border-Lavender-Gray rounded-md hover:rotateItem hover:group overflow-hidden`}
+      <div className={`${click && "animate-wiggle"} w-6 h-6 xl:w-7 xl:h-7 relative cursor-pointer rotate-12 border border-Lavender-Gray rounded-md hover:rotateItem hover:group overflow-hidden`}
       onClick={handleClick} onAnimationEnd={()=>setClick(false)}>
         <Image src={flag} fill sizes="(max-width:2000px)" className=" rounded-md hover:scale-150 duration-300" alt='change language'/>
       </div>
