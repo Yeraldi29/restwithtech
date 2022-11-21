@@ -4,34 +4,39 @@ export const mobile = [
         "name":"ben-kolde",
         "category":"mobile",
         "title":"dswl et cubilia habitant venenatis commodo interdum nasceur, fermentum ultricies commodo interdum nascetur,ultricies.",
-        "time":"25"
+        "time":"25",
+        "id":"mobile1example"
     },
     {
         "image":"/Feed/mobile/daniel-romero-4P3jflrqJhA-unsplash.jpg",
         "name":"xiaomi-camara",
         "category":"mobile",
         "title":"bitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
-        "time":"25"
+        "time":"25",
+        "id":"mobile2example"
     },
     {
         "image":"/Feed/mobile/mailchimp-KR0WW6bjtt0-unsplash.jpg",
         "name":"mailchimp",
         "category":"mobile",
         "title":"wdantum ultricies.",
-        "time":"27"
+        "time":"27",
+        "id":"mobile3example"
     },
     {
         "image":"/Feed/mobile/d-c-tr-nh-NEv65ZXjuLg-unsplash.jpg",
         "name":"iphones",
         "category":"mobile",
         "title":"nt venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
-        "time":"24"
+        "time":"24",
+        "id":"mobile4example"
     },
     {
         "image":"/Feed/mobile/sun-lingyan-k7lb5oYYYAw-unsplash.jpg",
         "name":"xiaomi",
         "category":"mobile",
         "title":"mmodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
-        "time":"14"
+        "time":"14",
+        "id":"mobile5example"
     },
 ]

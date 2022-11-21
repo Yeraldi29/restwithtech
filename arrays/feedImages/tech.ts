@@ -4,13 +4,15 @@ export const tech = [
         "name":"virtual reality",
         "category":"technologies",
         "title":"interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
-        "time":"25"
+        "time":"25",
+        "id":"tech1example"
     },
     {
         "image":"/Feed/technoligies/possessed-photography-jIBMSMs4_kA-unsplash.jpg",
         "name":"hand robot",
         "category":"technologies",
         "title":"cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum, fermentum ultricies.",
-        "time":"24"
+        "time":"24",
+        "id":"tech2example"
     },
 ]

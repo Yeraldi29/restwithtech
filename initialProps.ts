@@ -3,5 +3,6 @@ export const newData = [{
     name: "",
     category: "",
     title: "",
-    time: ""
+    time: "",
+    idNewPost: ""
 }]

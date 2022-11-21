@@ -9,7 +9,7 @@ const MarkButton = ({grow,format,icon, slatePlainText, space}:{grow:boolean,form
     const editor = useSlate()
 
     useEffect(()=>{
-        if(slatePlainText === "" || space === " "){
+        if(slatePlainText === "" || space === " " || space === "Enter"){
             Editor.removeMark(editor,format)
             setClickLeaf(false)
         }

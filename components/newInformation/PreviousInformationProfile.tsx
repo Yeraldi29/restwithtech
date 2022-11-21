@@ -16,11 +16,11 @@ const PreviousInformationProfile = ({name}:{name:string}) => {
              <ImageProfile src={`https://i.pravatar.cc/150?u=${name}`}/>
              <h4 className=" font-semibold xl:text-xl">Lorem Ipsum</h4>
            </div>
-           <p className="mt-2 xl:text-lg">
+           <p className="mt-2 xl:text-xl">
             porta litora habitasse curabitur malesuada ut potenti justo. Est justo turpis suscipit mattis dictumst aptent ultrices habitant a, potenti aliquam lectus pulvinar sem ut nullam hendrerit, id convallis erat fames lobortis euismod rutrum imperdiet.
             </p>
             <h5 className=" font-semibold xl:text-xl text-BabyBlueEyes">{t("skills")}</h5>
-            <ul className=" list-disc ml-4 text-base">
+            <ul className=" list-disc ml-4 text-base xl:text-lg">
               <li>litora habitasse</li>
               <li>ultrices</li>
               <li>vitae sem nec</li>

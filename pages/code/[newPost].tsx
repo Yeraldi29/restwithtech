@@ -11,9 +11,9 @@ import { newData } from '../../initialProps'
 const New: NextPageWithLayout = () => {
     const router = useRouter()
     const { newPost } = router.query 
-
+    
     const [getData, setGetData] = useState<Array<itemProps> | undefined>(newData)
-
+    
     useEffect(()=>{
       const falseData = code.filter(data => data.title === newPost)
       setGetData(falseData)
@@ -27,7 +27,7 @@ const New: NextPageWithLayout = () => {
         </Head>
         {
          getData && (
-           <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time}/>
+           <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time} idNewPost={getData[0].idNewPost}/>
         ) 
         }
       </>
@@ -44,7 +44,7 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   const paths = code.flatMap(item => {
     return locales.map(locale => {
       return {
-        params: { newPost : item.title},
+        params: { newPost : item.title },
         locale: locale
       }
     }

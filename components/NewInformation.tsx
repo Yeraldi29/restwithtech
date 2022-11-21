@@ -4,7 +4,7 @@ import Comments from "./newInformation/Comments"
 import PreviousInformationProfile from "./newInformation/PreviousInformationProfile"
 import ImageProfile from "./profile/ImageProfile"
 
-const NewInformation = ({image,title,category, name, time}:itemProps) => {
+const NewInformation = ({image,title,category, name, time, idNewPost}:itemProps) => {
   const { t } = useTranslation("newPost")
   
   const [categoryItem,setCategoryItem] = useState("")
@@ -47,7 +47,7 @@ const NewInformation = ({image,title,category, name, time}:itemProps) => {
                 <img className="w-full h-full rounded-lg" src={image} alt={name} />
               </picture>
             </div>
-            <div className="border-4 border-DarkBlueGray mt-4 rounded-xl p-4 xl:text-lg">
+            <div className="border-4 border-DarkBlueGray mt-4 rounded-xl p-4 xl:text-xl">
               <p>
                Lorem ipsum dolor sit amet consectetur adipiscing elit, fermentum egestas curabitur phasellus molestie. Ornare platea facilisis feugiat mauris sapien id lobortis, facilisi senectus taciti sed aliquet proin justo, volutpat interdum quis sociis conubia scelerisque. Sodales curae praesent sed vitae viverra aptent pulvinar primis quisque, nam lectus mollis diam hac congue fermentum laoreet etiam, porta litora habitasse curabitur malesuada ut potenti justo. Est justo turpis suscipit mattis dictumst aptent ultrices habitant a, potenti aliquam lectus pulvinar sem ut nullam hendrerit, id convallis erat fames lobortis euismod rutrum imperdiet. Vehicula eros nunc cubilia hendrerit potenti vulputate vestibulum curae, nam elementum mus euismod dis sollicitudin taciti nostra class, laoreet ridiculus bibendum dictumst himenaeos mattis maecenas.
                Justo maecenas laoreet lacinia vitae sem nec urna dui libero cum, congue litora sollicitudin tincidunt vehicula taciti netus commodo volutpat nam, ligula pretium potenti cubilia augue aptent lobortis cras iaculis. Inceptos nostra pellentesque egestas nisi curae ridiculus facilisi neque sociis, hac auctor mauris senectus quisque nam aliquet tristique. Scelerisque posuere potenti turpis porttitor sodales ullamcorper vehicula congue pretium ut, placerat cras varius cubilia aliquam nascetur eget fringilla natoque. Nibh sodales risus aptent commodo metus, duis tincidunt varius class tempus facilisis, felis ad suscipit nunc.
@@ -57,7 +57,7 @@ const NewInformation = ({image,title,category, name, time}:itemProps) => {
           </div>
           <PreviousInformationProfile name={name}/>
         </div>
-        <Comments />
+        <Comments idNewPost={idNewPost}/>
     </>
   )
 }

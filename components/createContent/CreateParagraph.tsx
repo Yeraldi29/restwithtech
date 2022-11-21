@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next"
-import { useState, useEffect, useCallback, useMemo, ReactNode } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import { BiSend } from "react-icons/bi"
 import { createEditor, Descendant, BaseEditor, Node, Range, Transforms} from "slate"
 import { Slate, Editable, withReact, ReactEditor, RenderLeafProps, RenderElementProps} from "slate-react"
@@ -8,8 +8,8 @@ import { isKeyHotkey } from 'is-hotkey'
 import Link from "./Link"
 import withLinks from "./plugins/withLinks"
 import Toolbar from "./Toolbar"
+import useCreateComment from "../../Hooks/firebase/useCreateComment"
 import { startSerialize } from "./plugins/serialize"
-import { useCommentContext } from "../../store/store"
 
 type LinkElement = {type: 'link', url:string,children:Descendant[]}
 type CustomText = { text: string, bold?: boolean, italic?:boolean,strikethrough?:boolean,underline?:boolean}
@@ -23,7 +23,7 @@ declare module 'slate' {
   }
 }
 
-const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
+const CreateParagraph = ({ cannotComment, option, idNewPost }:{cannotComment: boolean, option: string, idNewPost: string | undefined}) => {
   const { t } = useTranslation("newPost")
 
   const editor = useMemo(()=> withLinks(withHistory(withReact(createEditor()))),[])
@@ -31,9 +31,8 @@ const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
   const [ space, setSpace ] = useState("")
   const [ editablecomponent, setEditableComponent] = useState<JSX.Element | null>(null)
   const [ slatePlainText, setSlatePlainText] = useState("")
-  const [ contentChangeSlate, setContentChange] = useState<Descendant[]>([])
+  const { setContentComment, handleSaveComment } = useCreateComment(idNewPost)
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])
-  const { handleContentState} = useCommentContext()
 
   const renderElement = (props: RenderElementProps) => {
     switch(props.element.type){
@@ -104,8 +103,17 @@ const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
     if(isChange){
       const content = JSON.stringify(value)
       localStorage.setItem('content', content)
-      setContentChange(value)
+      if(option === "comment"){
+        setContentComment(startSerialize(value))
+      }
       setSlatePlainText(serialize(value))
+    }
+  }
+
+  const handleSendContent = () => {
+
+    if(option === "comment"){
+      handleSaveComment(true)
     }
   }
   
@@ -118,12 +126,14 @@ const CreateParagraph = ({ cannotComment }:{cannotComment: boolean}) => {
         <Toolbar grow={grow} slatePlainText={slatePlainText} space={space}/>
         <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
         {editablecomponent}
-        <div className={`relative sm:col-span-1 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}>
+        <div className={`relative sm:col-span-1 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}
+        onClick ={ () => {
+          if(option === "comment"){
+
+          }
+        }}>
           <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 lg:hover:text-white lg:hover:rotate-12   text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`} 
-          onClick ={ () => {
-            handleContentState(contentChangeSlate)
-          }}
-          />
+          onClick={handleSendContent}/>
         </div>
         </div>
       </Slate>

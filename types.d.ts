@@ -5,4 +5,5 @@ interface itemProps{
     title: string
     time?:string
     index?:number
+    idNewPost?:string
 }

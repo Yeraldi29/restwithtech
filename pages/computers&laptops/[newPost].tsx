@@ -26,7 +26,7 @@ const New: NextPageWithLayout = () => {
         </Head>
         {
          getData && (
-           <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time}/>
+           <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time} idNewPost={getData[0].idNewPost}/>
         ) 
         }
       </>
