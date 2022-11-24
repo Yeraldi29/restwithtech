@@ -23,7 +23,7 @@ declare module 'slate' {
   }
 }
 
-const CreateParagraph = ({ cannotComment, option, idNewPost }:{cannotComment: boolean, option: string, idNewPost: string | undefined}) => {
+const CreateParagraph = ({ cannotComment, option, idNewPost, name }:{cannotComment: boolean, option: string, idNewPost: string | undefined, name: string}) => {
   const { t } = useTranslation("newPost")
 
   const editor = useMemo(()=> withLinks(withHistory(withReact(createEditor()))),[])
@@ -31,7 +31,7 @@ const CreateParagraph = ({ cannotComment, option, idNewPost }:{cannotComment: bo
   const [ space, setSpace ] = useState("")
   const [ editablecomponent, setEditableComponent] = useState<JSX.Element | null>(null)
   const [ slatePlainText, setSlatePlainText] = useState("")
-  const { setContentComment, handleSaveComment } = useCreateComment(idNewPost)
+  const { setContentComment, handleSaveComment, contentComment } = useCreateComment(idNewPost, name)
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])
 
   const renderElement = (props: RenderElementProps) => {
@@ -127,13 +127,8 @@ const CreateParagraph = ({ cannotComment, option, idNewPost }:{cannotComment: bo
         <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
         {editablecomponent}
         <div className={`relative sm:col-span-1 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}
-        onClick ={ () => {
-          if(option === "comment"){
-
-          }
-        }}>
-          <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 lg:hover:text-white lg:hover:rotate-12   text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`} 
-          onClick={handleSendContent}/>
+        onClick ={handleSendContent}>
+          <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 lg:hover:text-white lg:hover:rotate-12   text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`}/>
         </div>
         </div>
       </Slate>

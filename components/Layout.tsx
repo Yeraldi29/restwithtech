@@ -6,7 +6,7 @@ import { AiOutlineArrowUp } from "react-icons/ai"
 import { motion, useScroll, useSpring } from "framer-motion"
 
 interface Props {
-  children?: ReactNode
+  children?: ReactNode 
 }
 
 const Layout = ({children}:Props) => {

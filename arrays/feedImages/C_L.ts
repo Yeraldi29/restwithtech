@@ -5,7 +5,7 @@ export const C_L = [
         "category":"computers&laptops",
         "title":"lia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies wdas.",
         "time":"24",
-        "id":"c_l1example"
+        "idNewPost":"c_l1example"
     },
     {
         "image":"/Feed/C_L/rafael-pol-6b5uqlWabB0-unsplash.jpg",
@@ -13,7 +13,7 @@ export const C_L = [
         "category":"computers&laptops",
         "title":"s commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"24",
-        "id":"c_l1example"
+        "idNewPost":"c_l1example"
     },
     {
         "image":"/Feed/C_L/alexandre-debieve-FO7JIlwjOtU-unsplash.jpg",
@@ -21,7 +21,7 @@ export const C_L = [
         "category":"computers&laptops",
         "title":"terdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"24",
-        "id":"c_l2example"
+        "idNewPost":"c_l2example"
     },
     {
         "image":"/Feed/C_L/andras-vas-Bd7gNnWJBkU-unsplash.jpg",
@@ -29,7 +29,7 @@ export const C_L = [
         "category":"computers&laptops",
         "title":"isl et cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum na.",
         "time":"24",
-        "id":"c_l3example"
+        "idNewPost":"c_l3example"
     },
     {
         "image":"/Feed/C_L/dell-6jQ5ukoVRTU-unsplash.jpg",
@@ -37,6 +37,6 @@ export const C_L = [
         "category":"computers&laptops",
         "title":"itant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"6",
-        "id":"c_l4example"
+        "idNewPost":"c_l4example"
     },
 ]

@@ -5,7 +5,7 @@ export const SO = [
         "category":"OS",
         "title":"votant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermenstum ultricies.",
         "time":"29",
-        "id":"so1example"
+        "idNewPost":"so1example"
     },
     {
         "image":"/Feed/SO/lukas-NLSXFjl_nhc-unsplash.jpg",
@@ -13,7 +13,7 @@ export const SO = [
         "category":"OS",
         "title":"dam nisl et cubilia habitant venenamodo interdum nascetur, fermentum ultwicies commodo interdum nascies.",
         "time":"28",
-        "id":"so2example"
+        "idNewPost":"so2example"
     },
     {
         "image":"/Feed/SO/dell-xIodDks1cQ8-unsplash.jpg",
@@ -21,6 +21,6 @@ export const SO = [
         "category":"OS",
         "title":"ur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"12",
-        "id":"so3example"
+        "idNewPost":"so3example"
     },
 ]

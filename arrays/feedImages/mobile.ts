@@ -5,7 +5,7 @@ export const mobile = [
         "category":"mobile",
         "title":"dswl et cubilia habitant venenatis commodo interdum nasceur, fermentum ultricies commodo interdum nascetur,ultricies.",
         "time":"25",
-        "id":"mobile1example"
+        "idNewPost":"mobile1example"
     },
     {
         "image":"/Feed/mobile/daniel-romero-4P3jflrqJhA-unsplash.jpg",
@@ -13,7 +13,7 @@ export const mobile = [
         "category":"mobile",
         "title":"bitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"25",
-        "id":"mobile2example"
+        "idNewPost":"mobile2example"
     },
     {
         "image":"/Feed/mobile/mailchimp-KR0WW6bjtt0-unsplash.jpg",
@@ -21,7 +21,7 @@ export const mobile = [
         "category":"mobile",
         "title":"wdantum ultricies.",
         "time":"27",
-        "id":"mobile3example"
+        "idNewPost":"mobile3example"
     },
     {
         "image":"/Feed/mobile/d-c-tr-nh-NEv65ZXjuLg-unsplash.jpg",
@@ -29,7 +29,7 @@ export const mobile = [
         "category":"mobile",
         "title":"nt venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"24",
-        "id":"mobile4example"
+        "idNewPost":"mobile4example"
     },
     {
         "image":"/Feed/mobile/sun-lingyan-k7lb5oYYYAw-unsplash.jpg",
@@ -37,6 +37,6 @@ export const mobile = [
         "category":"mobile",
         "title":"mmodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"14",
-        "id":"mobile5example"
+        "idNewPost":"mobile5example"
     },
 ]

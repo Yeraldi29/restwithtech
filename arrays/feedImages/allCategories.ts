@@ -19,7 +19,7 @@ export const mostRecents = [
         "category":"computers&laptops",
         "title":"itant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"6",
-        "id":"c_l4example"
+        "idNewPost":"c_l4example"
     },
      {
         "image":"/Feed/code/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg",
@@ -27,7 +27,7 @@ export const mostRecents = [
         "category":"code",
         "title":"fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"10",
-        "id":"code5example"
+        "idNewPost":"code5example"
     },
     {
         "image":"/Feed/SO/dell-xIodDks1cQ8-unsplash.jpg",
@@ -35,7 +35,7 @@ export const mostRecents = [
         "category":"OS",
         "title":"ur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"12",
-        "id":"so3example"
+        "idNewPost":"so3example"
     },
     {
         "image":"/Feed/mobile/sun-lingyan-k7lb5oYYYAw-unsplash.jpg",
@@ -43,7 +43,7 @@ export const mostRecents = [
         "category":"mobile",
         "title":"mmodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"14",
-        "id":"mobile5example"
+        "idNewPost":"mobile5example"
     },
      {
         "image":"/Feed/C_L/andras-vas-Bd7gNnWJBkU-unsplash.jpg",
@@ -51,7 +51,7 @@ export const mostRecents = [
         "category":"computers&laptops",
         "title":"isl et cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum na.",
         "time":"17",
-        "id":"c_l3example"
+        "idNewPost":"c_l3example"
     },
     {
         "image":"/Feed/C_L/alexandre-debieve-FO7JIlwjOtU-unsplash.jpg",
@@ -59,7 +59,7 @@ export const mostRecents = [
         "category":"computers&laptops",
         "title":"terdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"17",
-        "id":"c_l2example"
+        "idNewPost":"c_l2example"
     },
      {
         "image":"/Feed/SO/lukas-NLSXFjl_nhc-unsplash.jpg",
@@ -67,7 +67,7 @@ export const mostRecents = [
         "category":"OS",
         "title":"dam nisl et cubilia habitant venenamodo interdum nascetur, fermentum ultwicies commodo interdum nascies.",
         "time":"18",
-        "id":"so2example"
+        "idNewPost":"so2example"
     },
     {
         "image":"/Feed/code/michael-marais-y9emxVhxeTM-unsplash.jpg",
@@ -75,7 +75,7 @@ export const mostRecents = [
         "category":"code",
         "title":"et cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"22",
-        "id":"so2example"
+        "idNewPost":"so2example"
     },
     {
         "image":"/Feed/technoligies/possessed-photography-jIBMSMs4_kA-unsplash.jpg",
@@ -83,7 +83,7 @@ export const mostRecents = [
         "category":"technologies",
         "title":"cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum, fermentum ultricies.",
         "time":"24",
-        "id":"tech2example"
+        "idNewPost":"tech2example"
     },
     {
         "image":"/Feed/mobile/d-c-tr-nh-NEv65ZXjuLg-unsplash.jpg",
@@ -91,6 +91,6 @@ export const mostRecents = [
         "category":"mobile",
         "title":"nt venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"24",
-        "id":"mobile4example"
+        "idNewPost":"mobile4example"
     },
 ]

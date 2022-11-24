@@ -57,7 +57,7 @@ const NewInformation = ({image,title,category, name, time, idNewPost}:itemProps)
           </div>
           <PreviousInformationProfile name={name}/>
         </div>
-        <Comments idNewPost={idNewPost}/>
+        <Comments idNewPost={idNewPost} name={name}/>
     </>
   )
 }
