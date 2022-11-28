@@ -1,5 +1,7 @@
 import { useTranslation } from "next-i18next"
 import { useEffect, useState } from "react"
+import { mostRecents } from "../arrays/feedImages/allCategories"
+import ItemPost from "./feed/ItemPost"
 import Comments from "./newInformation/Comments"
 import PreviousInformationProfile from "./newInformation/PreviousInformationProfile"
 import ImageProfile from "./profile/ImageProfile"
@@ -58,6 +60,13 @@ const NewInformation = ({image,title,category, name, time, idNewPost}:itemProps)
           <PreviousInformationProfile name={name}/>
         </div>
         <Comments idNewPost={idNewPost} name={name}/>
+        <div className="grid gap-6 mt-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        {
+         mostRecents.map((post,index) => (
+          <ItemPost image={post.image} category={post.category} time={post.time} name={post.name} key={post.name} index={index} title={post.title}/>
+         ))
+        }
+      </div>
     </>
   )
 }

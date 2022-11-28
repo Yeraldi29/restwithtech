@@ -1,9 +1,12 @@
-import { Descendant } from "slate"
-import { ReactNode, ReactFragment } from "react"
+import { Descendant, Node } from "slate"
+import { ReactNode } from "react"
 import { Text } from "slate"
 import escapeHtml from 'escape-html'
 import { nanoid } from 'nanoid'
 
+export const serialize = (value:Descendant[]) => {
+  return value.map(n => Node.string(n)).join('\n')
+}
 
 const serializeHtml:(node: Descendant) => ReactNode = (node : Descendant) => {
     if (Text.isText(node)) {

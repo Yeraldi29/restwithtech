@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next"
 import Link from "next/link"
 
 const CannotComment = () => {
-    const { t } = useTranslation("newPost")
+  const { t } = useTranslation("newPost")
 
   return (
     <div className=" w-full h-full flex items-center justify-center rounded-lg -rotate-1 mt-4 p-4 bg-DarkBlueGray border-4 border-Blue-Gray">

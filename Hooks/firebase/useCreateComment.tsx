@@ -1,63 +1,53 @@
-import { useState, useEffect, ReactNode } from "react"
-import { Timestamp, doc, setDoc, getDoc, getDocs, collection } from "firebase/firestore"
+import { useState } from "react"
+import { Timestamp, doc, setDoc, getDocs, collection } from "firebase/firestore"
 import { useAuthValue } from "../../store/AuthContext"
 import { db } from "../../firebase"
+import { Descendant } from "slate"
 
-const useCreateComment = (idNewPost : string | undefined, name: string) => {
-  const [ contentComment, setContentComment ] = useState<ReactNode>("")
-  const [ sendComment, setSendComment ] = useState(false)
-  const [ valueId, setValueId ] = useState(0)
-  const [ valueParent_Id, setValueParent_Id ] = useState(0)
-  const [ authorVerification, setAuthorVerification ] = useState(false)
-
+const useCreateComment = (idNewPost : string | undefined, name: string, parent_id: number ) => {
+  const checkout  = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('content') as string) : null
+  const [ contentComment, setContentComment ] = useState<Descendant[]>(checkout || [])
+  const [ saved, setSaved ] = useState("no")
   const { currentUser } = useAuthValue()
-  
-  useEffect(()=>{
-  },[])
-  
-  const handleSaveComment  = async ( send: boolean ) => {
-    setSendComment(send)
 
-    if(currentUser && sendComment && idNewPost){
-      const commentsDoc = await getDocs(collection(db,`comments/${idNewPost}`,`comment`))
+  const handleSaveComment  = async () => {
+    setSaved("wait")
+    const commentsDoc = await getDocs(collection(db,`comments/${idNewPost}`,`comment`))
+    let valueParent_Id = 0
+    let authorVerification = false
 
-        if(commentsDoc.empty){
-          setValueId(0)
-          setValueParent_Id(0)
-        }else{
-          setValueId(commentsDoc.docs.length + 1)
-        }
-
-        // const commentRef = doc(db,`comments/${idNewPost}/comment`,`${valueId}`)
-        // const commentSnap = await getDoc(commentRef)
-        
-        // if(commentSnap.exists()){
-        //   setValueParent_Id(commentSnap.data().id)
-        // }
-        
-        if(name === currentUser.displayName){
-          setAuthorVerification(true)
-        }else{
-          setAuthorVerification(false)
-        }
-
-        await setDoc(doc(db,`comments/${idNewPost}/comment`,`${valueId}`),{
-         id: valueId,
-         parent_id: valueParent_Id,
-         data: JSON.stringify(contentComment),
-         username: currentUser.displayName,
-         create_at: Timestamp.now(),
-         author: authorVerification
-         }).then(()=>{
-         console.log("done");
-          
-        })
-
+    if(currentUser && idNewPost){
+      if(parent_id !== 0) {
+        valueParent_Id = parent_id
+      }else{
+        valueParent_Id = 0
+      }
+      
+      if(name === currentUser.displayName){
+        authorVerification = true
+      }else{
+        authorVerification = false
+      }
+      await setDoc(doc(db,`comments/${idNewPost}/comment`,`${commentsDoc.docs.length + 1}`),{
+        id: commentsDoc.docs.length + 1,
+        parent_id: valueParent_Id,
+        data: JSON.stringify(contentComment),
+        username: currentUser.displayName,
+        imageProfile: currentUser.photoURL,
+        create_at: Timestamp.now(),
+        author: authorVerification
+      }).then(()=>{
+        setSaved("yes")
+      }).catch(err =>{
+        setSaved("no")
+        alert(err.message)
+        console.log("🚀 ~ file: useCreateComment.tsx ~ line 44 ~ awaitsetDoc ~ err.message", err.message)
+      })
     }
   }
   
   
-  return  { setContentComment, handleSaveComment, contentComment }
+  return  { setContentComment, handleSaveComment, saved, setSaved }
 }
 
 export default useCreateComment

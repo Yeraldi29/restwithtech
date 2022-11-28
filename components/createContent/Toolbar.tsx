@@ -7,7 +7,7 @@ import { insertLink } from "./utils/link"
 import { motion } from "framer-motion"
 import { useCreateContentContext } from "../../store/CreateContentContext"
 
-const Toolbar = ({grow, slatePlainText, space }:{grow: boolean, slatePlainText: string, space: string}) => {
+const Toolbar = ({grow, space }:{grow: boolean , space: string}) => {
   const editor = useSlateStatic()
   const { t } = useTranslation("newPost")
   const { appear } = useCreateContentContext()
@@ -25,11 +25,11 @@ const Toolbar = ({grow, slatePlainText, space }:{grow: boolean, slatePlainText: 
        animate={appear ? { translateX: -500 } :{}}
        transition={appear ? { duration: 0.5 } :{}}
        >
-        <MarkButton grow={grow} format={"bold"} space={space} slatePlainText={slatePlainText} icon={<BiBold className={`w-7 h-7  xl:w-9 xl:h-9 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
-        <MarkButton grow={grow} format={"italic"} space={space} slatePlainText={slatePlainText} icon={<BiItalic className={`w-7 h-7 xl:w-9 xl:h-9  -rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
-        <MarkButton grow={grow} format={"strikethrough"} space={space} slatePlainText={slatePlainText} icon={<BiStrikethrough className={`w-7 h-7 xl:w-9 xl:h-9  rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
-        <MarkButton grow={grow} format={"underline"} space={space} slatePlainText={slatePlainText} icon={<BiUnderline className={`w-7 h-7 xl:w-9 xl:h-9  -rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
-        <div className={`border-2 lg:border-[3px] rounded-lg bg-BabyBlueEyes -rotate-12 even:rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-300 ease-in-out cursor-pointer lg:hover:bg-white lg:hover:border-Blue-Gray"} active:bg-BlueDarker active:text-BabyBlueEyes`}
+        <MarkButton grow={grow} format={"bold"} space={space} icon={<BiBold className={`w-7 h-7  xl:w-9 xl:h-9 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
+        <MarkButton grow={grow} format={"italic"} space={space} icon={<BiItalic className={`w-7 h-7 xl:w-9 xl:h-9  -rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
+        <MarkButton grow={grow} format={"strikethrough"} space={space}icon={<BiStrikethrough className={`w-7 h-7 xl:w-9 xl:h-9  rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
+        <MarkButton grow={grow} format={"underline"} space={space} icon={<BiUnderline className={`w-7 h-7 xl:w-9 xl:h-9  -rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>} />
+        <div className={`border-2 lg:border-[3px] rounded-lg bg-BabyBlueEyes -rotate-12 even:rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-300 ease-in-out cursor-pointer lg:hover:bg-white lg:hover:border-Blue-Gray"} active:bg-BlueDarker active:text-BabyBlueEyes`} 
         onClick={handleInsertLink}>
           <BiLink className={`w-7 h-7 xl:w-9 xl:h-9 -rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}/>
         </div>

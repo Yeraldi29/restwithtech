@@ -29,6 +29,14 @@
         }
     },
     "noComment":"No hay comentarios.",
-    "cancel":"cancelar",
-    "url":"Por favor ingresa un url."
+    "url":"Por favor ingresa un url.",
+    "comment":{
+        "reply":"Responder",
+        "replies":"Respuestas",
+        "showReply":"Mostrar respuesta",
+        "showReplies":"Mostrar respuestas",
+        "hideReply":"Ocultar respuesta",
+        "hideReplies":"Ocultar respuestas"
+    },
+    "cannotSave":"Por favor escribe más de 20 carácteres para poder guardar ."
 }

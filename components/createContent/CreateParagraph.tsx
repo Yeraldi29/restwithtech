@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next"
-import { useState, useEffect, useCallback, useMemo } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { BiSend } from "react-icons/bi"
-import { createEditor, Descendant, BaseEditor, Node, Range, Transforms} from "slate"
+import { createEditor, Descendant, BaseEditor, Node, Range, Transforms } from "slate"
 import { Slate, Editable, withReact, ReactEditor, RenderLeafProps, RenderElementProps} from "slate-react"
 import { withHistory, HistoryEditor } from "slate-history"
 import { isKeyHotkey } from 'is-hotkey'
@@ -9,30 +9,50 @@ import Link from "./Link"
 import withLinks from "./plugins/withLinks"
 import Toolbar from "./Toolbar"
 import useCreateComment from "../../Hooks/firebase/useCreateComment"
-import { startSerialize } from "./plugins/serialize"
+import { serialize } from "./plugins/serialize"
+import { useSlatePlainText } from "../../store/CreateContentContext"
 
-type LinkElement = {type: 'link', url:string,children:Descendant[]}
-type CustomText = { text: string, bold?: boolean, italic?:boolean,strikethrough?:boolean,underline?:boolean}
+type LinkElement = {type: 'link', url:string, children: Descendant[] }
+type CustomELement = { type: 'paragraph',children:CustomText[]}
+type CustomText = { text: string, bold?: boolean, italic?:boolean,strikethrough?:boolean,underline?:boolean, code?: boolean}
 type CustomEditor = BaseEditor & ReactEditor & HistoryEditor
 
 declare module 'slate' {
   interface CustomTypes {
     Editor: CustomEditor
-    Element: LinkElement
+    Element: CustomELement | LinkElement
     Text: CustomText
   }
 }
 
-const CreateParagraph = ({ cannotComment, option, idNewPost, name }:{cannotComment: boolean, option: string, idNewPost: string | undefined, name: string}) => {
+interface createParagraphProps {
+  cannotComment: boolean
+  option: string
+  idNewPost: string | undefined
+  name: string
+  parent_id: number 
+}
+
+const initialValues: Descendant[] = [
+  {
+  type: 'paragraph',
+  children: [{ text: '',bold:false,italic:false,strikethrough:false,underline:false,code:false}],
+  },
+]
+
+const CreateParagraph = ({ cannotComment, option, idNewPost, name,  parent_id }:createParagraphProps) => {
   const { t } = useTranslation("newPost")
 
-  const editor = useMemo(()=> withLinks(withHistory(withReact(createEditor()))),[])
+  const [ editor ] = useState(withLinks(withHistory(withReact(createEditor()))))
   const [ grow, setGrow ] = useState(false)
   const [ space, setSpace ] = useState("")
   const [ editablecomponent, setEditableComponent] = useState<JSX.Element | null>(null)
-  const [ slatePlainText, setSlatePlainText] = useState("")
-  const { setContentComment, handleSaveComment, contentComment } = useCreateComment(idNewPost, name)
+  const {  setContentComment, handleSaveComment, saved, setSaved } = useCreateComment(idNewPost, name, parent_id)
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])
+  
+  const checkout  = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('content') as string) : null
+  const [ value, setValue ] = useState(checkout || initialValues)
+  const { plainText ,handlePlainText, handleClickSave } = useSlatePlainText()
 
   const renderElement = (props: RenderElementProps) => {
     switch(props.element.type){
@@ -44,19 +64,6 @@ const CreateParagraph = ({ cannotComment, option, idNewPost, name }:{cannotComme
         )
     }
   }
-
-  const checkout = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('content') as string) : null
-
-  const initialValue: Descendant[] = useMemo(
-    () => 
-    checkout|| [
-      {
-      type: 'paragraph',
-      children: [{ text: '',bold:false,italic:false,strikethrough:false,underline:false,code:false}],
-      },
-    ],
-    []
-  )
 
   const onKeyDown:React.KeyboardEventHandler<HTMLInputElement> = (event)=>{
     const { selection } = editor
@@ -92,46 +99,59 @@ const CreateParagraph = ({ cannotComment, option, idNewPost, name }:{cannotComme
     )
   },[])
 
-  const serialize = (value:Descendant[]) => {
-    return value.map(n => Node.string(n)).join('\n')
-  }
+  useEffect(()=>{
+    if(saved === "yes"){
+      Transforms.delete(editor, {
+        distance: 10000,
+        reverse:true
+      })
+      Transforms.delete(editor, {
+        distance: 10000,
+      })
+      setSaved("no")
+    }
+  },[saved])
 
-  const handleChangeSlate = (value:Descendant[]) =>{
+  const handleChangeSlate = (value:Descendant[]) => {
+    // this code appears in Slate's documantation
     const isChange = editor.operations.some(
       op => 'set_selection' !== op.type
     )
     if(isChange){
       const content = JSON.stringify(value)
       localStorage.setItem('content', content)
+      setValue(value)
       if(option === "comment"){
-        setContentComment(startSerialize(value))
+        setContentComment(value)
       }
-      setSlatePlainText(serialize(value))
+      handlePlainText(serialize(value))
     }
   }
 
   const handleSendContent = () => {
-
-    if(option === "comment"){
-      handleSaveComment(true)
+    handleClickSave(true)
+    if(plainText.length >= 20){
+      if(option === "comment" ){
+        handleSaveComment()
+        handleClickSave(false)
+      }
     }
   }
   
   return (
     <>
-    <div className={`w-full h-fit bg-Lavender-Blue/40 rounded-xl border-4 text-BlueDarker md:text-lg xl:text-xl border-Blue-Gray focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
+    <div className={`w-full h-fit ${saved === "wait" ? "bg-gray-400" : "bg-Lavender-Blue/40"}  rounded-xl border-4 text-BlueDarker md:text-lg xl:text-xl border-Blue-Gray focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
     onClick={()=>setGrow(true)} >
-      <Slate editor={editor} value={initialValue} 
-       onChange={handleChangeSlate} >
-        <Toolbar grow={grow} slatePlainText={slatePlainText} space={space}/>
-        <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
-        {editablecomponent}
-        <div className={`relative sm:col-span-1 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}
-        onClick ={handleSendContent}>
-          <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 lg:hover:text-white lg:hover:rotate-12   text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`}/>
-        </div>
-        </div>
-      </Slate>
+      <Slate editor={editor} value={value} onChange={handleChangeSlate}>
+       <Toolbar grow={grow} space={space}/>
+       <div className="grid grid-cols-10 w-full relative mt-2 px-2 pb-1 sm:grid-cols-14 lg:grid-cols-16">
+       {editablecomponent}
+       <div className={`relative sm:col-span-1 cursor-pointer ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"}`}
+       onClick ={handleSendContent}>
+         <BiSend className={`absolute -bottom-[0.05rem] ml-1 w-7 h-7 xl:w-9 xl:h-9 -rotate-12 lg:hover:text-white lg:hover:rotate-12   text-DarkBlueGray ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-500 ease-in"} ${cannotComment && "hidden"}`}/>
+       </div>
+       </div>
+     </Slate>
     </div>
     </>
   )
