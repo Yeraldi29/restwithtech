@@ -1,15 +1,14 @@
 import { useTranslation } from "next-i18next"
 
-const CannotSave = () => {
+const CannotSave = ({text}: {text:string}) => {
   const { t } = useTranslation("newPost")
 
-  return (
-    <div className=" w-full h-full flex items-center justify-center rounded-lg -rotate-1 mt-4 p-4 bg-red-500  border-4 border-Blue-Gray">
-        <h1 className=" text-2xl  rotate-1 text-center">
-            {t("cannotSave")} 
-        </h1>
-    </div>
-  )
+  return <>
+    <div className="border-4 border-red-500 rounded-xl mt-2 p-1 ">
+      <h5 className="text-sm lg:text-base text-red-500 text-center "><strong>{t("warning")}</strong> {text}</h5>
+    </div> 
+  </>
+  
 }
 
 export default CannotSave

@@ -1,22 +1,20 @@
 import { useState, useEffect } from "react"
 import { Editor } from "slate"
 import { useSlate } from "slate-react"
-import { useSlatePlainText } from "../../store/CreateContentContext"
 
 type CustomText = { text: string, bold: boolean, italic:boolean,strikethrough:boolean,underline:boolean}
 
-const MarkButton = ({grow,format,icon, space}:{grow:boolean,format:keyof Omit<CustomText, "text">,icon:JSX.Element, space:string}) => {
-    const [clickLeaf, setClickLeaf] = useState(false)
+const MarkButton = ({grow,format,icon, keyword, plainText}:{grow:boolean,format:keyof Omit<CustomText, "text">,icon:JSX.Element, keyword: string, plainText: string}) => {
     const editor = useSlate()
-    const { plainText } = useSlatePlainText()
+    const [clickLeaf, setClickLeaf] = useState(false)
 
     useEffect(()=>{
-        if(plainText === "" || space === "Enter"){
+        if(plainText === "" || keyword === "Enter" ){
             Editor.removeMark(editor,format)
             setClickLeaf(false)
         }
-    },[plainText, space])
-    
+    },[plainText])
+
   return (
     <div className={`border-2 lg:border-[3px] rounded-lg bg-BabyBlueEyes -rotate-12 even:rotate-12 ${!grow ? "max-h-0 opacity-0" : "opacity-100 transform duration-300 ease-in-out cursor-pointer lg:hover:bg-white lg:hover:border-Blue-Gray"} ${clickLeaf && " bg-BlueDarker text-BabyBlueEyes"}`}
     onMouseDown={e =>{

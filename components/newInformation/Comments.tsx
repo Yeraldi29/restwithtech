@@ -9,46 +9,29 @@ import NoComments from "./comments/NoComments"
 import Comment from "./comments/Comment"
 import { db } from "../../firebase"
 import { collection, DocumentData, getDocs, query, QuerySnapshot, where } from "firebase/firestore"
-import { useSlatePlainText } from "../../store/CreateContentContext"
-import CannotSave from "../createContent/CannotSave"
+import { useSlateSaveContent } from "../../store/CreateContentContext"
 
 const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: string}) => {
     const { t } = useTranslation("newPost")
     const [ parentComments, setParentComments ] = useState<QuerySnapshot<DocumentData> | null>(null)
     const [ commentsLenght, setCommentsLenght ] = useState(0)
-    const [ cannotComment, setCannotComment ] = useState(false)
-    const [ noSave, setNoSave ] = useState(false)
     const { profile } = useAuthValue()
-    const { plainText, clickSave } = useSlatePlainText()
+    const { save } = useSlateSaveContent()
 
     useEffect(()=>{
       const commentsDoc = async () => {
-        if(idNewPost !== ""){
-          setCommentsLenght(await (await getDocs(collection(db,`comments`,`${idNewPost}`,`comment`))).docs.length)
-          setParentComments(await getDocs(query(collection(db,`comments`,`${idNewPost}`,`comment`), where("parent_id","==",0))))
-        }
+        const getComments = await getDocs(collection(db,`comments`,`${idNewPost}`,`comment`))
+        const getParentComment = await getDocs(query(collection(db,`comments`,`${idNewPost}`,`comment`), where("parent_id","==",0)))
+        
+          setCommentsLenght(getComments.docs.length)
+          setParentComments(getParentComment)
       }
-      commentsDoc()
-    },[idNewPost])
 
-    useEffect(()=>{
-      if(profile !== "profile"){
-        setCannotComment(true)
-      }else{
-        setCannotComment(false)
+      if(idNewPost !== "" || (save === "yes" && idNewPost !== "") ){
+        commentsDoc()
       }
-    },[profile])
+    },[idNewPost, save])
 
-    useEffect(()=>{
-      if(plainText.length <= 20){
-        setNoSave(true)
-      }else{
-        setNoSave(false)
-      }
-    },[plainText])
-
-    
-    
   return (
     <>
      <div className="relative mt-8 mb-4 flex space-x-1">
@@ -64,28 +47,28 @@ const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: str
       <div className="lg:grid lg:grid-cols-5 gap-x-8">
         <div className=" lg:col-span-3">
           <div className="relative border-4 border-DarkBlueGray rounded-xl p-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:h-fit " >
-            <CreateParagraph cannotComment={cannotComment} option="comment" idNewPost={idNewPost} name={name} parent_id={0}/>
-            {cannotComment && (
+            <CreateParagraph option="comment" idNewPost={idNewPost} name={name} parent_id={0}/>
+            {profile === "account" && (
               <CannotComment />
              )}
-            { (noSave && clickSave) && (
-            <CannotSave />
-            )}
           </div>
           {/* here will be all the comments for this post */}
           {parentComments?.empty ? (
             <NoComments />
-          ):parentComments?.docs.map((doc, index) => {
-            if(doc.data().parent_id === 0){
-              return <>
-              <Comment key={index} idNewPost={idNewPost} name={name} parent_id={doc.data().id} parent={doc.data().parent_id} data={doc.data().data} username={doc.data().username} imageProfile={doc.data().imageProfile} 
-              create_at={doc.data().create_at} author={doc.data().author} noSave={noSave} clickSave={clickSave}/>
-              </>
-            }
-           })}
+          ):(
+            <div className="border-4 border-DarkBlueGray rounded-xl p-4 pt-1 mt-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:mt-4">
+              {
+                parentComments?.docs.filter(doc => doc.data().parent_id === 0).map((doc, index) => (
+                  <Comment key={index} idNewPost={idNewPost} name={name} parent_id={doc.data().id} parent={doc.data().parent_id} data={doc.data().data} username={doc.data().username} imageProfile={doc.data().imageProfile} 
+                  create_at={doc.data().create_at} author={doc.data().author} />
+                )).reverse()
+              }
+            </div>
+          )       
+          }
         </div>
-      <div className="w-full h-96 rotate-1 my-3  sm:my-6 lg:col-span-2 lg:m-0 lg:mb-6 lg:mt-10 sticky top-20">
-        <Image className="border-4 border-DarkBlueGray bg-DarkBlueGray rounded-xl mx-auto" src="/giphy.gif" alt="a person listen music" width={360} height={430}/>
+      <div className=" max-w-sm h-[22rem] sm:h-96 mx-auto rotate-1 my-3  sm:my-6 lg:col-span-2 lg:m-0 lg:mb-6 lg:mt-10 xl:max-w-md xl:h-[28rem] sticky top-20">
+        <Image className="border-4 border-DarkBlueGray bg-DarkBlueGray rounded-xl mx-auto " src="/giphy.gif" alt="a person listen music" fill/>
       </div>
       </div>
      </div>

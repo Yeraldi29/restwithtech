@@ -38,5 +38,9 @@
         "hideReply":"Hide reply",
         "hideReplies":"Hide replies"
     },
-    "cannotSave":"Please write more than 20 characters to be able to save."
+    "cannotSave":"Please write more than 20 characters to be able to save.",
+    "warning":"Warning:",
+    "changes":"your changes won't be saved if you leave the page before you send your comment.",
+    "seeMore":"See more",
+    "seeLess": "See less"
 }

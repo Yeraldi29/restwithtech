@@ -38,5 +38,9 @@
         "hideReply":"Ocultar respuesta",
         "hideReplies":"Ocultar respuestas"
     },
-    "cannotSave":"Por favor escribe más de 20 carácteres para poder guardar ."
+    "cannotSave":"Por favor escribe más de 20 carácteres para poder guardar.",
+    "warning":"Advertencia:",
+    "changes":"tus cambios no serán guardados si dejas la página antes de enviar tu comentario.",
+    "seeMore":"Ver más",
+    "seeLess":"Ver menos"
 }

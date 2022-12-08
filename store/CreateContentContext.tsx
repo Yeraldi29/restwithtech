@@ -1,15 +1,13 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 const initialValuesHelpContent = {
   appear: false,
   handleAppear: () => {}
 }
 
-const initialValuesSlatePlainText = {
-  plainText: "",
-  handlePlainText: () => {},
-  clickSave: false,
-  handleClickSave: () => {}
+const initialValuesSlateSaveContent = {
+  save: "no",
+  handleSave: () => {}
 }
 
 interface helpContentProps {
@@ -17,38 +15,30 @@ interface helpContentProps {
   handleAppear: ( option: boolean) => void
 }
 
-interface slatePlainTextProps {
-  plainText: string,
-  handlePlainText: (value: string) => void
-  clickSave: boolean
-  handleClickSave: (value: boolean) => void
+interface slateSaveContentProps {
+  save: string
+  handleSave: (value : string) => void
 }
 
 const helpContent = createContext<helpContentProps>(initialValuesHelpContent)
-const slatePlainText = createContext<slatePlainTextProps>(initialValuesSlatePlainText)
+const slateSaveContent = createContext<slateSaveContentProps>(initialValuesSlateSaveContent)
 
 export const CreateContentContext = ({children}:{children: React.ReactNode}) => {
     const [appear, setAppear] = useState(false)
-    const [ plainText, setPlainText] = useState("")
-    const [ clickSave, setClickSave ] = useState(false)
-
+    const [save, setSave] = useState("no")
+    
     const handleAppear = (option: boolean ) => {
-        setAppear(option)
+      setAppear(option)
     }
 
-    const handlePlainText = (value: string) => {
-      setPlainText(value)
+    const handleSave = (value: string ) => {
+      setSave(value)
     }
-
-    const handleClickSave = (value: boolean) => {
-      setClickSave(value)
-    }
-
   return (
     <helpContent.Provider value={{appear,handleAppear}}>
-      <slatePlainText.Provider value={{plainText, handlePlainText, clickSave, handleClickSave}}>
+      <slateSaveContent.Provider value={{save, handleSave}}>
         {children}
-      </slatePlainText.Provider>
+      </slateSaveContent.Provider>
     </helpContent.Provider>
   )
 }
@@ -57,6 +47,6 @@ export const useCreateContentContext = () => {
     return useContext(helpContent)
 }
 
-export const useSlatePlainText = () => {
-  return useContext(slatePlainText)
+export const useSlateSaveContent = () => {
+  return useContext(slateSaveContent)
 }
