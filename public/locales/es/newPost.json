@@ -42,5 +42,6 @@
     "warning":"Advertencia:",
     "changes":"tus cambios no serán guardados si dejas la página antes de enviar tu comentario.",
     "seeMore":"Ver más",
-    "seeLess":"Ver menos"
+    "seeLess":"Ver menos",
+    "seeMoreComments":"Ver más comentarios"
 }

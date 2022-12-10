@@ -42,5 +42,6 @@
     "warning":"Warning:",
     "changes":"your changes won't be saved if you leave the page before you send your comment.",
     "seeMore":"See more",
-    "seeLess": "See less"
+    "seeLess": "See less",
+    "seeMoreComments":"See more comments"
 }

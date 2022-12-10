@@ -8,29 +8,33 @@ import CannotComment from "./comments/CannotComment"
 import NoComments from "./comments/NoComments"
 import Comment from "./comments/Comment"
 import { db } from "../../firebase"
-import { collection, DocumentData, getDocs, query, QuerySnapshot, where } from "firebase/firestore"
+import { collection, DocumentData, getDocs, limit, orderBy, query, QuerySnapshot, where } from "firebase/firestore"
 import { useSlateSaveContent } from "../../store/CreateContentContext"
 
 const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: string}) => {
     const { t } = useTranslation("newPost")
     const [ parentComments, setParentComments ] = useState<QuerySnapshot<DocumentData> | null>(null)
     const [ commentsLenght, setCommentsLenght ] = useState(0)
+    const [ limitNumber, setLimitNumber ] = useState(3)
+    const [ loading, setLoading ] = useState(false)
     const { profile } = useAuthValue()
     const { save } = useSlateSaveContent()
 
     useEffect(()=>{
       const commentsDoc = async () => {
-        const getComments = await getDocs(collection(db,`comments`,`${idNewPost}`,`comment`))
-        const getParentComment = await getDocs(query(collection(db,`comments`,`${idNewPost}`,`comment`), where("parent_id","==",0)))
+        setLoading(true)
+        const getCommentsLenght = await (await getDocs(collection(db,`comments`,`${idNewPost}`,`comment`))).docs.length
+        const getParentComment = await getDocs(query(collection(db,`comments`,`${idNewPost}`,`comment`), where("parent_id","==",0), orderBy("id", "desc"), limit(limitNumber)))
         
-          setCommentsLenght(getComments.docs.length)
+          setCommentsLenght(getCommentsLenght)
           setParentComments(getParentComment)
+          setLoading(false)
       }
 
       if(idNewPost !== "" || (save === "yes" && idNewPost !== "") ){
         commentsDoc()
       }
-    },[idNewPost, save])
+    },[idNewPost, save, limitNumber])
 
   return (
     <>
@@ -58,10 +62,24 @@ const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: str
           ):(
             <div className="border-4 border-DarkBlueGray rounded-xl p-4 pt-1 mt-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:mt-4">
               {
-                parentComments?.docs.filter(doc => doc.data().parent_id === 0).map((doc, index) => (
+                parentComments?.docs.map((doc, index) => (
                   <Comment key={index} idNewPost={idNewPost} name={name} parent_id={doc.data().id} parent={doc.data().parent_id} data={doc.data().data} username={doc.data().username} imageProfile={doc.data().imageProfile} 
                   create_at={doc.data().create_at} author={doc.data().author} />
-                )).reverse()
+                ))
+              }
+              {commentsLenght > limitNumber && (
+                <div className="bg-BabyBlueEyes text-BlueDarker hover:bg-DarkBlueGray hover:text-white w-fit mx-auto mt-2 border-4 border-Blue-Gray rounded-lg rotate-1 p-1  cursor-pointer transform ease-in-out duration-500 md:text-lg xl:text-xl md:p-2" onClick={()=>setLimitNumber(limitNumber + 10)}>
+                <h3>{t("seeMoreComments")}</h3>
+              </div>
+              )}
+              {
+                loading && (
+                <div className={`flex items-center justify-center space-x-2 mt-2`}>
+                  <div className="w-4 h-4 rounded-full bg-Lavender-Blue drop-shadow-xl animate-expand_close"></div>
+                  <div className="w-5 h-5 rounded-full bg-Lavender-Blue drop-shadow-xl animate-expand_close"></div>
+                  <div className="w-6 h-6 rounded-full bg-Lavender-Blue drop-shadow-xl animate-expand_close"></div>
+                </div>
+                ) 
               }
             </div>
           )       

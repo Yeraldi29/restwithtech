@@ -49,7 +49,7 @@ const useCreateComment = (idNewPost? : string | undefined, name?: string, parent
         create_at: Timestamp.now(),
         replyComment: replyComment,
         replyUsername: replyUsername,
-        author: authorVerification
+        author: authorVerification,
       }).then(()=>{
         setSaved("yes")
         handleSave("yes")
