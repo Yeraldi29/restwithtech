@@ -9,6 +9,7 @@
     },
     "hour":"{{time}} hours ago",
     "message":{
+        "home":"Welcome to Restwithtech, this is a page where you can read about interesting news created by users while you take a rest.",
         "mobile":"Here is where you can read all about mobile news and with the most popular smartphones enterprises such as: Aplee ,Xiaomi, Samsung, Blue, LG, Nokia etc...",
         "code":"Here is a very beautiful section because you can found interesting thing about code and their technologies, you know things like javascript, typescript, php, node.js, react, java etc... ",
         "tech":"Here is a explosive section where you'll find technology news and you never will be in the past.",

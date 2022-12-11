@@ -9,6 +9,7 @@
     },
     "hour":"Hace {{time}} horas",
     "message":{
+        "home":"Bienvenido a Restwithtech, esto es una página donde puedes leer acerca de noticias interesantes creadas por usuarios mientras tomas un descanso.",
         "mobile":"Aquí es donde puedes leer todo acerca de noticias de móviles y con las empresas más populares de teléfonos inteligentes como: Aplee ,Xiaomi, Samsung, Blue, LG, Nokia etc...",
         "code":"Aquí es una bonita section porque puedes encontrar consas interesantes acerca de código y sus tecnologias, tu sabes cosas como javascript, typescript, php, node.js, react, java etc... ",
         "tech":"Aquí es una sección explosiva donde encontraras noticias de tecnologías y nunca estarás en el pasado.",

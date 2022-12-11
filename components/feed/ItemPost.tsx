@@ -35,54 +35,49 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
   return (
     <Link href={`/${category}/${title}`} locale={router.locale}>
       { index !== undefined && (
-        <div className={`flex items-center group bg-DarkBlueGray w-full ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"}  h-52 sm:h-56 rounded-xl cursor-pointer border-4 border-Blue-Gray ${(index=== 0 || index === 1) && "lg:col-span-1"} ${(router.asPath !== "/" && index === 0) && "lg:mt-2"}`}
-        onMouseOver={()=>setAnimation({...animation,hover:true})}
-        onMouseLeave={()=>setAnimation({...animation,hover:false})}
-        onMouseDown={()=>setAnimation({...animation,clicked:true})}
-        >
-          {
-            (index !== undefined && index % 2 === 0) && (
-            <picture className="relative z-20 w-full h-full rounded-l-lg overflow-hidden">
-              <img className="w-full h-full bg-white/40 rounded-l-lg object-cover lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name} />
-            </picture>
-            )
-          }
-          <div className="w-full h-full relative">
-            <div className={`w-full bg-Lavender-Blue ${index !== undefined && index % 2 === 0 ? "rounded-tr-lg" : "rounded-tl-lg"}`}>
-              <h5 className="text-Blue-Gray text-center text-sm sm:text-md font-bold py-[2px]">{categoryItem}</h5>
+        <div className="flex h-full items-center">
+          <div className={`relative group bg-DarkBlueGray w-full h-96 md:h-[26rem] lg:h-[31rem]  ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"}  rounded-xl cursor-pointer border-4 border-Blue-Gray `}
+          onMouseOver={()=>setAnimation({...animation,hover:true})}
+          onMouseLeave={()=>setAnimation({...animation,hover:false})}
+          onMouseDown={()=>setAnimation({...animation,clicked:true})}
+          >
+            <div className="overflow-hidden border-b-4 border-Blue-Gray rounded-t-md">
+              <picture className="relative z-20 w-full rounded-t-md overflow-hidden ">
+                <img className="w-full h-28 sm:h-40 rounded-t-md bg-white/40 opacity-70 object-cover  lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name} />
+              </picture>
             </div>
-            <motion.h1 className="relative text-sm sm:text-md px-2 text-center mt-1 sm:mt-4 w-48 sm:w-64 md:w-48 mx-auto"
-            animate={animation.hover || animation.clicked ? {opacity:0,scale:0.20} : {opacity:100,scale:1}}
-            transition={{duration:0.3}}>
-              <strong>{title}</strong>
-            </motion.h1>
-            <p className={`absolute bottom-1 text-xs sm:text-sm text-Lavender-Blue ${index !== undefined && index % 2 === 0 ? "left-2" :"right-1"}`}>
-              {t("hour",{time})}
-           </p>
-           <motion.div 
-           className={`absolute bottom-0 w-10 h-10 ${index !== undefined && index % 2 === 0 ? "right-2" :"left-2"}`}
-           animate={animation.clicked ? {opacity:0} : animation.hover ? (index !== undefined && index % 2 === 0 ) ? {translateY: -100,translateX:-70,scale:2}:{translateY: -100,translateX:70,scale:2} :{}}
-           transition={{duration:0.5}}>
-            <BsNewspaper className="w-full h-full" />
-           </motion.div>
-           <motion.div className={`absolute top-24 w-10 h-10 opacity-0 ${index !== undefined && index % 2 === 0 ? " right-0" :"left-0"}`}
-           animate={animation.clicked ? ((index  !== undefined && index % 2 === 0 ) ? {opacity:1,scale:2,x: [0, -150, -75]}:{opacity:1,scale:2,x: [75, 150, 75]}) : {scale:1} }
-           transition={{duration:0.5,ease: [0.5, 0.71, 1, 1.5],repeat:Infinity,repeatDelay: 0.5}}
-           onAnimationEnd={()=>setAnimation({...animation,clicked:false})}
-           >
-             <AiFillRead className={`w-full h-full`} />
-           </motion.div>
+            <div >
+             <div className="flex items-center mt-2 mx-2 justify-between text-sm xl:text-base">
+               <div className={`w-fit bg-Lavender-Blue rounded-md px-1 `}>
+                 <h5 className="text-Blue-Gray text-center font-bold py-[2px]">{categoryItem}</h5>
+               </div>
+                 <h5 className=" text-Lavender-Blue ">
+                 {t("hour",{time})}
+                 </h5>
+             </div>
+             <motion.h1 className="relative w-full text-2xl xl:text-3xl px-2 mt-2 sm:mt-4 mx-auto"
+             animate={animation.hover || animation.clicked ? {opacity:0,scale:0.20} : {opacity:100,scale:1}}
+             transition={{duration:0.3}}>
+               <strong>{title}</strong>
+             </motion.h1>
+             <motion.div 
+             className={`absolute bottom-1 w-12 h-12 ${index !== undefined && index % 2 === 0 ? "right-2" :"left-2"}`}
+             animate={animation.clicked ? {opacity:0} : animation.hover ? (index !== undefined && index % 2 === 0 ) ? {translateY: -100,translateX:-70,scale:2}:{translateY: -100,translateX:70,scale:2} :{}}
+             transition={{duration:0.5}}>
+              <BsNewspaper className="w-full h-full" />
+             </motion.div>
+             <motion.div className={`absolute bottom-20 right-16 lg:bottom-32 w-12 h-12 opacity-0 ${index !== undefined && index % 2 === 0 ? " right-0" :"left-0"}`}
+             animate={animation.clicked ? ((index  !== undefined && index % 2 === 0 ) ? {opacity:1,scale:2,x: [0, -150, -75]}:{opacity:1,scale:2,x: [75, 150, 75]}) : {scale:1} }
+             transition={{duration:0.5,ease: [0.5, 0.71, 1, 1.5],repeat:Infinity,repeatDelay: 0.5}}
+             onAnimationEnd={()=>setAnimation({...animation,clicked:false})}
+             >
+              <AiFillRead className={`w-full h-full`} />
+             </motion.div>
+            </div>
           </div>
-           {
-             (index !== undefined && index % 2 !== 0) && (
-               <picture className="relative z-20 w-full h-full rounded-r-lg overflow-hidden">
-              <img className="w-full h-full rounded-r-lg object-cover group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name}  />
-            </picture>
-            )
-          }
         </div>
       )}
-    </Link>
+    </Link> 
   )
 }
 
