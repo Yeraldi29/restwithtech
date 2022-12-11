@@ -14,5 +14,14 @@
         "tech":"Aquí es una sección explosiva donde encontraras noticias de tecnologías y nunca estarás en el pasado.",
         "os":"Aquí es una simple sección donde hay todo acerca de sistemas operativos.",
         "C&P":"Aquí es donde toda esa gente que ama las computadoras y los portátiles pueden estar y eso es porque obviamente aquí esta todo acerca de eso :)"
+    },
+    "time":{
+        "seconds":"hace {{currentSeconds}} segundos",
+        "minute":"hace {{currentMinutes}} minuto",
+        "minutes":"hace {{currentMinutes}} minutos",
+        "hour":"hace {{currentHours}} hora",
+        "hours":"hace {{currentHours}} horas",
+        "yesterday":"ayer",
+        "beforeYesterday":"antes de ayer"
     }
 }
