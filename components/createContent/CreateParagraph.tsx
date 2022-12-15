@@ -12,6 +12,7 @@ import useCreateComment from "../../Hooks/firebase/useCreateComment"
 import { serialize } from "./plugins/serialize"
 import CannotSave from "./CannotSave"
 import { useAuthValue } from "../../store/AuthContext"
+import Loading from "../Loading"
 
 type LinkElement = {type: 'link', url:string, children: Descendant[] }
 type CustomELement = { type: 'paragraph',children:CustomText[]}
@@ -161,11 +162,7 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
       <CannotSave text={t("cannotSave")}/>
     )}
     {saved === "wait" && (
-      <div className={`flex items-center justify-center space-x-2 mt-2`}>
-      <div className="w-4 h-4 rounded-full bg-Lavender-Blue drop-shadow-xl animate-expand_close"></div>
-      <div className="w-5 h-5 rounded-full bg-Lavender-Blue drop-shadow-xl animate-expand_close"></div>
-      <div className="w-6 h-6 rounded-full bg-Lavender-Blue drop-shadow-xl animate-expand_close"></div>
-    </div>
+      <Loading />
     ) }
     </>
   )

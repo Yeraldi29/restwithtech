@@ -39,7 +39,12 @@ const CompleteProfile:NextPageWithLayout = () => {
           const docRef = doc(db, `users/${uid}`)
           await setDoc(docRef,{
               userName,
-              uid
+              uid,
+              descriptionProfile:"",
+              skill1:"",
+              skill2:"",
+              skill3:"",
+              profession:""
           })
           updateProfile(currentUser, {
             displayName: userName,
@@ -86,7 +91,7 @@ const CompleteProfile:NextPageWithLayout = () => {
         <link rel="icon" href="/icon.png" />
     </Head>
     
-    <div className=" relative bg-DarkBlueGray border -rotate-1 mx-auto mt-2 rounded-2xl w-[21.5rem] shadow-2xl py-10 px-6 sm:w-96 sm:mt-6 sm:px-8 xl:mt-16">
+    <div className=" relative bg-DarkBlueGray border-4 border-Blue-Gray -rotate-1 mx-auto mt-2 rounded-2xl w-[21.5rem] shadow-2xl py-10 px-6 sm:w-96 sm:mt-6 sm:px-8 xl:mt-16">
         <div className=" absolute inset-0 left-4 top-4 w-0 h-0">
         <Language />
         </div>

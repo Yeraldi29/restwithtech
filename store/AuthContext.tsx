@@ -1,6 +1,7 @@
 import { useContext, createContext } from "react"
 import { useState, useEffect} from "react"
 import { getAuth, onAuthStateChanged, signOut, User } from 'firebase/auth'
+import { useRouter } from "next/router"
 
 const initialStateAuth = {
   currentUser: null,
@@ -22,6 +23,7 @@ export const AuthProvider = ({children}: { children:  React.ReactNode}) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null)
     const [profile, setProfile] = useState("wait")
     const [timeActive, setTimeActive] = useState(false)
+    const router = useRouter()
   
     useEffect(()=>{
       const auth = getAuth()
@@ -39,7 +41,7 @@ export const AuthProvider = ({children}: { children:  React.ReactNode}) => {
           setProfile("account")
         }
       })
-    },[currentUser])
+    },[currentUser,router])
     
     const handleTimeActive = (time: boolean) => {
       setTimeActive(time)

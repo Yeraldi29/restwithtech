@@ -1,0 +1,17 @@
+{
+    "user":"User",
+    "warningEdit":"Please fill the following fields before create your first new. ",
+    "biography":"Biography",
+    "skills":"Skills",
+    "skill":"Skill",
+    "profession":"Profession",
+    "biographyError":"I can't have less than 50 characters or more than 250 characters.",
+    "skillsError":"I can't have less than 10 characters or more than 40 characters.",
+    "professionError":"I can't have less than 10 characters or more than 40 characters.",
+    "biographyMessage":"Fill the following field with your biography for your profile.",
+    "skillsMessage":"Fill the following fields with your skills, you must write only one in each one.",
+    "professionMessage":"Fill the following field with you profession.",
+    "saveChanges":"Save changes",
+    "warningSave":"You cannot save changes because you need to fulfill the requirements.",
+    "editProfile":"Edit Profile"
+}

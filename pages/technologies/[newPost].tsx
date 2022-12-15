@@ -21,7 +21,7 @@ const New: NextPageWithLayout = () => {
   return (
     <>
      <Head>
-        <title> {newPost} </title>
+        <title>{newPost}</title>
         <link rel="icon" href="/icon.png" />
       </Head>
       {

@@ -13,18 +13,15 @@ interface PropsUserActions{
     title: string
     Router: NextRouter
     t: TFunction
-    handleFormValues: (name:string, value: string | null) => void
 }
 
-const UserActions = ({validation, formValues, handleOther, handleTimeActive, title,Router, t, handleFormValues}: PropsUserActions) =>{
+const UserActions = ({validation, formValues, handleOther, handleTimeActive, title,Router, t}: PropsUserActions) =>{
     const auth = getAuth()
     const locale = Router.locale
     if(validation){
         switch(title){
             case (t("signIn.signin")):{
                 createUserWithEmailAndPassword(auth, formValues.email, formValues.password ).then(userCredentials=>{
-                    handleFormValues("email", "")
-                    handleFormValues("password","")     
                 sendEmailVerification(userCredentials.user).then(()=>{
                     Router.push(`${locale === "es/" ? locale : "" } sign-in/verification`)
                         handleTimeActive(true)
@@ -39,8 +36,6 @@ const UserActions = ({validation, formValues, handleOther, handleTimeActive, tit
                 signInWithEmailAndPassword(auth,formValues.email,formValues.password)
                 .then(userCredantials => {
                     const user = userCredantials.user
-                    handleFormValues("email", "")
-                    handleFormValues("password","")
                     if(user.emailVerified){
                         if(user.displayName === null && user.photoURL === null){
                             Router.push(`${locale === "es/" ? locale : "" }log-in/completeProfile`)

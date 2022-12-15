@@ -63,7 +63,7 @@ const FormInputsS_L = ({title}:{title: string}) => {
             handleFormErrors(errors)
         }
         
-        UserActions({validation,formValues,handleOther,handleTimeActive,title, Router, t,handleFormValues})
+        UserActions({validation,formValues,handleOther,handleTimeActive,title, Router, t})
     }
 
     const handleSetSubmit = () => {

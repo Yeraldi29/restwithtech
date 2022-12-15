@@ -1,0 +1,17 @@
+{
+    "user":"Usuario",
+    "warningEdit":"Por favor llena los siguientes campos antes de que crees tu primera noticia. ",
+    "biography":"Biografía",
+    "skills":"Habilidades",
+    "skill":"Habilidad",
+    "profession":"Profesión",
+    "biographyError":"No puedo tener menos de 50 caracteres o tener más de 250 caracteres.",
+    "skillsError":"No puedo tener menos de 10 caracteres o tener más de 40 caracteres.",
+    "professionError":"No puedo tener menos de 10 caracteres o tener más de 40 caracteres.",
+    "biographyMessage":"Llena el siguiente campo con tu biografía para tu perfil.",
+    "skillsMessage":"Llena los siguientes campos con tus habilidades, debes escribir solo uno en cada uno.",
+    "professionMessage":"Llena el siguiente campo con tu profesión.",
+    "saveChanges":"Guardar cambios",
+    "warningSave":"No puedes guardar los cambios porque necesitas cumplir los requisitos.",
+    "editProfile":"Editar Perfil"
+}

@@ -8,6 +8,7 @@ import { State } from '../store/store'
 import { AuthProvider } from '../store/AuthContext'
 import { FormS_LProvider } from '../store/FormContextS_L'
 import { CreateContentContext } from '../store/CreateContentContext'
+import { UserContext } from '../store/UserContext'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -24,7 +25,9 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) =>{
           <State>
             <FormS_LProvider>
               <CreateContentContext>
-                {getLayout(<Component {...pageProps} />)}
+                <UserContext>
+                  {getLayout(<Component {...pageProps} />)}
+                </UserContext>
               </CreateContentContext>
             </FormS_LProvider>
           </State>

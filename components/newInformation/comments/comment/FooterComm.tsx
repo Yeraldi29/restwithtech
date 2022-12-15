@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import { BiLike, BiMessageDetail } from 'react-icons/bi'
