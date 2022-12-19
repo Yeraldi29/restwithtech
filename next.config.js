@@ -9,7 +9,8 @@ const nextConfig = {
     domains: [
       'avatars.githubusercontent.com',
       'lh3.googleusercontent.com',
-      'i.pravatar.cc'
+      'i.pravatar.cc',
+      'firebasestorage.googleapis.com'
     ],
   },
 }

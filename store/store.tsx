@@ -23,8 +23,8 @@ interface Click{
 }
 
 interface ImageProfile{
-    imageProfile: string
-    handleClickImage: (image: string) => void
+    imageProfile: string|null
+    handleClickImage: (image: string|null) => void
 }
 
 interface NewExpandPost{
@@ -38,13 +38,13 @@ export const postNewExpand = createContext<NewExpandPost>(initialStatePostNewExp
 
 export const State = ({children}:{children: React.ReactNode}) => {
     const [clickMenu, setClickMenu] = useState(false)
-    const [imageProfile, setImageProfile] = useState("")
+    const [imageProfile, setImageProfile] = useState<string | null>("")
     const [NewExpand, setNewExpand] = useState(false)
    
     const handleClick = (clicked: boolean) => {
         setClickMenu(clicked)
     }
-    const handleClickImage = (image:string) => {
+    const handleClickImage = (image:string | null) => {
         setImageProfile(image)
     }
 

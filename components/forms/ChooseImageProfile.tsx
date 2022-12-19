@@ -30,7 +30,7 @@ const ChooseImageProfile = ({submit,handleClick}:{submit: boolean, handleClick:(
      <div className="grid grid-cols-4 gap-3 mx-auto mt-4 " onClick={handleClick}>
       {profileImages.map(src => <ImageProfile key={src} src={src}/> )}
      </div>
-     <UploadImage handleClick={handleClick} />
+     <UploadImage handleClick={handleClick} message={t("CompleteProfile.upload")}/>
     </>
   )
 }

@@ -17,11 +17,11 @@ const Biography = ({handleProfileValues, descriptionError, descriptionValue}:Des
     
   return (
     <div>
-        <div className="w-fit mx-auto my-3 p-2 bg-DarkBlueGray border-4 border-Blue-Gray rounded-xl -rotate-1 text-xl text-white">
+        <div className="w-fit mx-auto my-3 p-2 bg-DarkBlueGray border-4 border-Blue-Gray rounded-xl -rotate-1 text-xl xl:text-2xl text-white">
             <h2>{t("biography")}</h2>
         </div>
         <h3 className="text-center text-lg mb-2">{t("biographyMessage")}</h3>
-        <textarea className="h-auto overflow-auto  bg-Lavender-Blue/30 w-full border-4 border-Blue-Gray rounded-xl focus:outline-none focus:ring-0 focus:border-DarkBlueGray resize-none" 
+        <textarea className="h-auto overflow-auto xl:text-lg  bg-Lavender-Blue/30 w-full border-4 border-Blue-Gray rounded-xl focus:outline-none focus:ring-0 focus:border-DarkBlueGray resize-none" 
         rows={7} value={descriptionValue} name="description" onChange={handleChangeBio}/>
         {
           descriptionError && (

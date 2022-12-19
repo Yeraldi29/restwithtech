@@ -13,5 +13,8 @@
     "professionMessage":"Llena el siguiente campo con tu profesión.",
     "saveChanges":"Guardar cambios",
     "warningSave":"No puedes guardar los cambios porque necesitas cumplir los requisitos.",
-    "editProfile":"Editar Perfil"
+    "editProfile":"Editar Perfil",
+    "cancel":"Cancelar",
+    "noNews":"No tienes ninguna noticia aún.",
+    "changeImage":"Cambiar la imagen de tu perfil"
 }

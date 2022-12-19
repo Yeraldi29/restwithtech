@@ -11,14 +11,15 @@ import { useAuthValue } from "../../../store/AuthContext"
 import { updateProfile } from "firebase/auth"
 import { profileImage } from "../../../store/store"
 import Router from "next/router"
-import { db } from "../../../firebase"
+import { db, storage } from "../../../firebase"
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore"
+import { getDownloadURL, ref, uploadString } from "firebase/storage"
 
 const CompleteProfile:NextPageWithLayout = () => {
   const { t } = useTranslation("signIn_logIn")
   const { currentUser, profile } = useAuthValue()
   const profileImg = useContext(profileImage)
-  const { imageProfile } = profileImg
+  const { imageProfile, handleClickImage } = profileImg
 
   const [userName, setUserName] = useState("")
   const [validation, setValidation] = useState(false)
@@ -34,7 +35,12 @@ const CompleteProfile:NextPageWithLayout = () => {
         const queryDisplayName = query(collection(db, "users"), where("userName","==", userName)) 
         const {docs} = await getDocs(queryDisplayName)
         const {uid} = currentUser
+        
+        if(imageProfile){
+          const uploadImageProfile = uploadString(ref(storage,`users/${currentUser?.uid}`),imageProfile,"data_url")
 
+         handleClickImage(null)
+         
         if(docs.length === 0){
           const docRef = doc(db, `users/${uid}`)
           await setDoc(docRef,{
@@ -46,20 +52,26 @@ const CompleteProfile:NextPageWithLayout = () => {
               skill3:"",
               profession:""
           })
-          updateProfile(currentUser, {
-            displayName: userName,
-            photoURL: imageProfile
-          }).then(()=>{
-            Router.push("/")
-          }).catch(err => {
-            setError(err.message)
-            setSubmit(false)
-            console.log("🚀 ~ file: index.tsx ~ line 39 ~ handleSubmit ~ err.message", err.message)
-          })
+          uploadImageProfile.then(snap => {
+            getDownloadURL(snap.ref).then(url => {
+              if(currentUser){
+                updateProfile(currentUser, {
+                  photoURL: url
+                }).then(()=>{
+                  Router.push("/")
+                  }).catch(err => {
+                    setError(err.message)
+                    setSubmit(false)
+                    console.log("🚀 ~ file: index.tsx ~ line 39 ~ handleSubmit ~ err.message", err.message)
+                  })
+              }
+            })
+           })
         }else{
             setError(t("errors.userName"))
             setSubmit(false)
           }
+        }
         }
     }
   }
