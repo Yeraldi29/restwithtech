@@ -1,3 +1,5 @@
+import { DocumentData } from "firebase/firestore"
+
 interface itemProps{
     image:string
     name:string
@@ -6,4 +8,9 @@ interface itemProps{
     time?:string
     index?:number
     idNewPost?:string
+}
+
+interface createNewProps {
+    getDocumentName: string
+    getDocValues : DocumentData | null
 }

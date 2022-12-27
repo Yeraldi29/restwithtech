@@ -49,34 +49,36 @@ const EditProfile = ({descriptionProfile,skill1Profile,skill2Profile,skill3Profi
     useEffect(()=>{
       const { description, skill1, skill2, skill3, profession } = profileValues
       
-      if(description.length < 50 || description.length > 250){
-        setDescriptionError(true)
-      }else{
-        setDescriptionError(false)
-      }
-
-      if(skill1.length < 10 || skill1.length > 40){
-        setSkill1Error(true)
-      }else{
-        setSkill1Error(false)
-      }
-
-      if(skill2.length < 10  || skill2.length > 40){
-        setSkill2Error(true)
-      }else{
-        setSkill2Error(false)
-      }
-
-      if(skill3.length < 10  || skill3.length > 40){
-        setSkill3Error(true)
-      }else{
-        setSkill3Error(false)
-      }
-
-      if(profession.length < 10 || profession.length > 40){
-        setProfessionError(true)
-      }else{
-        setProfessionError(false)
+      if(description){
+        if(description.length < 50 || description.length > 250){
+          setDescriptionError(true)
+        }else{
+          setDescriptionError(false)
+        }
+  
+        if(skill1.length < 10 || skill1.length > 40){
+          setSkill1Error(true)
+        }else{
+          setSkill1Error(false)
+        }
+  
+        if(skill2.length < 10  || skill2.length > 40){
+          setSkill2Error(true)
+        }else{
+          setSkill2Error(false)
+        }
+  
+        if(skill3.length < 10  || skill3.length > 40){
+          setSkill3Error(true)
+        }else{
+          setSkill3Error(false)
+        }
+  
+        if(profession.length < 10 || profession.length > 40){
+          setProfessionError(true)
+        }else{
+          setProfessionError(false)
+        }
       }
       
     },[profileValues])

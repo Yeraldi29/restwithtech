@@ -5,6 +5,7 @@ import { AiFillRead } from "react-icons/ai"
 import { BsNewspaper } from "react-icons/bs"
 import { useRouter } from "next/router"
 import Link from "next/link"
+import Image from "next/image"
 
 const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
     const [categoryItem,setCategoryItem] = useState("")
@@ -42,9 +43,9 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
           onMouseDown={()=>setAnimation({...animation,clicked:true})}
           >
             <div className="overflow-hidden border-b-4 border-Blue-Gray rounded-t-md">
-              <picture className="relative z-20 w-full rounded-t-md overflow-hidden ">
-                <img className="w-full h-28 sm:h-40 rounded-t-md bg-white/40 opacity-70 object-cover  lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name} />
-              </picture>
+              <div className="relative z-20 w-full h-28 sm:h-40 rounded-t-md overflow-hidden ">
+              <Image className="rounded-t-md bg-white/40 opacity-70 object-cover  lg:group-hover:scale-125 duration-300 transform ease-in" src={image} alt={name} fill/>
+              </div>
             </div>
             <div >
              <div className="flex items-center mt-2 mx-2 justify-between text-sm xl:text-base">

@@ -34,7 +34,7 @@ const User: NextPageWithLayout = () => {
         setLoading(false)
       }
     }
-      if(currentUser){
+      if(currentUser && profile === "profile"){
         handleDocUser()
       }else if(profile === "account"){
         router.push("/")
@@ -47,7 +47,7 @@ const User: NextPageWithLayout = () => {
         <title>{t("user")}</title>
         <link rel="icon" href="/icon.png" />
       </Head>
-      {currentUser && (
+      {(currentUser && profile)&& (
         <div className="lg:flex md:mt-4 xl:mt-8 items-center ">
         <div className="relative lg:flex lg:space-x-3 ">
         <UserProfile descriptionProfile={userProfile?.data().descriptionProfile}/>

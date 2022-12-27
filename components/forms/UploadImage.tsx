@@ -1,10 +1,8 @@
-import { useTranslation } from "next-i18next"
 import { BiCamera } from "react-icons/bi"
 import { useState , useRef, useContext } from "react"
 import { profileImage } from "../../store/store"
 
 const UploadImage = ({handleClick, handleUpdateImage, message}:{handleClick?:()=>void, handleUpdateImage?:(option:boolean) => void, message : string}) => {
-    const { t } = useTranslation("signIn_logIn")
     const [animation, setAnimation] = useState(false)
     const inputFileRef = useRef<HTMLInputElement | null>(null)
     const profileImg = useContext(profileImage)

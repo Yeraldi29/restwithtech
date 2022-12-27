@@ -1,0 +1,11 @@
+{
+    "titlePage":"Create a new",
+    "mainTitle":"Write here your main title.",
+    "title":"Title",
+    "mainImage":"Upload here your main image.",
+    "uploadImage":"Upload image",
+    "warningTitleMore":"The title can't have more than 120 characters.",
+    "warningTitleLess":"The title can't have less than 20 characters.",
+    "save":"Save",
+    "edit":"Edit"
+}

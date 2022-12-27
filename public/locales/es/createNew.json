@@ -1,0 +1,11 @@
+{
+    "titlePage":"Crea una noticia",
+    "mainTitle":"Escribe aquí tu título principal.",
+    "title":"Título",
+    "mainImage":"Sube aquí tu imagen principal.",
+    "uploadImage":"Sube imagen",
+    "warningTitle":"El título no puede tener más de 120 caracteres.",
+    "warningTitleLess":"El título no puede tener menos de 20 caracteres.",
+    "save":"Guardar",
+    "edit":"Editar"
+}

@@ -7,11 +7,14 @@ import { NextPageWithLayout } from "../_app"
 import { collection, getDocs, query, where } from "firebase/firestore"
 import { db } from "../../firebase"
 import { useRouter } from "next/router"
+import { useTranslation } from "next-i18next"
+import CreateYourNew from "../../components/createNew/CreateYourNew"
 
-const PostNew: NextPageWithLayout = () => {
+const CreateNew: NextPageWithLayout = () => {
 
     const { currentUser } = useAuthValue()
     const router = useRouter()
+    const { t } = useTranslation("createNew")
 
     useEffect(()=>{
         const handleurlPost = async () => {
@@ -19,8 +22,10 @@ const PostNew: NextPageWithLayout = () => {
               const docUser = query(collection(db,"users"),where("uid","==",currentUser.uid))
               const getDocUser = await getDocs(docUser)
               
-              if(getDocUser.docs[0].data().descriptionProfile === "" ){
-                router.push("/user")
+              if(!getDocUser.empty ){
+                if(getDocUser.docs[0].data().descriptionProfile === "" ){
+                  router.push("/user")
+                }
               }
               if(!currentUser){
                 router.push("/")
@@ -32,24 +37,25 @@ const PostNew: NextPageWithLayout = () => {
     
   return (
     <>
-     <Head>
-        <title>postNew</title>
+    <Head>
+        <title>{t("titlePage")}</title>
         <link rel="icon" href="/icon.png" />
     </Head> 
+    <CreateYourNew />
     </>
   )
 }
 
 export const getStaticProps = async ({ locale }:{locale:string}) => ({
     props: {
-      ...await serverSideTranslations(locale, ['header']),
+      ...await serverSideTranslations(locale, ['header','createNew']),
     },
 })
   
-PostNew.getLayout = function getLayout(page: ReactElement) {
+CreateNew.getLayout = function getLayout(page: ReactElement) {
     return (
       <Layout>{page}</Layout>
     )
 }
 
-export default PostNew
+export default CreateNew

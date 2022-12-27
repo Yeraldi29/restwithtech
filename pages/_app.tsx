@@ -21,17 +21,17 @@ type AppPropsWithLayout = AppProps & {
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) =>{
   const getLayout = Component.getLayout ?? Layout
     return (
-        <AuthProvider >
-          <State>
-            <FormS_LProvider>
-              <CreateContentContext>
-                <UserContext>
-                  {getLayout(<Component {...pageProps} />)}
-                </UserContext>
-              </CreateContentContext>
-            </FormS_LProvider>
-          </State>
-        </AuthProvider>
+      <AuthProvider >
+        <State>
+          <FormS_LProvider>
+            <CreateContentContext>
+              <UserContext>
+                {getLayout(<Component {...pageProps} />)}
+              </UserContext>
+            </CreateContentContext>
+          </FormS_LProvider>
+        </State>
+      </AuthProvider>
     )
 }
 

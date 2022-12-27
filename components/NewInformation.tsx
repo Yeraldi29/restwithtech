@@ -1,6 +1,7 @@
 import { useTranslation } from "next-i18next"
 import { useEffect, useState } from "react"
 import { mostRecents } from "../arrays/feedImages/allCategories"
+import { itemProps } from "../types"
 import ItemPost from "./feed/ItemPost"
 import Comments from "./newInformation/Comments"
 import PreviousInformationProfile from "./newInformation/PreviousInformationProfile"
