@@ -7,5 +7,16 @@
     "warningTitleMore":"The title can't have more than 120 characters.",
     "warningTitleLess":"The title can't have less than 20 characters.",
     "save":"Save",
-    "edit":"Edit"
+    "edit":"Edit",
+    "public":"Public new",
+    "addContent":"When you click here two options will appear:",
+    "addContentOptions":{
+      "addParagraph":"When you click here you will be able to create a paragraph.",
+      "addImage":"When you click here you will be able to add an image."  
+    },
+    "preView":"When you click here you'll see how your new will be displayed.",
+    "hidePreView":"When you click here you will keep editing your new.",
+    "help":"When you click here you can hide or show this helper.",
+    "placeholder":"Create your paragraph here.",
+    "cancel":"Cancel"
 }

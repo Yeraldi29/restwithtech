@@ -13,6 +13,8 @@ import { serialize } from "./plugins/serialize"
 import CannotSave from "./CannotSave"
 import { useAuthValue } from "../../store/AuthContext"
 import Loading from "../Loading"
+import { DocumentData } from "firebase/firestore"
+import useCreatenewParagraph from "../../Hooks/firebase/useCreatenewParagraph"
 
 type LinkElement = {type: 'link', url:string, children: Descendant[] }
 type CustomELement = { type: 'paragraph',children:CustomText[]}
@@ -30,13 +32,18 @@ declare module 'slate' {
 interface createParagraphProps {
   option: string
   idNewPost: string | undefined
-  name: string
-  parent_id: number 
+  placeholder: string
+  name?: string
+  parent_id?: number 
   dataFather?: string
   usernameFather?: string | null
+  getDocValues?: DocumentData | null
+  getDocumentName?:string
+  handleClickAddCreateParagraph?: (option: boolean) => void
 }
 
-const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usernameFather }:createParagraphProps) => {
+const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, dataFather, usernameFather, getDocValues, handleClickAddCreateParagraph }:createParagraphProps) => {
+  
   const { t } = useTranslation("newPost")
 
   const [ editor ] = useState(withLinks(withHistory(withReact(createEditor()))))
@@ -46,6 +53,7 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
   const [ plainText, setPlainText ] = useState("")
   const [ editablecomponent, setEditableComponent ] = useState<JSX.Element | null>(null)
   const { setContentComment, handleSaveComment, saved } = useCreateComment(idNewPost, name, parent_id, dataFather, usernameFather)
+  const { setContentParagraph, savedParagraph, handleCreateNewParagraph } = useCreatenewParagraph( idNewPost, getDocValues, handleClickAddCreateParagraph)
   const { profile } = useAuthValue()
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])
   
@@ -95,7 +103,7 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           spellCheck={false}
-          placeholder={t("createComment.placeholder")}
+          placeholder={placeholder}
           onKeyDown={onKeyDown}
           />
       </div>
@@ -103,7 +111,7 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
   },[])
 
   useEffect(()=>{
-    if(saved === "yes"){
+    if(saved === "yes" || savedParagraph === "yes"){
       Transforms.delete(editor, {
         distance: 10000,
         reverse:true
@@ -112,7 +120,7 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
         distance: 10000,
       })
     }
-  },[saved])
+  },[saved, savedParagraph])
 
   const handleChangeSlate = (value:Descendant[]) => {
     // this code appears in Slate's documantation
@@ -122,6 +130,9 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
     if(isChange){
       if(option === "comment"){
         setContentComment(value)
+      }
+      if(option === "createNew"){
+        setContentParagraph(value) 
       }
       setPlainText(serialize(value))
     }
@@ -134,12 +145,16 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
         handleSaveComment()
         setClickSend(false)
       }
+      if(option === "createNew"){
+        handleCreateNewParagraph()
+        setClickSend(false)
+      }
     }
   }
 
   return (
     <>
-    <div className={`w-full h-fit ${saved === "wait" ? "bg-gray-400" : "bg-Lavender-Blue/40"}  rounded-xl border-4 border-Blue-Gray text-BlueDarker md:text-lg xl:text-xl  focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
+    <div className={`w-full h-fit ${(saved === "wait" || savedParagraph === "wait") ? "bg-gray-400" : "bg-Lavender-Blue/40"}  rounded-xl border-4 border-Blue-Gray text-BlueDarker md:text-lg xl:text-xl  focus:outline-none ${grow ? "min-h-[5rem] ":"min-h-[3rem]"} transform duration-500 ease-in`}
     onClick={()=>setGrow(true)} >
       <Slate editor={editor} value={initialValues} onChange={handleChangeSlate}>
        <Toolbar grow={grow} keyword={keyword} plainText={plainText}/>
@@ -161,7 +176,7 @@ const CreateParagraph = ({ option, idNewPost, name, parent_id, dataFather, usern
     {(plainText.length <= 20 && clickSend) && (
       <CannotSave text={t("cannotSave")}/>
     )}
-    {saved === "wait" && (
+    {(saved === "wait"|| savedParagraph === "wait") && (
       <Loading />
     ) }
     </>

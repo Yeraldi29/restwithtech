@@ -51,7 +51,7 @@ const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: str
       <div className="lg:grid lg:grid-cols-5 gap-x-8">
         <div className=" lg:col-span-3">
           <div className="relative border-4 border-DarkBlueGray rounded-xl p-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:h-fit " >
-            <CreateParagraph option="comment" idNewPost={idNewPost} name={name} parent_id={0}/>
+            <CreateParagraph option="comment" idNewPost={idNewPost} name={name} parent_id={0} placeholder={t("createComment.placeholder")} />
             {profile === "account" && (
               <CannotComment />
              )}

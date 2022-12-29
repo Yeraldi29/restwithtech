@@ -7,5 +7,16 @@
     "warningTitle":"El título no puede tener más de 120 caracteres.",
     "warningTitleLess":"El título no puede tener menos de 20 caracteres.",
     "save":"Guardar",
-    "edit":"Editar"
+    "edit":"Editar",
+    "public":"Publicar noticia",
+    "addContent":"Cuando haces click aquí dos opciones van a aparecer:",
+    "addContentOptions":{
+      "addParagraph":"Cuando haces click aquí podrás crear un párrafo.",
+      "addImage":"Cuando haces click aquí podrás añadir una imagen."  
+    },
+    "preView":"Cuando haces click aquí tú podrás ver como tu noticia será mostrada.",
+    "hidePreView":"Cuando haces click aquí seguirás editando tu noticia.",
+    "help":"Cuando haces click aquí podrás ocultar o mostrar este ayundante.",
+    "placeholder":"Crea tu párrafo aquí.",
+    "cancel":"Cancelar"
 }

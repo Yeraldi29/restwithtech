@@ -91,7 +91,7 @@ const Comment = ({ idNewPost, name, parent_id, parent, data, username,imageProfi
        { replyComment && (
           <div className={`relative mt-4 lg:h-fit ${parent >= 1 ? "ml-8 ": "lg:mx-0"}`} >
             <div className="w-full my-4 border-2 border-dashed border-DarkBlueGray rounded-md"></div>
-            <CreateParagraph option="comment" idNewPost={idNewPost} name={name} parent_id={parent_id} dataFather={serialize(JSON.parse(data))} usernameFather={username}/>
+            <CreateParagraph option="comment" idNewPost={idNewPost} name={name} parent_id={parent_id} dataFather={serialize(JSON.parse(data))} usernameFather={username} placeholder={t("createComment.placeholder")} />
             {profile === "account" && (
               <CannotComment />
              )}

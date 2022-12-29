@@ -54,7 +54,7 @@ const MainTitle = ({getDocumentName, getDocValues }: createNewProps) => {
     const handleClickMainTitle = async () => {
       setLoading(true)
       if(currentUser?.uid){
-
+        
         if(valueTitle !== getDocValues?.mainTitle){
         const docUserCreateNew = doc(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`)
 

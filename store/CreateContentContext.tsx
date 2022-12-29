@@ -7,7 +7,9 @@ const initialValuesHelpContent = {
 
 const initialValuesSlateSaveContent = {
   save: "no",
-  handleSave: () => {}
+  handleSave: () => {},
+  loadContentBody: false,
+  handleLoadContentBody: () => {}
 }
 
 interface helpContentProps {
@@ -18,6 +20,8 @@ interface helpContentProps {
 interface slateSaveContentProps {
   save: string
   handleSave: (value : string) => void
+  loadContentBody: boolean
+  handleLoadContentBody: (value : boolean) => void
 }
 
 const helpContent = createContext<helpContentProps>(initialValuesHelpContent)
@@ -26,6 +30,7 @@ const slateSaveContent = createContext<slateSaveContentProps>(initialValuesSlate
 export const CreateContentContext = ({children}:{children: React.ReactNode}) => {
     const [appear, setAppear] = useState(false)
     const [save, setSave] = useState("no")
+    const [ loadContentBody, setLoadContentBody] = useState(false)
     
     const handleAppear = (option: boolean ) => {
       setAppear(option)
@@ -34,9 +39,14 @@ export const CreateContentContext = ({children}:{children: React.ReactNode}) => 
     const handleSave = (value: string ) => {
       setSave(value)
     }
+
+    const handleLoadContentBody = (value: boolean ) => {
+      setLoadContentBody(value)
+    }
+    
   return (
     <helpContent.Provider value={{appear,handleAppear}}>
-      <slateSaveContent.Provider value={{save, handleSave}}>
+      <slateSaveContent.Provider value={{save, handleSave, loadContentBody, handleLoadContentBody}}>
         {children}
       </slateSaveContent.Provider>
     </helpContent.Provider>
