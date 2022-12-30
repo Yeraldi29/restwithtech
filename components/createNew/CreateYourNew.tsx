@@ -86,7 +86,6 @@ const CreateYourNew = () => {
     if(getDocumentName !== "" || loadContentBody ){
       handleContentBody()
     }
-    console.log("hello");
     
   },[getDocumentName, loadContentBody])
 
@@ -115,13 +114,13 @@ const CreateYourNew = () => {
         {!getContentBody?.empty && (
           <>
           {getContentBody?.docs.map((doc, index)=>(
-            <ContentBody key={index} dataParagraph={doc.data().data} dataImage={doc.data().image} option={doc.data().option} />
+            <ContentBody key={index} dataParagraph={doc.data().data} dataImage={doc.data().image} option={doc.data().option} order={doc.data().order} getDocumentName={getDocumentName} />
           ))}
           </>
         )}
         { addCreateParagraph && (
           <div className="mt-4">
-          <CreateParagraph option="createNew" idNewPost={getDocumentName} getDocValues={getDocValues} placeholder={t("placeholder")} handleClickAddCreateParagraph={handleClickAddCreateParagraph} />
+          <CreateParagraph option="createNew" idNewPost={getDocumentName} placeholder={t("placeholder")} handleClickCancelParagraph={handleClickAddCreateParagraph} />
           <div className=" w-full flex justify-end items-center">
             <div className=" my-4 w-fit p-1 bg-red-500 rounded-xl text-white border-4 border-Blue-Gray " onClick={()=>handleClickAddCreateParagraph(false)}>
               <h3 className="text-xl">{t("cancel")}</h3>

@@ -14,7 +14,7 @@ interface createNewOptionsProps extends createNewProps {
   handleClickAddCreateParagraph : (option: boolean) => void
 }
 
-const CreateNewOptions = ({getDocumentName, getDocValues, handleClickAddCreateParagraph }: createNewOptionsProps) => {
+const CreateNewOptions = ({getDocumentName, handleClickAddCreateParagraph }: createNewOptionsProps) => {
   const [ clickHelper, setClickHelper ] = useState(true)
   const [ animation, setAnimation ] = useState({
     plus: false,
@@ -55,7 +55,6 @@ const CreateNewOptions = ({getDocumentName, getDocValues, handleClickAddCreatePa
           uploadMainImage.then(snap => {
             getDownloadURL(snap.ref).then(async url => {
               if(currentUser?.uid){
-                // if(mainValueImage !== getDocValues?.mainImage){
                 const docContentBoby = doc(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`,"contentBody",`${getDocsContentBodyLength + 1}`)
 
                 await setDoc(docContentBoby,{
@@ -65,9 +64,7 @@ const CreateNewOptions = ({getDocumentName, getDocValues, handleClickAddCreatePa
                 }).then(()=>{
                   handleLoadContentBody(true)
                 })
-                // setMainValueImage(url)
                 setLoading(false)
-                // }
               }
             })
           })
@@ -82,7 +79,7 @@ const CreateNewOptions = ({getDocumentName, getDocValues, handleClickAddCreatePa
 
   return (
     <>
-    <div className="mt-4 flex items-center space-x-4">
+    <div className="mt-8 flex items-center space-x-4">
       <motion.div className={`flex items-center space-x-1 border-4 border-Blue-Gray rounded-xl overflow-hidden`}
       onClick={()=>setAnimation({...animation,plus: !animation.plus})} 
       animate={animation.plus ? {rotate:0, backgroundColor: "white"} : {rotate:-12}}

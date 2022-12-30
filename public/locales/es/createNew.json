@@ -18,5 +18,6 @@
     "hidePreView":"Cuando haces click aquí seguirás editando tu noticia.",
     "help":"Cuando haces click aquí podrás ocultar o mostrar este ayundante.",
     "placeholder":"Crea tu párrafo aquí.",
-    "cancel":"Cancelar"
+    "cancel":"Cancelar",
+    "delete":"Eliminar"
 }

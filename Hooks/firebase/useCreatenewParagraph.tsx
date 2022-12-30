@@ -1,11 +1,13 @@
-import { collection, doc, DocumentData, getDocs, setDoc } from "firebase/firestore"
+import { collection, doc, DocumentData, getDocs, setDoc, updateDoc } from "firebase/firestore"
 import { useState } from "react"
 import { Descendant } from "slate"
 import { db } from "../../firebase"
 import { useAuthValue } from "../../store/AuthContext"
 import { useSlateSaveContent } from "../../store/CreateContentContext"
 
-const useCreatenewParagraph = (getDocumentName: string | undefined, getDocValues: DocumentData | null | undefined, handleClickAddCreateParagraph: ((option: boolean) => void) | undefined) => {
+
+const useCreatenewParagraph = (getDocumentName: string | undefined, dataEdit: Descendant[] | null | undefined, handleClickCancelParagraph: ((option: boolean) => void) | undefined, order: number | null | undefined) => {
+    
     const [ contentParagraph, setContentParagraph ] = useState<Descendant[]>([])
     const [ savedParagraph, setSavedParagraph ] = useState("no")
 
@@ -16,28 +18,49 @@ const useCreatenewParagraph = (getDocumentName: string | undefined, getDocValues
         setSavedParagraph("wait")
         handleLoadContentBody(false)
 
-        if(currentUser?.uid && handleClickAddCreateParagraph){
+        if(currentUser?.uid && handleClickCancelParagraph){
             const getDocsContentBodyLength = (await getDocs(collection(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`,"contentBody"))).docs.length
-            const docContentBoby = doc(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`,"contentBody",`${getDocsContentBodyLength + 1}`)
+            const docContentBody = doc(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`,"contentBody",`${getDocsContentBodyLength + 1}`)
 
-            await setDoc(docContentBoby,{
+            await setDoc(docContentBody,{
                 data: JSON.stringify(contentParagraph),
                 order: getDocsContentBodyLength + 1,
                 option: "paragraph"
             }).then(()=>{
                 setSavedParagraph("yes")
                 handleLoadContentBody(true)
-                handleClickAddCreateParagraph(false)
+                handleClickCancelParagraph(false)
             }).catch(()=>{
                 setSavedParagraph("no")
                 handleLoadContentBody(false)
-                handleClickAddCreateParagraph(false)
+                handleClickCancelParagraph(false)
             })
         }
         
     }
+
+    const handleEditParagraph = async () => {
+        setSavedParagraph("wait")
+        handleLoadContentBody(false)
+        
+        if(currentUser?.uid && handleClickCancelParagraph){
+            const docContentBody = doc(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`,"contentBody",`${order}`)
+
+            await updateDoc(docContentBody,{
+                data: JSON.stringify(contentParagraph),
+            }).then(()=>{
+                setSavedParagraph("yes")
+                handleLoadContentBody(true)
+                handleClickCancelParagraph(false)
+            }).catch(()=>{
+                setSavedParagraph("no")
+                handleLoadContentBody(false)
+                handleClickCancelParagraph(false)
+            })
+        }
+    }
     
-  return { setContentParagraph, savedParagraph, handleCreateNewParagraph }
+  return { setContentParagraph, savedParagraph, handleCreateNewParagraph, handleEditParagraph }
 }
 
 export default useCreatenewParagraph

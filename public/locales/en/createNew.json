@@ -18,5 +18,6 @@
     "hidePreView":"When you click here you will keep editing your new.",
     "help":"When you click here you can hide or show this helper.",
     "placeholder":"Create your paragraph here.",
-    "cancel":"Cancel"
+    "cancel":"Cancel", 
+    "delete":"Delete"
 }

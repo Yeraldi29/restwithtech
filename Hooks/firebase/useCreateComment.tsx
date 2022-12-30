@@ -6,8 +6,7 @@ import { Descendant } from "slate"
 import { useSlateSaveContent } from "../../store/CreateContentContext"
 
 const useCreateComment = (idNewPost? : string | undefined, name?: string, parent_id?: number, dataFather?:string, usernameFather?: string | null ) => {
-  const checkout  = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('content') as string) : null
-  const [ contentComment, setContentComment ] = useState<Descendant[]>(checkout || [])
+  const [ contentComment, setContentComment ] = useState<Descendant[]>([])
   const [ saved, setSaved ] = useState("no")
   const { currentUser } = useAuthValue()
   const { handleSave } = useSlateSaveContent()

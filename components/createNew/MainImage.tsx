@@ -75,7 +75,8 @@ const MainImage = ({ getDocumentName, getDocValues }:createNewProps) => {
       {loading && (
         <Loading />
       )}
-      <div className="  mb-4 w-fit p-1 bg-red-400 rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " onClick={handleClickFile}>
+      <div className="  mb-4 w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " 
+      onClick={handleClickFile} >
         <BiEdit className="w-12 h-12 -rotate-12" />
         <h3 className="text-xl rotate-12">{t("edit")}</h3>
       </div> 

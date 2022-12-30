@@ -37,12 +37,13 @@ interface createParagraphProps {
   parent_id?: number 
   dataFather?: string
   usernameFather?: string | null
-  getDocValues?: DocumentData | null
   getDocumentName?:string
-  handleClickAddCreateParagraph?: (option: boolean) => void
+  handleClickCancelParagraph?: (option: boolean) => void
+  dataEdit?: Descendant[] | null
+  order?: number
 }
 
-const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, dataFather, usernameFather, getDocValues, handleClickAddCreateParagraph }:createParagraphProps) => {
+const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, dataFather, usernameFather, handleClickCancelParagraph, dataEdit, order }:createParagraphProps) => {
   
   const { t } = useTranslation("newPost")
 
@@ -53,16 +54,18 @@ const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, data
   const [ plainText, setPlainText ] = useState("")
   const [ editablecomponent, setEditableComponent ] = useState<JSX.Element | null>(null)
   const { setContentComment, handleSaveComment, saved } = useCreateComment(idNewPost, name, parent_id, dataFather, usernameFather)
-  const { setContentParagraph, savedParagraph, handleCreateNewParagraph } = useCreatenewParagraph( idNewPost, getDocValues, handleClickAddCreateParagraph)
+  const { setContentParagraph, savedParagraph, handleCreateNewParagraph, handleEditParagraph } = useCreatenewParagraph( idNewPost, dataEdit, handleClickCancelParagraph, order)
   const { profile } = useAuthValue()
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])
   
-  const initialValues: Descendant[] = [
-    {
-    type: 'paragraph',
-    children: [{ text: '',bold:false,italic:false,strikethrough:false,underline:false,code:false}],
-    }
-  ]
+  const [ initialValues ] = useState<Descendant[]>(
+    dataEdit || [
+        {
+        type: 'paragraph',
+        children: [{ text: '',bold:false,italic:false,strikethrough:false,underline:false,code:false}],
+        }
+    ]
+  )
 
   const renderElement = (props: RenderElementProps) => {
     switch(props.element.type){
@@ -131,7 +134,7 @@ const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, data
       if(option === "comment"){
         setContentComment(value)
       }
-      if(option === "createNew"){
+      if(option === "createNew" || option === "editParagraph"){
         setContentParagraph(value) 
       }
       setPlainText(serialize(value))
@@ -147,6 +150,10 @@ const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, data
       }
       if(option === "createNew"){
         handleCreateNewParagraph()
+        setClickSend(false)
+      }
+      if(option === "editParagraph"){
+        handleEditParagraph()
         setClickSend(false)
       }
     }
