@@ -56,7 +56,6 @@ const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: str
               <CannotComment />
              )}
           </div>
-          {/* here will be all the comments for this post */}
           {parentComments?.empty ? (
             <NoComments />
           ):(

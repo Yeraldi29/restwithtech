@@ -38,4 +38,13 @@
     .profileError{
         @apply text-center text-red-500 border-4 border-red-500 p-1 rounded-xl mb-2
     }
+    .edit{
+        @apply cursor-pointer lg:hover:bg-Blue-Gray lg:hover:border-DarkBlueGray lg:hover:text-BlueDarker ease-in-out duration-300 transform 
+    }
+    .cancelOrDelete{
+        @apply cursor-pointer lg:hover:bg-white lg:hover:border-red-500 lg:hover:text-Blue-Gray ease-in-out duration-300 transform
+    }
+    .saveOrPublish{
+        @apply cursor-pointer lg:hover:bg-white lg:hover:border-green-500 lg:hover:text-green-500 ease-in-out duration-300 transform
+    }
 }

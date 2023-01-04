@@ -19,5 +19,14 @@
     "help":"When you click here you can hide or show this helper.",
     "placeholder":"Create your paragraph here.",
     "cancel":"Cancel", 
-    "delete":"Delete"
+    "delete":"Delete",
+    "errorPublish":{
+      "mainTitle":"You need to create your main title.",
+      "category":"You need to choose a category.",
+      "mainImage":"You need to upload your main image.",
+      "contentBody1":"Your content can't be empty.",
+      "contentBody2":"Your content must have at least 300 characters."
+    },
+    "published":"Your new have been published successfully.",
+    "redirected":"You will redirected to home."
 }

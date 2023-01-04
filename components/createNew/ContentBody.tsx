@@ -6,7 +6,7 @@ import { useRef, useState } from "react"
 import { BiEdit, BiTrash } from "react-icons/bi"
 import { db, storage } from "../../firebase"
 import { useAuthValue } from "../../store/AuthContext"
-import { useSlateSaveContent } from "../../store/CreateContentContext"
+import { useCreateNew, useSlateSaveContent } from "../../store/CreateContentContext"
 import CreateParagraph from "../createContent/CreateParagraph"
 import { startSerialize } from "../createContent/plugins/serialize"
 import Loading from "../Loading"
@@ -17,9 +17,10 @@ interface contentBodyProps {
     option: string
     order: number
     getDocumentName: string
+    previewContent: boolean
 }
 
-const ContentBody = ({ dataParagraph, dataImage, option, order, getDocumentName }:contentBodyProps) => {
+const ContentBody = ({ dataParagraph, dataImage, option, order, getDocumentName, previewContent }:contentBodyProps) => {
   const [ loadingDeletingContent, setLoadingDeletingContent ] = useState(false)
   const [ loadingEditingContent, setLoadingEditingContent ] = useState(false)
   const [ editParagraph, setEditParagraph ] = useState(false)
@@ -28,6 +29,7 @@ const ContentBody = ({ dataParagraph, dataImage, option, order, getDocumentName 
   const { t } = useTranslation("createNew")
   const { currentUser } = useAuthValue()
   const { handleLoadContentBody } = useSlateSaveContent()
+  const { handleNoErrors } = useCreateNew() 
   
   const handleDeleteParagraph = async () => {
     if(currentUser?.uid){
@@ -107,6 +109,7 @@ const ContentBody = ({ dataParagraph, dataImage, option, order, getDocumentName 
 
   const handleClickEditParagraph = (option : boolean) => {
     setEditParagraph(option)
+    handleNoErrors()
   }
   
   return (
@@ -114,40 +117,44 @@ const ContentBody = ({ dataParagraph, dataImage, option, order, getDocumentName 
       {(dataParagraph && option === "paragraph") && (
         <>
         {editParagraph ? (
-          <div className="mt-4">
+          <div className="border-4 border-DarkBlueGray rounded-xl p-4  mt-4 sm:mx-16 sm:w-auto md:mx-36 lg:mx-0">
           <CreateParagraph option="editParagraph" idNewPost={getDocumentName} dataEdit={JSON.parse(dataParagraph)} placeholder={t("placeholder")} 
           order={order} handleClickCancelParagraph={handleClickEditParagraph} />
           <div className=" w-full flex justify-end items-center">
-            <div className=" my-4 w-fit p-1 bg-red-500 rounded-xl text-white border-4 border-Blue-Gray " onClick={()=>handleClickEditParagraph(false)}>
+            <div className=" mt-4 w-fit p-1 bg-red-500 rounded-xl text-white border-4 border-Blue-Gray cancelOrDelete " onClick={()=>handleClickEditParagraph(false)}>
               <h3 className="text-xl">{t("cancel")}</h3>
             </div> 
           </div>
           </div>
         ):(
           <>
-          <div className="border-2 border-DarkBlueGray mt-4 rounded-xl p-2 break-words xl:text-xl">
+          <div className={`${!previewContent ? "border-2 border-DarkBlueGray mt-4  rounded-xl p-2 break-words xl:text-xl": "mx-4" }`}>
             <p>{startSerialize(JSON.parse(dataParagraph))}</p>
           </div>
           <div className="w-full mt-2 flex justify-end space-x-2 items-center">
             {loadingDeletingContent && (
               <Loading />
             )}
-            <div className=" w-fit p-1 bg-red-500 rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " onClick={handleDeleteParagraph} >
+            {!previewContent && (
+              <>
+              <div className=" w-fit p-1 bg-red-500 rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray cancelOrDelete " onClick={handleDeleteParagraph} >
               <BiTrash className="w-8 h-8 rotate-12" />
               <h3 className="">{t("delete")}</h3>
-            </div> 
-            <div className=" w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " onClick={()=>{setEditParagraph(true)}} >
-              <BiEdit className="w-8 h-8 -rotate-12" />
-              <h3 className="">{t("edit")}</h3>
-            </div> 
+              </div> 
+              <div className=" w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray edit " onClick={()=>{setEditParagraph(true)}} >
+                <BiEdit className="w-8 h-8 -rotate-12" />
+                <h3 className="">{t("edit")}</h3>
+              </div> 
+            </>
+            )}
           </div>
           </>
         )}
         </>
       )} 
       {(dataImage && option === "image") && (
-        <>
-        <div className=" col-span-3 relative mt-4 bg-DarkBlueGray w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl rotate-1  border-4 border-DarkBlueGray break-words">
+        <div className={`${previewContent && "mx-2"}`}>
+        <div className={`${!previewContent ? "mt-4" :" my-4 "} col-span-3 relative bg-DarkBlueGray w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl rotate-1  border-4 border-DarkBlueGray break-words `}>
             <div className="relative w-full h-full">
                 <Image className="rounded-lg" src={dataImage} alt={"image content"} fill />
             </div>
@@ -156,21 +163,25 @@ const ContentBody = ({ dataParagraph, dataImage, option, order, getDocumentName 
           {loadingDeletingContent && (
             <Loading />
           )}
-          <div className=" w-fit p-1 bg-red-500 rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " onClick={handleDeleteImage} >
+          {!previewContent && (
+            <>
+            <div className=" w-fit p-1 bg-red-500 rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray cancelOrDelete" onClick={handleDeleteImage} >
             <BiTrash className="w-8 h-8 rotate-12" />
             <h3>{t("delete")}</h3>
-          </div> 
-          <div className=" w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " 
-          onClick={()=>inputFileRef.current?.click()} >
-            <BiEdit className="w-8 h-8 -rotate-12" />
-            <h3>{t("edit")}</h3>
-            <input onChange={handleClickAddImage} ref={inputFileRef} type="file" name="file" hidden/>
-          </div> 
+            </div> 
+            <div className=" w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray edit" 
+            onClick={()=>inputFileRef.current?.click()} >
+              <BiEdit className="w-8 h-8 -rotate-12" />
+              <h3>{t("edit")}</h3>
+              <input onChange={handleClickAddImage} ref={inputFileRef} type="file" name="file" hidden/>
+            </div> 
+            </>
+          )}
           {loadingEditingContent && (
             <Loading />
           )}
         </div>
-        </>
+        </div>
       )}
     </div>
   )

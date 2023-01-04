@@ -4,10 +4,11 @@ import { useState, useEffect } from "react"
 import { BiEdit, BiSave } from "react-icons/bi"
 import { db } from "../../firebase"
 import { useAuthValue } from "../../store/AuthContext"
+import { useCreateNew } from "../../store/CreateContentContext"
 import { createNewProps } from "../../types"
 import Loading from "../Loading"
 
-const MainTitle = ({getDocumentName, getDocValues }: createNewProps) => {
+const MainTitle = ({getDocumentName, getDocValues, previewContent }: createNewProps) => {
     const [ valueTitle, setValueTitle ] = useState("")
     const [ errorTitle, setErrorTitle ] = useState({
     more: false,
@@ -18,6 +19,7 @@ const MainTitle = ({getDocumentName, getDocValues }: createNewProps) => {
 
     const { t } = useTranslation("createNew")
     const { currentUser } = useAuthValue()
+    const { handleNoErrors } = useCreateNew() 
 
     useEffect(()=>{
      if(getDocValues){
@@ -53,6 +55,8 @@ const MainTitle = ({getDocumentName, getDocValues }: createNewProps) => {
 
     const handleClickMainTitle = async () => {
       setLoading(true)
+      handleNoErrors()
+      
       if(currentUser?.uid){
         
         if(valueTitle !== getDocValues?.mainTitle){
@@ -73,15 +77,18 @@ const MainTitle = ({getDocumentName, getDocValues }: createNewProps) => {
     <div>
       {!editMainTitle ? (
         <>
-        <div className={`w-full mb-4 p-2 border-4 border-Blue-Gray rounded-xl `}>
+        <div className={`${!previewContent && "w-full mb-4 p-2 border-4 border-Blue-Gray rounded-xl"} mb-4 `}>
           <h1 className="text-2xl xl:text-3xl font-bold text-DarkBlueGray ">{valueTitle}</h1>
         </div>
-        <div className=" w-full flex justify-end items-center">
-          <div className="  mb-4 w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " onClick={()=>setEditMainTitle(true)}>
-            <BiEdit className="w-12 h-12 -rotate-12" />
-            <h3 className="text-xl rotate-12">{t("edit")}</h3>
-          </div> 
-        </div>
+        {!previewContent && (
+          <div className=" w-full flex justify-end items-center">
+            <div className="  mb-4 w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray edit" 
+            onClick={()=>setEditMainTitle(true)}>
+              <BiEdit className="w-12 h-12 -rotate-12" />
+              <h3 className="text-xl rotate-12">{t("edit")}</h3>
+            </div> 
+          </div>
+        )}
       </>
       ):(
         <>
@@ -103,7 +110,7 @@ const MainTitle = ({getDocumentName, getDocValues }: createNewProps) => {
             {loading && (
               <Loading />
             )}
-            <div className=" -mt-4 mb-4 w-fit p-1 bg-green-400 rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray " onClick={handleClickMainTitle}>
+            <div className=" -mt-4 mb-4 w-fit p-1 bg-green-400 rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray saveOrPublish " onClick={handleClickMainTitle}>
               <BiSave className="w-12 h-12 -rotate-12" />
               <h3 className="text-xl rotate-12">{t("save")}</h3>
             </div> 

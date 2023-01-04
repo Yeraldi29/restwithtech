@@ -19,5 +19,14 @@
     "help":"Cuando haces click aquí podrás ocultar o mostrar este ayundante.",
     "placeholder":"Crea tu párrafo aquí.",
     "cancel":"Cancelar",
-    "delete":"Eliminar"
+    "delete":"Eliminar",
+    "errorPublish":{
+      "mainTitle":"Necesitas crear tu título principal.",
+      "category":"Necesitas escoger una categoría.",
+      "mainImage":"Necesitas subir tu imagen principal.",
+      "contentBody1":"Tu contenido no puede estar vacio.",
+      "contentBody2":"Tu contenido debe de tener al menos 300 caracteres."
+    },
+    "published":"Tu noticia ha sido publicada exitosamente.",
+    "redirected":"Vas a ser redireccionado a casa."
 }

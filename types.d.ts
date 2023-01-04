@@ -13,4 +13,5 @@ interface itemProps{
 interface createNewProps {
     getDocumentName: string
     getDocValues : DocumentData | null
+    previewContent?: boolean
 }
