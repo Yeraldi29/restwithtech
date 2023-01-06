@@ -7,12 +7,12 @@ import { NextPageWithLayout } from '../_app'
 import { SO } from '../../arrays/feedImages/SO'
 import NewInformation from '../../components/NewInformation'
 import { newData } from '../../initialProps'
-import { itemProps } from '../../types'
+import { itemProps, newDataProps } from '../../types'
 
 const New: NextPageWithLayout = () => {
     const router = useRouter()
     const { newPost } = router.query 
-    const [getData, setGetData] = useState<Array<itemProps> | undefined>(newData)
+    const [getData, setGetData] = useState<Array<newDataProps> | undefined>(newData)
 
     useEffect(()=>{
       const falseData = SO.filter(data => data.title === newPost)
@@ -25,11 +25,11 @@ const New: NextPageWithLayout = () => {
           <title>{newPost}</title>
           <link rel="icon" href="/icon.png" />
         </Head>
-        {
+        {/* {
          getData && (
            <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time} idNewPost={getData[0].idNewPost}/>
         ) 
-        }
+        } */}
       </>
     )
 }
