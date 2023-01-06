@@ -13,18 +13,17 @@ import { serialize } from "./plugins/serialize"
 import CannotSave from "./CannotSave"
 import { useAuthValue } from "../../store/AuthContext"
 import Loading from "../Loading"
-import { DocumentData } from "firebase/firestore"
 import useCreatenewParagraph from "../../Hooks/firebase/useCreatenewParagraph"
 
-type LinkElement = {type: 'link', url:string, children: Descendant[] }
-type CustomELement = { type: 'paragraph',children:CustomText[]}
+type LinkElement = { type: 'link', url:string, children: Descendant[] }
+type CustomELement = { type: 'paragraph',children:CustomText[], url?: string }
 type CustomText = { text: string, bold?: boolean, italic?:boolean,strikethrough?:boolean,underline?:boolean, code?: boolean}
 type CustomEditor = BaseEditor & ReactEditor & HistoryEditor
 
 declare module 'slate' {
   interface CustomTypes {
     Editor: CustomEditor
-    Element: CustomELement | LinkElement
+    Element: LinkElement | CustomELement
     Text: CustomText
   }
 }
@@ -74,7 +73,7 @@ const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, data
       default:
         return (
           <p {...props.attributes}>{props.children}</p>
-        )
+          )
     }
   }
 
