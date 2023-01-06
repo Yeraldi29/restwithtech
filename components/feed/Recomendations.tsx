@@ -7,7 +7,7 @@ import NewSection from "./NewSection"
 
 const Recomendations = () => {
   const [ recentData, setData ] = useState<QuerySnapshot<DocumentData> | null>(null)
-  const [ loading, setLoading ] = useState(false)
+  const [ loading, setLoading ] = useState(true)
   
   const { t } = useTranslation("common")
 

@@ -62,7 +62,12 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
                     category: getDocValues.data().category,
                     idNewPost: randomId,
                     create_at: Timestamp.now(),
-                    userName: docUser.data()?.userName
+                    userName: docUser.data()?.userName,
+                    descriptionProfile: docUser.data()?.descriptionProfile,
+                    profession: docUser.data()?.profession,
+                    skill1: docUser.data()?.skill1,
+                    skill2: docUser.data()?.skill2,
+                    skill3: docUser.data()?.skill3
                 }).then(async ()=>{
 
                     getContentBody.docs.map(async (docContent,index)=>{

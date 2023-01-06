@@ -68,8 +68,8 @@ const ItemPost = ({image,name,category, time, timeFake, index, title, option}:it
              animate={animation.hover || animation.clicked ? {opacity:0,scale:0.20} : {opacity:100,scale:1}}
              transition={{duration:0.3}}>
                <strong>
-                {title.substring(0,145)}
-                {title.length > 145 && (
+                {title.substring(0,125)}
+                {title.length > 125 && (
                   <span>...</span>
                 )}
                </strong>

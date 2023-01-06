@@ -5,7 +5,7 @@ const Presentation = ({message,presentationImage,title}: {message:string,present
   const router = useRouter()
 
   return (
-    <div className={`relative z-40 overflow-hidden w-full h-96 sm:h-[28rem] md:h-[32rem] xl:h-[36rem] bg-DarkBlueGray border-4 border-DarkBlueGray mt-4 rounded-xl -rotate-1 md:col-span-2`}>
+    <div className={`relative z-20 overflow-hidden w-full h-96 sm:h-[28rem] md:h-[32rem] xl:h-[36rem] bg-DarkBlueGray border-4 border-DarkBlueGray mt-4 rounded-xl -rotate-1 md:col-span-2`}>
         <div className="h-full w-full flex flex-col justify-between py-2">
             {
               router.asPath !== "/" && (

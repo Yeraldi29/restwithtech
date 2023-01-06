@@ -62,11 +62,11 @@ const NewInformation = ({image,title,category, name, time, idNewPost}:itemProps)
         </div>
         <Comments idNewPost={idNewPost} name={name}/>
         <div className="grid gap-6 mt-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-        {
+        {/* {
          mostRecents.map((post,index) => (
           <ItemPost image={post.image} category={post.category} time={post.time} name={post.name} key={post.name} index={index} title={post.title}/>
          ))
-        }
+        } */}
       </div>
     </>
   )

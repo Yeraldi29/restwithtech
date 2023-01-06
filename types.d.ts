@@ -12,6 +12,15 @@ interface itemProps{
     idNewPost?:string
 }
 
+interface newDataProps {
+    image: string
+    name: string
+    category: string
+    title: string
+    time: string
+    idNewPost: string
+}
+
 interface createNewProps {
     getDocumentName: string
     getDocValues : DocumentData | null

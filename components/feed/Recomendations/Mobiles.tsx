@@ -8,7 +8,7 @@ import NewSection from "../NewSection"
 
 const Mobiles = () => {
   const [ mobileData, setMobileData ] = useState<QuerySnapshot<DocumentData> | null>(null)
-  const [ loading, setLoading ] = useState(false)
+  const [ loading, setLoading ] = useState(true)
   
   const { t } = useTranslation("common")
   const router = useRouter()

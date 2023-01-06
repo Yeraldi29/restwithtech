@@ -8,7 +8,7 @@ import { db } from "../../../firebase"
 
 const Computers_Portables = () => {
   const [ c_pData, setC_pData ] = useState<QuerySnapshot<DocumentData> | null>(null)
-  const [ loading, setLoading ] = useState(false)
+  const [ loading, setLoading ] = useState(true)
   
   const { t } = useTranslation("common")
   const router = useRouter()

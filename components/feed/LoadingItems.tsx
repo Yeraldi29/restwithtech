@@ -2,8 +2,9 @@
 const LoadingItems = ({index}:{index:number}) => {
   return (
     <div className="h-full">
-      <div className={`relative w-full h-96 md:h-[26rem] lg:h-[31rem] ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"} rounded-xl bg-Lavender-Blue/30 border-4 border-DarkBlueGray skeletonLoading`}>
-            <div className="relative overflow-hidden bg-Blue-Gray border-b-4 border-DarkBlueGray rounded-t-md skeletonLoading">
+      <div className={`relative w-full h-96 md:h-[26rem] lg:h-[31rem] ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"} rounded-xl bg-Lavender-Blue/30 border-4 border-DarkBlueGray 
+      shadow z-0 before:absolute before:inset-0 before:-translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/20 before:animate-[shimmer_1.5s_infinite]`}>
+            <div className="relative overflow-hidden bg-Blue-Gray border-b-4 border-DarkBlueGray rounded-t-md ">
               <div className="relative z-20 w-full h-28 sm:h-40 rounded-t-md overflow-hidden ">
               </div>
             </div>
