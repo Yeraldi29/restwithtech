@@ -7,7 +7,7 @@
         "os":"SO",
         "C&P":"Computadoras y Portátiles"
     },
-    "hour":"Hace {{time}} horas",
+    "hour":"Hace {{timeFake}} horas",
     "message":{
         "home":"Bienvenido a Restwithtech, esto es una página donde puedes leer acerca de noticias interesantes creadas por usuarios mientras tomas un descanso.",
         "mobile":"Aquí es donde puedes leer todo acerca de noticias de móviles y con las empresas más populares de teléfonos inteligentes como: Aplee ,Xiaomi, Samsung, Blue, LG, Nokia etc...",
@@ -17,12 +17,12 @@
         "C&P":"Aquí es donde toda esa gente que ama las computadoras y los portátiles pueden estar y eso es porque obviamente aquí esta todo acerca de eso :)"
     },
     "time":{
-        "seconds":"hace {{currentSeconds}} segundos",
-        "minute":"hace {{currentMinutes}} minuto",
-        "minutes":"hace {{currentMinutes}} minutos",
-        "hour":"hace {{currentHours}} hora",
-        "hours":"hace {{currentHours}} horas",
-        "yesterday":"ayer",
-        "beforeYesterday":"antes de ayer"
+        "seconds":"Hace {{currentSeconds}} segundos",
+        "minute":"Hace {{currentMinutes}} minuto",
+        "minutes":"Hace {{currentMinutes}} minutos",
+        "hour":"Hace {{currentHours}} hora",
+        "hours":"Hace {{currentHours}} horas",
+        "yesterday":"Ayer",
+        "beforeYesterday":"Antes de ayer"
     }
 }

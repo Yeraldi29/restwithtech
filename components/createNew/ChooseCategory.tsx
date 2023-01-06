@@ -54,7 +54,21 @@ const ChooseCategory = ({getDocumentName, getDocValues, previewContent}: createN
       <div className={`${chooseCategory && "mb-2"} h-12 p-2 ${loading ? "bg-Blue-Gray" : "bg-BabyBlueEyes"} rounded-xl border-4 border-DarkBlueGray active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform `}
       onClick={()=>setChooseCategory(!chooseCategory)} >
         <div className="flex items-center justify-between space-x-2">
-          <h4>{category}</h4>
+          <h4>{category === "tech" ?
+           (<span>
+            {t("categories.tech")}
+            </span>):category === "mobile" ? (<span>
+            {t("categories.mobile")}
+            </span>):category === "C&P" ? (<span>
+            {t("categories.C&P")}
+            </span>):category === "OS" ? (<span>
+            {t("categories.os")}
+            </span>):category === "code" ? (<span>
+            {t("categories.code")}
+            </span>):(<span>
+            {category}
+            </span>)
+          }</h4>
           {chooseCategory ? (
             <BiUpArrow className="w-6 h-6 rotate-12 " />
           ):(
@@ -65,23 +79,23 @@ const ChooseCategory = ({getDocumentName, getDocValues, previewContent}: createN
       {chooseCategory && (
         <div className="w-64 mx-auto bg-BabyBlueEyes rounded-xl border-4 border-DarkBlueGray ">
           <div className="p-2 text-center border-b-4 border-DarkBlueGray rounded-t-lg active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform " 
-          onClick={()=>handleSaveCategory(t("categories.tech"))} >
+          onClick={()=>handleSaveCategory("tech")} >
             <h4>{t("categories.tech")}</h4>
           </div>
           <div className="p-2 text-center border-b-4 border-DarkBlueGray active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform" 
-          onClick={()=>handleSaveCategory(t("categories.mobile"))} >
+          onClick={()=>handleSaveCategory("mobile")} >
             <h4>{t("categories.mobile")}</h4>
           </div>
           <div className="p-2 text-center border-b-4 border-DarkBlueGray active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform" 
-          onClick={()=>handleSaveCategory(t("categories.C&P"))} >
+          onClick={()=>handleSaveCategory("C&P")} >
             <h4>{t("categories.C&P")}</h4>
           </div>
           <div className="p-2 text-center border-b-4 border-DarkBlueGray active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform" 
-          onClick={()=>handleSaveCategory(t("categories.os"))} >
+          onClick={()=>handleSaveCategory("OS")} >
             <h4>{t("categories.os")}</h4>
           </div>
           <div className="p-2 text-center rounded-b-lg active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform" 
-          onClick={()=>handleSaveCategory(t("categories.code"))} >
+          onClick={()=>handleSaveCategory("code")} >
             <h4>{t("categories.code")}</h4>
           </div>
         </div>

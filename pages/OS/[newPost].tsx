@@ -7,6 +7,7 @@ import { NextPageWithLayout } from '../_app'
 import { SO } from '../../arrays/feedImages/SO'
 import NewInformation from '../../components/NewInformation'
 import { newData } from '../../initialProps'
+import { itemProps } from '../../types'
 
 const New: NextPageWithLayout = () => {
     const router = useRouter()

@@ -4,7 +4,7 @@ import { BsFilePost } from "react-icons/bs"
 import { useAuthValue } from "../../store/AuthContext"
 import { createNewProps } from "../../types"
 import Loading from "../Loading"
-import { doc, DocumentData, QuerySnapshot, setDoc, Timestamp, updateDoc } from "firebase/firestore"
+import { doc, DocumentData, getDoc, QuerySnapshot, setDoc, Timestamp, updateDoc } from "firebase/firestore"
 import { serialize } from "../createContent/plugins/serialize"
 import { useCreateNew } from "../../store/CreateContentContext"
 import { db } from "../../firebase"
@@ -41,37 +41,59 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
             
             await getContentBody?.docs.map((doc)=>{
                 if(doc.data().option === "paragraph"){
-                    textLength = serialize(JSON.parse(doc.data().data)).length
+                    textLength += serialize(JSON.parse(doc.data().data)).length
                 }
             })
 
             if(textLength <= 300 ){
                 handleErrors("contentBody2",true)
             }else{
-            setLoading(true)
-                
-            const randomId = nanoid()
-            const docNew = doc(db, "news", `${randomId}`)
-            
-            await setDoc(docNew,{
-                userId: currentUser?.uid,
-                idNewPost: getDocumentName,
-                create_at: Timestamp.now(),
-            }).then(async ()=>{
-                if(currentUser?.uid){
-                    const docUserCreateNew = doc(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`)
+            if(currentUser?.uid){
 
-                    await updateDoc(docUserCreateNew,{
-                        creating: false
-                    }).then(()=>{
-                        setLoading(false)
-                        handlePublished()
-                        setInterval(()=>{
-                            router.push("/")
-                        },3000)
+                setLoading(true)
+                
+                const randomId = nanoid()
+                const docNew = doc(db, "news", randomId)
+                const docUser = await getDoc(doc(db,"users", currentUser.uid))
+                
+                await setDoc(docNew,{
+                    mainTitle: getDocValues.data().mainTitle,
+                    mainImage: getDocValues.data().mainImage,
+                    category: getDocValues.data().category,
+                    idNewPost: randomId,
+                    create_at: Timestamp.now(),
+                    userName: docUser.data()?.userName
+                }).then(async ()=>{
+
+                    getContentBody.docs.map(async (docContent,index)=>{
+                        const docNewContent = doc(db, "news",`${randomId}`, "content", `${index + 1}`)
+                        if(docContent.data().option === "paragraph"){
+                            await setDoc(docNewContent,{
+                                data: docContent.data().data,
+                                order: index + 1,  
+                                option: "paragraph"
+                                })
+                        }else if(docContent.data().option === "image"){
+                            await setDoc(docNewContent,{
+                                data: docContent.data().image,
+                                order: index + 1,  
+                                option: "image"
+                                })
+                            }
                     })
-                }
-            })
+                        const docUserCreateNew = doc(db, "users", currentUser.uid, "userCreateNew",`${getDocumentName}`)
+
+                        await updateDoc(docUserCreateNew,{
+                            creating: false
+                        }).then(()=>{
+                            setLoading(false)
+                            handlePublished()
+                            setInterval(()=>{
+                                router.push("/",undefined,{scroll:false})
+                            },1500)
+                        })
+                    })
+                }                    
             }
         }
     }

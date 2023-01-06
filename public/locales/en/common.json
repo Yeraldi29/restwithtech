@@ -7,7 +7,7 @@
         "os":"OS",
         "C&P":"Computers & Portables"
     },
-    "hour":"{{time}} hours ago",
+    "hour":"{{timeFake}} hours ago",
     "message":{
         "home":"Welcome to Restwithtech, this is a page where you can read about interesting news created by users while you take a rest.",
         "mobile":"Here is where you can read all about mobile news and with the most popular smartphones enterprises such as: Aplee ,Xiaomi, Samsung, Blue, LG, Nokia etc...",
@@ -22,7 +22,7 @@
         "minutes":"{{currentMinutes}} minutes ago",
         "hour":"{{currentHours}} hour ago",
         "hours":"{{currentHours}} hours ago",
-        "yesterday":"yesterday",
-        "beforeYesterday":"before yesterday"
+        "yesterday":"Yesterday",
+        "beforeYesterday":"Before yesterday"
     }
 }

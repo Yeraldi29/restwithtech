@@ -36,6 +36,9 @@ module.exports = {
           "25%,50%":{transform: "scale(1)"},
           "100%":{transform: "scale(0)"}
        },
+       shimmer: {
+        "100%":{transform: "translateX(100%)"}
+       }
        },
       animation: {
          wiggle:"wiggle 700ms ease-in-out",

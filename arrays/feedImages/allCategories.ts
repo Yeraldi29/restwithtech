@@ -16,7 +16,7 @@ export const mostRecents = [
     {
         "image":"/Feed/C_L/dell-6jQ5ukoVRTU-unsplash.jpg",
         "name":"dell laptop",
-        "category":"computers&laptops",
+        "category":"C&P",
         "title":"itant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"6",
         "idNewPost":"c_l4example"
@@ -48,7 +48,7 @@ export const mostRecents = [
      {
         "image":"/Feed/C_L/andras-vas-Bd7gNnWJBkU-unsplash.jpg",
         "name":"laptop rbg",
-        "category":"computers&laptops",
+        "category":"C&P",
         "title":"isl et cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum na.",
         "time":"17",
         "idNewPost":"c_l3example"
@@ -56,7 +56,7 @@ export const mostRecents = [
     {
         "image":"/Feed/C_L/alexandre-debieve-FO7JIlwjOtU-unsplash.jpg",
         "name":"motherboard",
-        "category":"computers&laptops",
+        "category":"C&P",
         "title":"terdum nascetur, fermentum ultricies commodo interdum nascetur, fermentum ultricies.",
         "time":"17",
         "idNewPost":"c_l2example"
@@ -80,7 +80,7 @@ export const mostRecents = [
     {
         "image":"/Feed/technoligies/possessed-photography-jIBMSMs4_kA-unsplash.jpg",
         "name":"hand robot",
-        "category":"technologies",
+        "category":"tech",
         "title":"cubilia habitant venenatis commodo interdum nascetur, fermentum ultricies commodo interdum, fermentum ultricies.",
         "time":"24",
         "idNewPost":"tech2example"

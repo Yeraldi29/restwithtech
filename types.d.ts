@@ -1,11 +1,13 @@
-import { DocumentData } from "firebase/firestore"
+import { DocumentData, Timestamp } from "firebase/firestore"
 
 interface itemProps{
     image:string
     name:string
     category:string
     title: string
-    time?:string
+    option: string
+    time?: Timestamp
+    timeFake?:string
     index?:number
     idNewPost?:string
 }

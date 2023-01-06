@@ -6,22 +6,26 @@ import { BsNewspaper } from "react-icons/bs"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
+import { itemProps } from "../../types"
+import { useCurrentTime } from "../../Hooks/useCurrentTime"
 
-const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
+const ItemPost = ({image,name,category, time, timeFake, index, title, option}:itemProps) => {
     const [categoryItem,setCategoryItem] = useState("")
     const [animation,setAnimation] = useState({hover:false,clicked:false})
+
     const { t } = useTranslation("common")
+    const { timeString } = useCurrentTime(time)
     const router = useRouter()
 
     useEffect(()=>{
         switch (category) {
-            case "technologies":
+            case "tech":
                 setCategoryItem(t("categories.tech"))
             break
             case "mobile":
                 setCategoryItem(t("categories.mobile"))
             break
-            case "computers&laptops":
+            case "C&P":
                 setCategoryItem(t("categories.C&P"))
             break
             case "OS":
@@ -37,7 +41,7 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
     <Link href={`/${category}/${title}`} locale={router.locale}>
       { index !== undefined && (
         <div className="flex h-full items-center">
-          <div className={`relative group bg-DarkBlueGray w-full h-96 md:h-[26rem] lg:h-[31rem]  ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"}  rounded-xl cursor-pointer border-4 border-Blue-Gray `}
+          <div className={`relative group bg-DarkBlueGray w-full h-96 md:h-[26rem] lg:h-[31rem] ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"}  rounded-xl cursor-pointer border-4 border-Blue-Gray `}
           onMouseOver={()=>setAnimation({...animation,hover:true})}
           onMouseLeave={()=>setAnimation({...animation,hover:false})}
           onMouseDown={()=>setAnimation({...animation,clicked:true})}
@@ -53,13 +57,22 @@ const ItemPost = ({image,name,category,time,index, title}:itemProps) => {
                  <h5 className="text-Blue-Gray text-center font-bold py-[2px]">{categoryItem}</h5>
                </div>
                  <h5 className=" text-Lavender-Blue ">
-                 {t("hour",{time})}
+                 {option === "fakeData" ? (
+                  <span>{t("hour",{timeFake})}</span>
+                 ): option === "data" && (
+                  <span>{timeString}</span>
+                 )}
                  </h5>
              </div>
              <motion.h1 className="relative w-full text-2xl xl:text-3xl px-2 mt-2 sm:mt-4 mx-auto"
              animate={animation.hover || animation.clicked ? {opacity:0,scale:0.20} : {opacity:100,scale:1}}
              transition={{duration:0.3}}>
-               <strong>{title}</strong>
+               <strong>
+                {title.substring(0,145)}
+                {title.length > 145 && (
+                  <span>...</span>
+                )}
+               </strong>
              </motion.h1>
              <motion.div 
              className={`absolute bottom-1 w-12 h-12 ${index !== undefined && index % 2 === 0 ? "right-2" :"left-2"}`}
