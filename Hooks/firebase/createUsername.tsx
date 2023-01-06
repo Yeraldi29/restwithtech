@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { User } from "firebase/auth"
 import { collection, doc, getDocs, query, setDoc, where } from "firebase/firestore"
 import { db } from "../../firebase"
