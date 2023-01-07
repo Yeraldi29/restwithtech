@@ -67,12 +67,10 @@ const ItemPost = ({image,name,category, time, timeFake, index, title, option}:it
              <motion.h1 className="relative w-full text-2xl xl:text-3xl px-2 mt-2 sm:mt-4 mx-auto"
              animate={animation.hover || animation.clicked ? {opacity:0,scale:0.20} : {opacity:100,scale:1}}
              transition={{duration:0.3}}>
-               <strong>
-                {title.substring(0,125)}
-                {title.length > 125 && (
-                  <span>...</span>
-                )}
-               </strong>
+              {title.substring(0,125)}
+              {title.length > 125 && (
+                <span>...</span>
+              )}
              </motion.h1>
              <motion.div 
              className={`absolute bottom-1 w-12 h-12 ${index !== undefined && index % 2 === 0 ? "right-2" :"left-2"}`}

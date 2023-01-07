@@ -10,6 +10,8 @@ import { newData } from '../../initialProps'
 import { newDataProps } from '../../types'
 import { collection, getDocs, orderBy, query, where, QuerySnapshot, DocumentData } from 'firebase/firestore'
 import { db } from '../../firebase'
+import { GetStaticProps } from 'next'
+import { UserConfig } from 'next-i18next'
 
 const New: NextPageWithLayout = () => {
     const router = useRouter()
@@ -36,23 +38,33 @@ const New: NextPageWithLayout = () => {
   )
 }
 
-export const getStaticProps = async ({ locale }:{locale:string}) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['header','newPost','common']),
-  },
-})
+export const getStaticProps = async ({ locale }:{locale:string}) => {
+  return {props: {
+    ...await serverSideTranslations(locale, ['header','newPost','common'])
+  }}
+}
 
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    }
+  }
+  
   const getNewsTech = (await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","tech"))))
 
-  const paths = getNewsTech.docs.flatMap(data => {
-    return locales.map(locale => {
-      return {
-        params: { newPost : data.data().mainTitle},
-        locale: locale
-      }
+  const paths = getNewsTech.docs.map(data => {
+    return {
+      params: { newPost : data.data().mainTitle},
     }
-    )})
+    // locales.map(locale => {
+      // return {
+        // locale: locale
+      // }
+    // }
+    // )
+  })
     
     return {paths, fallback: true}
 } 
