@@ -16,10 +16,10 @@ const New: NextPageWithLayout = () => {
     const { newPost } = router.query 
     const [getData, setGetData] = useState<Array<newDataProps> | undefined>(newData)
 
-    useEffect(()=>{
-      const falseData = tech.filter(data => data.title === newPost)
-      setGetData(falseData)
-    },[newPost])
+    // useEffect(()=>{
+    //   const falseData = tech.filter(data => data.title === newPost)
+    //   setGetData(falseData)
+    // },[newPost])
     
   return (
     <>
@@ -45,7 +45,7 @@ export const getStaticProps = async ({ locale }:{locale:string}) => ({
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   const getNewsTech = (await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","tech"))))
 
-  const paths = getNewsTech.docs.map(data => {
+  const paths = getNewsTech.docs.flatMap(data => {
     return locales.map(locale => {
       return {
         params: { newPost : data.data().mainTitle},
