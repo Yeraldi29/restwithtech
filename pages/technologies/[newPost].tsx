@@ -10,7 +10,7 @@ import { newData } from '../../initialProps'
 import { newDataProps } from '../../types'
 import { collection, getDocs, orderBy, query, where, QuerySnapshot, DocumentData } from 'firebase/firestore'
 import { db } from '../../firebase'
-import { GetStaticProps } from 'next'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { UserConfig } from 'next-i18next'
 
 const New: NextPageWithLayout = () => {
@@ -44,7 +44,7 @@ export const getStaticProps = async ({ locale }:{locale:string}) => {
   }}
 }
 
-export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 
   // const paths = (await getDocs(await query(collection(db,"news"), where("category", "==","tech")))).docs.flatMap(data => ({
   //   params: { newPost : data.data().mainTitle}
@@ -55,15 +55,29 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
     // }
   // }
   // )
-   const paths = (await getDocs(collection(db,"news"))).docs.map(item => {
+  const { docs } = await getDocs(collection(db, 'news'))
+
+  const localesPaths = locales!
+    .map((locale) => {
+      return docs.map((item) => ({
+        params: { newPost: `${item.data().mainTitle}` },
+        locale: locale,
+      }))
+    })
+    .flat()
+
+   /* const paths = (await getDocs(collection(db,"news"))).docs.map(item => {
     return locales.map(locale => {
       return {
         params: { newPost : `${item.data().mainTitle}`},
         locale: locale
       }
     }
-  )})
-    return {paths, fallback: true}
+  )}) */
+  return {
+    paths: localesPaths,
+    fallback: true
+  }
 } 
 
   New.getLayout = function getLayout(page: ReactElement) {
