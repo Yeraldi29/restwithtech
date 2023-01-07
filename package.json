@@ -14,7 +14,6 @@
     "and": "^0.0.3",
     "base64url": "^3.0.1",
     "core-js": "^3.25.0",
-    "dotenv": "^16.0.3",
     "escape-html": "^1.0.3",
     "firebase": "^9.9.4",
     "framer-motion": "^7.6.1",
