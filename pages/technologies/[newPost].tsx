@@ -45,7 +45,7 @@ export const getStaticProps = async ({ locale }:{locale:string}) => ({
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   const getNewsTech = await (await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","tech")))).docs
 
-  const paths = getNewsTech.map(data => {
+  const paths = getNewsTech.flatMap(data => {
     return locales.map(locale => {
       return {
         params: { newPost : data.data().mainTitle},
