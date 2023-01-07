@@ -43,9 +43,9 @@ export const getStaticProps = async ({ locale }:{locale:string}) => ({
 })
 
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
-  const getNewsTech = await (await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","tech")))).docs
+  const getNewsTech = (await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","tech"))))
 
-  const paths = getNewsTech.flatMap(data => {
+  const paths = getNewsTech.docs.map(data => {
     return locales.map(locale => {
       return {
         params: { newPost : data.data().mainTitle},
@@ -54,7 +54,7 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
     }
     )})
     
-    return {paths, fallback: false}
+    return {paths, fallback: true}
 } 
 
   New.getLayout = function getLayout(page: ReactElement) {
