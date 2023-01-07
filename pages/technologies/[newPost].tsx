@@ -45,27 +45,17 @@ export const getStaticProps = async ({ locale }:{locale:string}) => {
 }
 
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    }
-  }
-  
-  const getNewsTech = (await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","tech"))))
+  const getNewsTech = (await getDocs(await query(collection(db,"news"), where("category", "==","tech"))))
 
-  const paths = getNewsTech.docs.map(data => {
-    return {
-      params: { newPost : data.data().mainTitle},
-    }
-    // locales.map(locale => {
-      // return {
-        // locale: locale
-      // }
+  const paths = getNewsTech.docs.map(data => ({
+    params: { newPost : data.data().mainTitle}
+  }))
+  // locales.map(locale => {
+    // return {
+      // locale: locale
     // }
-    // )
-  })
-    
+  // }
+  // )
     return {paths, fallback: true}
 } 
 
