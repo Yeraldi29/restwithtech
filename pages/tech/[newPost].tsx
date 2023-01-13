@@ -77,14 +77,15 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
         locale: locale
       }
     }
-  )}).concat(tech.flatMap(item => {
-    return locales.map(locale => {
-      return {
-        params: { newPost : item.title },
-        locale: locale
-      }
-    }
-  )}))
+  )})
+  // .concat(tech.flatMap(item => {
+  //   return locales.map(locale => {
+  //     return {
+  //       params: { newPost : item.title },
+  //       locale: locale
+  //     }
+  //   }
+  // )}))
     return {paths, fallback: true}
 } 
 
