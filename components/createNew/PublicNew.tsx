@@ -65,6 +65,7 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
                     userName: docUser.data()?.userName,
                     descriptionProfile: docUser.data()?.descriptionProfile,
                     profession: docUser.data()?.profession,
+                    profileImage: currentUser.photoURL,
                     skill1: docUser.data()?.skill1,
                     skill2: docUser.data()?.skill2,
                     skill3: docUser.data()?.skill3

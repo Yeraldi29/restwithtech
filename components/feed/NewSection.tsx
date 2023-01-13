@@ -29,12 +29,12 @@ const NewSection = ({ fakeData, data, title, message,presentationImage, loading 
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
      {( message && presentationImage)  && (<Presentation message={message} presentationImage={presentationImage} title={title}/>)}
 
-      <div className={`md:col-span-2 mx-auto ${(title === t("recent")) ? "hidden": router.asPath !== "/" ? "hidden":"lg:col-span-3 mt-4"}`}>      
+      <div className={`md:col-span-2 mx-auto ${(title === t("recent")) ? "hidden": router.asPath !== "/" ? "hidden ":"lg:col-span-3 mt-4"}`}>      
         <h2 className="text-Blue-Gray text-2xl rotate-1 px-2 border-b-4 border-DarkBlueGray  w-fit">{title}</h2>
       </div>
       {loading ? (<>
         {[...itemsLoading].map((noValues,index)=>(
-          <LoadingItems index={index} key={index} />
+          <LoadingItems index={index} key={index} first={title === t("recent")} />
         ))}
       </>):(
       <>
@@ -42,7 +42,7 @@ const NewSection = ({ fakeData, data, title, message,presentationImage, loading 
           <ItemPost image={data.data().mainImage} category={data.data().category} time={data.data().create_at} name={data.data().mainTitle} option="data" key={index} index={index} title={data.data().mainTitle}/>
           )).concat(fakeData.map((post,index) => (
             <ItemPost image={post.image} category={post.category} timeFake={post.time} name={post.name} option="fakeData" key={post.name} index={index} title={post.title}/>
-            )))
+          )))
         }
       </>
      )}

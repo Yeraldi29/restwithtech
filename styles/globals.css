@@ -47,4 +47,7 @@
     .saveOrPublish{
         @apply cursor-pointer lg:hover:bg-white lg:hover:border-green-500 lg:hover:text-green-500 ease-in-out duration-300 transform
     }
+    .skeletonAnimation{
+        @apply after:content-[""] after:shadow-3xl after:absolute after:top-0 after:-left-[100%] after:h-full after:animate-load  
+    }
 }

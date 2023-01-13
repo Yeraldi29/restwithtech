@@ -7,7 +7,7 @@
         "C&P":"Computers & Portables"
     },
     "published":"Published",
-    "hour":"{{time}} hours ago",
+    "hour":"{{timeFake}} hours ago",
     "by":"by",
     "skills":"Skills:",
     "thisUser":"This user is:",

@@ -4,10 +4,10 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import Layout from "../../components/Layout"
 import { NextPageWithLayout } from '../_app'
-import { SO } from '../../arrays/feedImages/SO'
+import { tech } from '../../arrays/feedImages/tech'
 import NewInformation from '../../components/NewInformation'
 import { newData } from '../../initialProps'
-import { itemProps, newDataProps } from '../../types'
+import { newDataProps } from '../../types'
 import { collection, DocumentData, getDocs, orderBy, query, QuerySnapshot, where } from 'firebase/firestore'
 import { db } from '../../firebase'
 
@@ -22,7 +22,7 @@ const New: NextPageWithLayout = () => {
     useEffect(()=>{
       
       const handleGetDoc = async () => {
-        const falseData = await SO.filter(data => data.title === newPost)
+        const falseData = await tech.filter(data => data.title === newPost)
         
         if(falseData.length === 0){
           const docData = await getDocs(query(collection(db,"news"),where("mainTitle","==",`${newPost}`)))
@@ -62,14 +62,14 @@ const New: NextPageWithLayout = () => {
   )
 }
 
-export const getStaticProps = async ({ locale }:{locale:string}) => ({
-  props: {
-    ...await serverSideTranslations(locale, ['header','newPost','common']),
-  },
-})
+export const getStaticProps = async ({ locale }:{locale:string}) => {
+  return {props: {
+    ...await serverSideTranslations(locale, ['header','newPost','common'])
+  }}
+}
 
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
-  const data = await getDocs(query(collection(db,"news"),where("category","==","OS"))); 
+  const data = await getDocs(query(collection(db,"news"),where("category","==","tech"))); 
   
   const paths = data.docs.flatMap(item => {
     return locales.map(locale => {
@@ -78,7 +78,7 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
         locale: locale
       }
     }
-  )}).concat(SO.flatMap(item => {
+  )}).concat(tech.flatMap(item => {
     return locales.map(locale => {
       return {
         params: { newPost : item.title },

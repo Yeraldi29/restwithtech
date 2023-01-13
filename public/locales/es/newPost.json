@@ -7,7 +7,7 @@
         "C&P":"Computadoras y Portátiles"
     },
     "published":"Publicado",
-    "hour":"Hace {{time}} horas",
+    "hour":"Hace {{timeFake}} horas",
     "by":"por",
     "skills":"Habilidades:",
     "thisUser":"Este usuario es:",

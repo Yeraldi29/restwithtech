@@ -8,31 +8,58 @@ import { code } from '../../arrays/feedImages/code'
 import NewInformation from '../../components/NewInformation'
 import { newData } from '../../initialProps'
 import { newDataProps } from '../../types'
+import { collection, DocumentData, getDocs, orderBy, query, QuerySnapshot, where } from 'firebase/firestore'
+import { db } from '../../firebase'
 
 const New: NextPageWithLayout = () => {
     const router = useRouter()
     const { newPost } = router.query 
-    
-    const [getData, setGetData] = useState<Array<newDataProps> | undefined>(newData)
-    
+    const [ getData, setGetData ] = useState<QuerySnapshot<DocumentData>  | null >(null)
+    const [ getContentData, setGetContentData ] = useState<QuerySnapshot<DocumentData>  | null >(null)
+    const [ falseData, setFalseData ] = useState<Array<newDataProps>  | null >(newData)
+    const [ loading, setLoading ] = useState(true)
+
     useEffect(()=>{
-      const falseData = code.filter(data => data.title === newPost)
-      setGetData(falseData)
-    },[newPost])
-    
-    return (
-      <>
-       <Head>
-          <title>{newPost}</title>
-          <link rel="icon" href="/icon.png" />
-        </Head>
-        {/* {
-         getData && (
-           <NewInformation image={getData[0].image} title={getData[0].title} category={getData[0].category} name={getData[0].name} time={getData[0].time} idNewPost={getData[0].idNewPost}/>
-        ) 
-        } */}
-      </>
-    )
+      
+      const handleGetDoc = async () => {
+        const falseData = await code.filter(data => data.title === newPost)
+        
+        if(falseData.length === 0){
+          const docData = await getDocs(query(collection(db,"news"),where("mainTitle","==",`${newPost}`)))
+          const contentData = await getDocs(query(collection(db,"news",`${docData.docs[0].data().idNewPost}`,"content"),orderBy("order")))
+          
+          setGetData(docData)
+          setGetContentData(contentData)
+          setLoading(false)
+        }else{
+          setFalseData(falseData)
+          setLoading(false)
+        }
+        
+      }
+      
+      handleGetDoc() 
+      
+    },[])
+
+  return (
+    <>
+     <Head>
+        <title>{newPost}</title>
+        <link rel="icon" href="/icon.png" />
+      </Head>
+      {!loading && (
+        <>
+        {getData ? (
+          <NewInformation image={getData?.docs[0].data().mainImage} title={getData?.docs[0].data().mainTitle} category={getData?.docs[0].data().category} name={getData?.docs[0].data().userName} option="data" time={getData?.docs[0].data().create_at} idNewPost={getData?.docs[0].data().idNewPost}
+          profession={getData?.docs[0].data().profession} descriptionProfile={getData?.docs[0].data().descriptionProfile} profileImage={getData?.docs[0].data().profileImage} skill1={getData?.docs[0].data().skill1} skill2={getData?.docs[0].data().skill2} skill3={getData?.docs[0].data().skill3} content={getContentData} />
+        ):falseData &&(
+          <NewInformation image={falseData[0].image} title={falseData[0].title} category={falseData[0].category} name={falseData[0].name} option="fakeData" timeFake={falseData[0].time} idNewPost={falseData[0].idNewPost} />
+        )}
+        </>
+      )}
+    </>
+  )
 }
 
 export const getStaticProps = async ({ locale }:{locale:string}) => ({
@@ -42,16 +69,24 @@ export const getStaticProps = async ({ locale }:{locale:string}) => ({
 })
 
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
-  const paths = code.flatMap(item => {
+  const data = await getDocs(query(collection(db,"news"),where("category","==","code"))); 
+  
+  const paths = data.docs.flatMap(item => {
+    return locales.map(locale => {
+      return {
+        params: { newPost : `${item.data().mainTitle}`},
+        locale: locale
+      }
+    }
+  )}).concat(code.flatMap(item => {
     return locales.map(locale => {
       return {
         params: { newPost : item.title },
         locale: locale
       }
     }
-  )})
-  
-  return {paths, fallback: false}
+  )}))
+    return {paths, fallback: true}
 }  
 
   New.getLayout = function getLayout(page: ReactElement) {

@@ -18,6 +18,9 @@ module.exports = {
         "BabyBlueEyes":"#A3BCF9",
         "BlueDarker":"rgb(39 58 92)"
       },
+      boxShadow:{
+        '3xl': '0 0 50px 9px rgba(254,254,254)'
+      },
       keyframes: {
         wiggle: {
           "0%, 100%": { transform: "rotate(10deg)"},
@@ -35,15 +38,17 @@ module.exports = {
            },
           "25%,50%":{transform: "scale(1)"},
           "100%":{transform: "scale(0)"}
-       },
-       shimmer: {
-        "100%":{transform: "translateX(100%)"}
-       }
+         },
+         load: {
+          "0%":{ left: "-100%"},
+          "100%":{ left: "150%"}
+         }
        },
       animation: {
          wiggle:"wiggle 700ms ease-in-out",
          expand:" expand 1s ease-in ",
-         expand_close: " expand_close 1.1s ease-in-out infinite"
+         expand_close: " expand_close 1.1s ease-in-out infinite",
+         load: "load 1s infinite"
       },
       screens: {
         '3xl':'1300px'
