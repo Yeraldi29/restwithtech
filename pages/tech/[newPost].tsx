@@ -74,7 +74,7 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   const paths = data.docs.flatMap(item => {
     return locales.map(locale => {
       return {
-        params: { newPost : `${item.data().mainTitle}`},
+        params: { newPost : item.data().mainTitle},
         locale: locale
       }
     }
@@ -86,7 +86,7 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
       }
     }
   )}))
-    return {paths, fallback: false}
+    return {paths, fallback: true}
 } 
 
   New.getLayout = function getLayout(page: ReactElement) {
