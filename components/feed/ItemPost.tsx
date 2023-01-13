@@ -38,7 +38,7 @@ const ItemPost = ({image,name,category, time, timeFake, index, title, option}:it
     },[category])
     
   return (
-    <Link href={`/${category}/${encodeURIComponent(title)}`} locale={router.locale}>
+    <Link href={`/${category}/${title}`} locale={router.locale}>
       { index !== undefined && (
         <div className="flex h-full items-center">
           <div className={`relative group bg-DarkBlueGray w-full h-96 md:h-[26rem] lg:h-[31rem] ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"}  rounded-xl cursor-pointer border-4 border-Blue-Gray `}
