@@ -69,9 +69,8 @@ export const getStaticProps = async ({ locale }:{locale:string}) => ({
 })
 
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
-  const data = await getDocs(query(collection(db,"news"),where("category","==","tech"))); 
   
-  const paths = data.docs.flatMap(item => {
+  const paths = await (await getDocs(query(collection(db,"news"),where("category","==","tech")))).docs.flatMap(item => {
     return locales.map(locale => {
       return {
         params: { newPost : `${item.data().mainTitle}`},
