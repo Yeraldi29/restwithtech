@@ -93,6 +93,6 @@ export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   return (
     <Layout>{page}</Layout>
   )
-}
+} 
 
 export default New

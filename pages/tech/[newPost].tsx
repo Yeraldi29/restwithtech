@@ -62,11 +62,11 @@ const New: NextPageWithLayout = () => {
   )
 }
 
-export const getStaticProps = async ({ locale }:{locale:string}) => {
-  return {props: {
+export const getStaticProps = async ({ locale }:{locale:string}) => ({
+  props: {
     ...await serverSideTranslations(locale, ['header','newPost','common'])
-  }}
-}
+  }
+})
 
 export const getStaticPaths = async ({ locales }:{locales:Array<string>}) => {
   const data = await getDocs(query(collection(db,"news"),where("category","==","tech"))); 
