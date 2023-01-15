@@ -53,14 +53,13 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
                 setLoading(true)
                 
                 const randomId = nanoid()
-                const docNew = doc(db, "news", randomId)
+                const docNew = doc(db, "news", getDocValues.data().mainTitle)
                 const docUser = await getDoc(doc(db,"users", currentUser.uid))
                 
                 await setDoc(docNew,{
                     mainTitle: getDocValues.data().mainTitle,
                     mainImage: getDocValues.data().mainImage,
                     category: getDocValues.data().category,
-                    idNewPost: randomId,
                     create_at: Timestamp.now(),
                     userName: docUser.data()?.userName,
                     descriptionProfile: docUser.data()?.descriptionProfile,
@@ -72,7 +71,7 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
                 }).then(async ()=>{
 
                     getContentBody.docs.map(async (docContent,index)=>{
-                        const docNewContent = doc(db, "news",`${randomId}`, "content", `${index + 1}`)
+                        const docNewContent = doc(db, "news",`${getDocValues.data().mainTitle}`, "content", `${index + 1}`)
                         if(docContent.data().option === "paragraph"){
                             await setDoc(docNewContent,{
                                 data: docContent.data().data,
