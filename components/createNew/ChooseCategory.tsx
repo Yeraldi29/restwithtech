@@ -87,7 +87,7 @@ const ChooseCategory = ({getDocumentName, getDocValues, previewContent}: createN
             <h4>{t("categories.mobile")}</h4>
           </div>
           <div className="p-2 text-center border-b-4 border-DarkBlueGray active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform" 
-          onClick={()=>handleSaveCategory("C&P")} >
+          onClick={()=>handleSaveCategory("computers&laptops")} >
             <h4>{t("categories.C&P")}</h4>
           </div>
           <div className="p-2 text-center border-b-4 border-DarkBlueGray active:bg-Blue-Gray cursor-pointer lg:hover:bg-Blue-Gray lg:hover:text-white ease-in-out duration-300 transform" 

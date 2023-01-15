@@ -56,9 +56,6 @@ module.exports = {
       transformOrigin: {
         "zero":"0%"
       },
-      fontFamily:{
-        "shadow":'Shadows Into Light, cursive'
-      },
       gridColumn:{
         "span-13":"span 13 / span 13",
         "span-15":"span 15 / span 15"
@@ -67,7 +64,7 @@ module.exports = {
         "14":"repeat(14, minmax(0, 1fr))",
         "16":"repeat(16, minmax(0, 1fr))"
       }
-    },
+    }
   },
   plugins: [
     require('tailwind-scrollbar')({ nocompatible: true }),

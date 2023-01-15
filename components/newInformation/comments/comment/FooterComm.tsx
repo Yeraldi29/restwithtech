@@ -52,7 +52,9 @@ const FooterComm = ({username, idNewPost, parent_id, commentRepliesLength, handl
       }
     }
 
-    handleVerifyLikeComment()
+    if(currentUser){
+      handleVerifyLikeComment()
+    }
   },[parent_id])
 
   const handleLikeComment = async () => {

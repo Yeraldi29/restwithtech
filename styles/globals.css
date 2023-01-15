@@ -1,20 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Kanit:wght@200;300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700;800&family=Shadows+Into+Light&display=swap');
 
 @layer base {
     * {
         box-sizing: border-box;
     }
     html {
-        font-family:'Kanit', sans-serif;
+        font-family:Kanit, sans-serif;
         @apply text-white bg-BabyBlueEyes/30 scrollbar-thin scrollbar-thumb-rounded-lg scrollbar-track-transparent scrollbar-thumb-DarkBlueGray;
         @apply overflow-x-hidden scroll-smooth
     }
-    h1,h2,h3,h4,h5,h5{
-        font-family: 'Shadows Into Light', cursive;
+    h1,h2,h3,h4,h5{
+        font-family: 'Kalam', cursive;
     }
 }
 

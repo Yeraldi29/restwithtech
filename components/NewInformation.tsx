@@ -46,7 +46,7 @@ const NewInformation = ({ image, title, category, name, time, timeFake, idNewPos
         case "mobile":
             setCategoryItem(t("categories.mobile"))
         break
-        case "C&P":
+        case "computers&laptops":
             setCategoryItem(t("categories.C&P"))
         break
         case "OS":

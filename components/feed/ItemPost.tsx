@@ -25,7 +25,7 @@ const ItemPost = ({image,name,category, time, timeFake, index, title, option}:it
             case "mobile":
                 setCategoryItem(t("categories.mobile"))
             break
-            case "C&P":
+            case "computers&laptops":
                 setCategoryItem(t("categories.C&P"))
             break
             case "OS":
@@ -64,7 +64,7 @@ const ItemPost = ({image,name,category, time, timeFake, index, title, option}:it
                  )}
                  </h5>
              </div>
-             <motion.h1 className="relative w-full text-2xl xl:text-3xl px-2 mt-2 sm:mt-4 mx-auto"
+             <motion.h1 className="relative w-full text-2xl xl:text-3xl px-2 mt-2 sm:mt-4 mx-auto "
              animate={animation.hover || animation.clicked ? {opacity:0,scale:0.20} : {opacity:100,scale:1}}
              transition={{duration:0.3}}>
               {title.substring(0,125)}
