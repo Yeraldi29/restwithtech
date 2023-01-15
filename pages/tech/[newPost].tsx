@@ -34,6 +34,7 @@ const New: NextPageWithLayout = () => {
           setLoading(false)
         }else{
           setFalseData(falseData)
+          setLoading(false)
         }
       }  
       handleGetDoc()
