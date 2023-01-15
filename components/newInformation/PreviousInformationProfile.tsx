@@ -62,7 +62,7 @@ const PreviousInformationProfile = ({name, option, profession, profileImage, des
                 {option === "fakeData" ? (
                   <span className="text-base text-DarkBlueGray"> Potenti aliquam lectus</span>
                 ):option === "data" && (
-                  <span className="text-base text-DarkBlueGray">{profession}</span>
+                  <span className="text-base text-DarkBlueGray"> {profession}</span>
                 )}
             </h5>
           </div>
