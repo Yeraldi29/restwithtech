@@ -132,11 +132,12 @@ const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, data
     if(isChange){
       if(option === "comment"){
         setContentComment(value)
+        setPlainText(serialize(value))
       }
       if(option === "createNew" || option === "editParagraph"){
         setContentParagraph(value) 
+        setPlainText(serialize(value))
       }
-      setPlainText(serialize(value))
     }
   }
 

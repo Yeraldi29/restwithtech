@@ -67,7 +67,7 @@ const Comment = ({ idNewPost, name, parent_id, parent, data, username,imageProfi
   return (
     <>
     <div className={` mt-3 ${parent >= 1 ? "ml-8 ": "lg:mx-0"} break-words `}>
-      <HeaderComm username={username} imageProfile={imageProfile} create_at={create_at}/>
+      <HeaderComm username={username} imageProfile={imageProfile} create_at={create_at} author={author} />
       <FeedComm username={username} parent={parent} replyUsername={replyUsername} dataFather={dataFather} data={data} />
       <FooterComm username={username} idNewPost={idNewPost} parent_id={parent_id} 
       commentRepliesLength={commentRepliesLength} handleReply={handleReply} replyComment={replyComment}/>

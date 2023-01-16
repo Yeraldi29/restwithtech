@@ -12,6 +12,7 @@
     "skills":"Habilidades:",
     "thisUser":"Este usuario es:",
     "comments":"Comentarios",
+    "author":"Autor",
     "createComment":{
         "noAccount":{
             "you":"No estás en tu cuenta si tu quieres comentar",
