@@ -59,7 +59,7 @@ const ChooseCategory = ({getDocumentName, getDocValues, previewContent}: createN
             {t("categories.tech")}
             </span>):category === "mobile" ? (<span>
             {t("categories.mobile")}
-            </span>):category === "C&P" ? (<span>
+            </span>):category === "computers&laptops" ? (<span>
             {t("categories.C&P")}
             </span>):category === "OS" ? (<span>
             {t("categories.os")}

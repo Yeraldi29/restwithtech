@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useTranslation } from "next-i18next"
 import { BsFilePost } from "react-icons/bs"
 import { useAuthValue } from "../../store/AuthContext"
@@ -8,9 +8,8 @@ import { doc, DocumentData, getDoc, QuerySnapshot, setDoc, Timestamp, updateDoc 
 import { serialize } from "../createContent/plugins/serialize"
 import { useCreateNew } from "../../store/CreateContentContext"
 import { db } from "../../firebase"
-import { nanoid } from "nanoid"
 import { BiCheckCircle } from "react-icons/bi"
-import { useRouter } from "next/router"
+import Link from "next/link"
 
 interface publicNewProps extends createNewProps{
     getContentBody: QuerySnapshot<DocumentData> | null
@@ -20,11 +19,11 @@ interface publicNewProps extends createNewProps{
 
 const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, handlePublished}:publicNewProps) => {
     const [ loading, setLoading ] = useState(false)
+    const linkRef = useRef<HTMLAnchorElement | null>(null)
 
     const { t } = useTranslation("createNew")
     const { currentUser } = useAuthValue()
     const { errors, handleErrors } = useCreateNew() 
-    const router = useRouter()
     
     const handlePublicNew = async () => {
         
@@ -52,7 +51,6 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
 
                 setLoading(true)
                 
-                const randomId = nanoid()
                 const docNew = doc(db, "news", getDocValues.data().mainTitle)
                 const docUser = await getDoc(doc(db,"users", currentUser.uid))
                 
@@ -94,7 +92,9 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
                             setLoading(false)
                             handlePublished()
                             setInterval(()=>{
-                                router.push("/",undefined,{scroll:false})
+                                if(linkRef.current){
+                                    linkRef?.current?.click()
+                                }
                             },1500)
                         })
                     })
@@ -146,6 +146,7 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
         <h1>{t("redirected")}</h1>
         </div>
     )}
+    <Link href="/" hidden ref={linkRef} ></Link>
     </>
   )
 }
