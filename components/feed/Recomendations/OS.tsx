@@ -16,7 +16,7 @@ const OS = () => {
   useEffect(()=>{
     const handleGetData = async () => {
       setLoading(true)
-      const getNews = await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","os")))
+      const getNews = await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","OS")))
       setOsData(getNews)
       setLoading(false)
     }

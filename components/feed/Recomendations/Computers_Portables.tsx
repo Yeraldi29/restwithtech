@@ -16,7 +16,7 @@ const Computers_Portables = () => {
   useEffect(()=>{
     const handleGetData = async () => {
       setLoading(true)
-      const getNews = await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","C&P")))
+      const getNews = await getDocs(await query(collection(db,"news"), orderBy("create_at","desc"), where("category", "==","computers&laptops")))
       setC_pData(getNews)
       setLoading(false)
     }
