@@ -11,7 +11,7 @@ const Navbar = () => {
     </div>
     <div>
     <ButtonMenu />
-      <Menu/>
+    <Menu/>
     </div>
     </>
   )

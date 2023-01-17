@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import Logo from "./header/Logo"
 import Input from "./header/Input"
 import { useTranslation } from "next-i18next"
@@ -9,6 +9,7 @@ import Profile from "./profile/Profile"
 import { useAuthValue } from "../store/AuthContext"
 import PostNew from "./header/PostNew"
 import { postNewExpand } from "../store/store"
+import { BiBell } from "react-icons/bi"
 
 const Header= () => {
   const { t } = useTranslation('header')
@@ -20,7 +21,7 @@ return (
     <header className="sticky top-0 z-40 flex items-center justify-between h-[4.5rem] xl:h-[5.5rem] bg-Blue-Gray my-2 lg:my-4 lg:mb-2  rounded-xl -rotate-1  shadow-inner drop-shadow-md px-3 sm:px-4 md:px-5 shadow-Blue-Gray/50">
         <Logo />
         <Navbar />
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-4">
         <Input placeholder={t("placeholder")}/>
         <div className={`${ NewExpand && "lg:hidden"}`}>
           <Language />
@@ -30,12 +31,13 @@ return (
             <Account />
           ): profile === "profile" &&(
             <>
+            <BiBell className=" w-6 h-6 xl:w-7 xl:h-7 mx-auto -rotate-12 lg:hover:rotateItem cursor-pointer " />
             <div className={`${ NewExpand && "lg:hidden"}`}>
               <Profile />
             </div>
-              <div className=" hidden lg:flex">
-                <PostNew />
-              </div>
+            <div className=" hidden lg:flex">
+              <PostNew />
+            </div>
             </>
           )
         }

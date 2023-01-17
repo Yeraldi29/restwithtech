@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam&family=Kanit:wght@200;300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,7 +24,7 @@
         @apply rotate-45 transition duration-300 ease-in
     }
     .divLine{
-        @apply border-[3px] w-10 my-1 transform duration-300 ease-out transition
+        @apply h-[3px] w-9 rounded-sm bg-white my-1 transform duration-300 ease-out transition
     }
     .input{
         @apply rotate-1 bg-Lavender-Blue rounded-xl focus:border-4 focus:border-Blue-Gray focus:outline-none focus:ring-0 border-4 border-Blue-Gray text-BlueDarker mt-1 mb-4 w-full h-12 caret-Blue-Gray

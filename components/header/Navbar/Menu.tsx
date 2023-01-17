@@ -13,7 +13,7 @@ const Menu = () => {
     const { currentUser, profile } = useAuthValue() 
 
   return (
-      <div className={`${clickMenu ? "top-32 " : "-top-[30rem] "} transform duration-500 ease-out absolute bg-DarkBlueGray w-80 h-[25.5rem] z-50 inset-0  mx-auto rounded-2xl lg:hidden`}>
+      <div className={`${clickMenu ? "top-32 " : "-top-[30rem] "} transform duration-500 ease-out absolute bg-DarkBlueGray border-4 border-Blue-Gray w-80 h-[25.8rem] z-50 inset-0  mx-auto rounded-2xl lg:hidden`}>
       <div className=" w-64 mx-auto">
       { profile === "account" ? (
           <UserAccount />
