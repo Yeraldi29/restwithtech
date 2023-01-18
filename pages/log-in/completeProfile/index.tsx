@@ -17,9 +17,9 @@ import { getDownloadURL, ref, uploadString } from "firebase/storage"
 
 const CompleteProfile:NextPageWithLayout = () => {
   const { t } = useTranslation("signIn_logIn")
-  const { currentUser, profile } = useAuthValue()
+  const { currentUser, profile, handleUpdateProfile } = useAuthValue()
   const profileImg = useContext(profileImage)
-  const { imageProfile, handleClickImage } = profileImg
+  const { imageProfile, handleClickImage, option } = profileImg
 
   const [userName, setUserName] = useState("")
   const [validation, setValidation] = useState(false)
@@ -37,10 +37,12 @@ const CompleteProfile:NextPageWithLayout = () => {
         const {uid} = currentUser
         
         if(imageProfile){
-          const uploadImageProfile = uploadString(ref(storage,`users/${currentUser?.uid}`),imageProfile,"data_url")
+          let uploadImageProfile 
 
-         handleClickImage(null)
-         
+          if(option === "upload"){
+            uploadImageProfile = uploadString(ref(storage,`users/${currentUser?.uid}`),imageProfile,"data_url")
+          }
+
         if(docs.length === 0){
           const docRef = doc(db, `users/${uid}`)
           await setDoc(docRef,{
@@ -52,21 +54,38 @@ const CompleteProfile:NextPageWithLayout = () => {
               skill3:"",
               profession:""
           })
-          uploadImageProfile.then(snap => {
-            getDownloadURL(snap.ref).then(url => {
-              if(currentUser){
-                updateProfile(currentUser, {
-                  photoURL: url
-                }).then(()=>{
-                  Router.push("/")
-                  }).catch(err => {
-                    setError(err.message)
-                    setSubmit(false)
-                    console.log("🚀 ~ file: index.tsx ~ line 39 ~ handleSubmit ~ err.message", err.message)
-                  })
-              }
+          if(uploadImageProfile){
+            uploadImageProfile.then(snap => {
+              getDownloadURL(snap.ref).then(url => {
+                if(currentUser){
+                  updateProfile(currentUser, {
+                    photoURL: url,
+                    displayName: userName
+                  }).then(()=>{
+                    Router.push("/")
+                    handleUpdateProfile()
+                    }).catch(err => {
+                      setError(err.message)
+                      setSubmit(false)
+                      console.log("🚀 ~ file: index.tsx ~ line 39 ~ handleSubmit ~ err.message", err.message)
+                    })
+                }
+              })
+             })
+          }else if(option === "choose"){
+            updateProfile(currentUser, {
+              photoURL: imageProfile,
+              displayName: userName
+            }).then(()=>{
+              Router.push("/")
+              handleUpdateProfile()
+            }).catch(err => {
+              setError(err.message)
+              setSubmit(false)
+              console.log("🚀 ~ file: index.tsx ~ line 39 ~ handleSubmit ~ err.message", err.message)
             })
-           })
+          }
+          handleClickImage(null)
         }else{
             setError(t("errors.userName"))
             setSubmit(false)

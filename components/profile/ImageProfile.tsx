@@ -5,11 +5,12 @@ import { profileImage } from "../../store/store"
 const ImageProfile = ({src}:{src:string}) => {
   const [animation, setAnimation] = useState(false)
   const profileImg = useContext(profileImage)
-  const { handleClickImage } = profileImg
+  const { handleClickImage, handleOption } = profileImg
 
   const handleClick = ()=>{
     setAnimation(true)
     handleClickImage(src)
+    handleOption("choose")
   }
   
   return (

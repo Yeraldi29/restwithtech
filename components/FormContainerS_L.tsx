@@ -14,16 +14,18 @@ interface PropsInput {
     tryAccount: string
     account: string
     change: string
+    option: string
     forgotPassword?: string
 }
 
-const FormContainerS_L = ({title,tryAccount,account,change,forgotPassword}:PropsInput) => {
+const FormContainerS_L = ({ title, tryAccount, account, change, option, forgotPassword }:PropsInput) => {
     const [animation, setAnimation] = useState({
         animation:false,
         icon:0
     })
     const { github, isPending,error } = useGithubSession()
     const { google, isPending2, error2 } = useGoogleSession()
+    const router = useRouter()
 
     const handleGithub = () => {
         setAnimation({animation:true,icon:1})
@@ -93,8 +95,8 @@ const FormContainerS_L = ({title,tryAccount,account,change,forgotPassword}:Props
     }
     <div className="flex justify-center items-center space-x-3">
         <p>{account}</p>
-        <Link href={`${ useRouter().asPath === "/log-in" ? "/sign-in" : "/log-in"}`} locale={useRouter().locale}>
-            <div className={`${(animation.animation && animation.icon === 3) && " animate-wiggle "} bg-Lavender-Blue rounded-xl text-DarkBlueGray border-4 border-Blue-Gray font-semibold p-2 border -rotate-12 active:bg-white hover:opacity-50 cursor-pointer`}
+        <Link href={`/${option}`} >
+            <div className={`${(animation.animation && animation.icon === 3) && " animate-wiggle "} bg-Lavender-Blue rounded-xl text-DarkBlueGray border-4 border-Blue-Gray font-semibold p-2 -rotate-12 active:bg-white hover:opacity-50 cursor-pointer`}
             onClick={()=>setAnimation({animation:true,icon:3})} onAnimationEnd={()=>setAnimation({animation:false,icon:0})}>
                 <p >{change}</p>
         </div>

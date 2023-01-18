@@ -11,6 +11,7 @@ const Log_In = () => {
     account={t("logIn.account")}
     change={t("signIn.signin")}
     forgotPassword={t("logIn.forgotPassword")}
+    option="sign-in"
     />
   )
 }

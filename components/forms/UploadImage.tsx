@@ -6,7 +6,7 @@ const UploadImage = ({handleClick, handleUpdateImage, message}:{handleClick?:()=
     const [animation, setAnimation] = useState(false)
     const inputFileRef = useRef<HTMLInputElement | null>(null)
     const profileImg = useContext(profileImage)
-    const { handleClickImage } = profileImg
+    const { handleClickImage, handleOption } = profileImg
 
     const handleClickFile = () => {
       setAnimation(true)
@@ -30,6 +30,7 @@ const UploadImage = ({handleClick, handleUpdateImage, message}:{handleClick?:()=
 
       reader.onload = (e) =>{
           handleClickImage(e.target?.result as string)
+          handleOption("upload")
          if(handleUpdateImage){
           handleUpdateImage(true)
          }

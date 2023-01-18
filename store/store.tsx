@@ -1,6 +1,4 @@
-import { createContext, useState, useContext, ReactNode } from "react"
-import { Descendant } from "slate"
-import { startSerialize } from "../components/createContent/plugins/serialize"
+import { createContext, useState } from "react"
 
 const initialStateState = {
     clickMenu: false,
@@ -9,7 +7,9 @@ const initialStateState = {
 
 const initialStateImageProfile = {
     imageProfile: "",
-    handleClickImage: () => {}
+    handleClickImage: () => {},
+    option: "",
+    handleOption: () => {}
 }
 
 const initialStatePostNewExpand = {
@@ -25,6 +25,8 @@ interface Click{
 interface ImageProfile{
     imageProfile: string|null
     handleClickImage: (image: string|null) => void
+    option: string,
+    handleOption: (value: string) => void
 }
 
 interface NewExpandPost{
@@ -39,6 +41,7 @@ export const postNewExpand = createContext<NewExpandPost>(initialStatePostNewExp
 export const State = ({children}:{children: React.ReactNode}) => {
     const [clickMenu, setClickMenu] = useState(false)
     const [imageProfile, setImageProfile] = useState<string | null>("")
+    const [ option, setOption ] = useState("")
     const [NewExpand, setNewExpand] = useState(false)
    
     const handleClick = (clicked: boolean) => {
@@ -52,8 +55,12 @@ export const State = ({children}:{children: React.ReactNode}) => {
         setNewExpand(expand)
     } 
 
+    const handleOption = (value: string) => {
+        setOption(value)
+    }
+
     return (
-        <profileImage.Provider value={{imageProfile,handleClickImage}}>
+        <profileImage.Provider value={{imageProfile,handleClickImage, option, handleOption}}>
             <menuClick.Provider value={{clickMenu,handleClick}}>
                 <postNewExpand.Provider value={{NewExpand, handleNewExpand}}>
                     {children}

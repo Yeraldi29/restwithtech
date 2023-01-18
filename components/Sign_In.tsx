@@ -9,6 +9,7 @@ const Sign_In = () => {
     tryAccount={t("try")}
     account={t("signIn.areUser")}
     change={t("logIn.login")}
+    option="log-in"
     />
   )
 }

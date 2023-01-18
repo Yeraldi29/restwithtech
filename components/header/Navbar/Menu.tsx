@@ -9,7 +9,7 @@ import SignOut from "../SignOut"
 
 const Menu = () => {
     const clickState = useContext(menuClick)
-    const {clickMenu} = clickState
+    const { clickMenu, handleClick } = clickState
     const { currentUser, profile } = useAuthValue() 
 
   return (
@@ -20,7 +20,9 @@ const Menu = () => {
         ): profile === "profile" && (
           <>
             <h1 className=" text-center text-2xl mt-1">{currentUser?.displayName}</h1>
-            <PostNew />
+            <div onClick={()=>handleClick(false)} >
+              <PostNew />
+            </div>
           </>
         ) 
       }

@@ -3,7 +3,7 @@ import { useTranslation } from "next-i18next"
 
 const Categories = () => {
     const { t } = useTranslation("header")
-
+   
   return (
     <>
      <Category count={0} text={t("categories.tech")} path={"tech"}/>
