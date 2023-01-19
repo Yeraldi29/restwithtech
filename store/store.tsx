@@ -2,7 +2,11 @@ import { createContext, useState } from "react"
 
 const initialStateState = {
     clickMenu: false,
-    handleClick: () => {}
+    handleClick: () => {},
+    clickBell: false,
+    handleClickBell: () => {},
+    clickProfile: false,
+    handleClickProfile: () => {}
 }
 
 const initialStateImageProfile = {
@@ -20,6 +24,10 @@ const initialStatePostNewExpand = {
 interface Click{
      clickMenu: boolean
      handleClick: (clicked: boolean) => void
+     clickBell: boolean
+     handleClickBell: (click: boolean) => void
+     clickProfile: boolean
+    handleClickProfile: (click: boolean) => void
 }
 
 interface ImageProfile{
@@ -39,10 +47,12 @@ export const profileImage = createContext<ImageProfile>(initialStateImageProfile
 export const postNewExpand = createContext<NewExpandPost>(initialStatePostNewExpand)
 
 export const State = ({children}:{children: React.ReactNode}) => {
-    const [clickMenu, setClickMenu] = useState(false)
-    const [imageProfile, setImageProfile] = useState<string | null>("")
+    const [ clickMenu, setClickMenu ] = useState(false)
+    const [ imageProfile, setImageProfile ] = useState<string | null>("")
     const [ option, setOption ] = useState("")
-    const [NewExpand, setNewExpand] = useState(false)
+    const [ NewExpand, setNewExpand ] = useState(false)
+    const [ clickBell, setClickBell ] = useState(false)
+    const [ clickProfile, setClickProfile ] = useState(false)
    
     const handleClick = (clicked: boolean) => {
         setClickMenu(clicked)
@@ -59,10 +69,18 @@ export const State = ({children}:{children: React.ReactNode}) => {
         setOption(value)
     }
 
+    const handleClickBell = (click: boolean) => {
+        setClickBell(click)
+    }
+
+    const handleClickProfile = (click: boolean) => {
+        setClickProfile(click)
+    }
+
     return (
-        <profileImage.Provider value={{imageProfile,handleClickImage, option, handleOption}}>
-            <menuClick.Provider value={{clickMenu,handleClick}}>
-                <postNewExpand.Provider value={{NewExpand, handleNewExpand}}>
+        <profileImage.Provider value={{ imageProfile,handleClickImage, option, handleOption }}>
+            <menuClick.Provider value={{ clickMenu,handleClick, clickBell, handleClickBell, clickProfile, handleClickProfile }}>
+                <postNewExpand.Provider value={{ NewExpand, handleNewExpand }}>
                     {children}
                 </postNewExpand.Provider>
             </menuClick.Provider>

@@ -63,7 +63,7 @@ const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: str
               {
                 parentComments?.docs.map((doc, index) => (
                   <Comment key={index} idNewPost={idNewPost} name={name} parent_id={doc.data().id} parent={doc.data().parent_id} data={doc.data().data} username={doc.data().username} imageProfile={doc.data().imageProfile} 
-                  create_at={doc.data().create_at} author={doc.data().author} />
+                  create_at={doc.data().create_at} author={doc.data().author} userId={doc.data().userId} />
                 ))
               }
               {commentsLenght > limitNumber && (

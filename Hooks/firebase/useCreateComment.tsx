@@ -4,6 +4,7 @@ import { useAuthValue } from "../../store/AuthContext"
 import { db } from "../../firebase"
 import { Descendant } from "slate"
 import { useSlateSaveContent } from "../../store/CreateContentContext"
+import { nanoid } from "nanoid"
 
 const useCreateComment = (idNewPost? : string | undefined, name?: string, parent_id?: number, dataFather?:string, usernameFather?: string | null ) => {
   const [ contentComment, setContentComment ] = useState<Descendant[]>([])
@@ -49,7 +50,26 @@ const useCreateComment = (idNewPost? : string | undefined, name?: string, parent
         replyComment: replyComment,
         replyUsername: replyUsername,
         author: authorVerification,
-      }).then(()=>{
+        userId: currentUser.uid
+      }).then(async ()=>{
+        // const notificationDoc = doc(db, `users/${currentUser.uid}/notifications/${nanoid()}`)
+
+        // let reason 
+
+        // if(parent_id === 0){
+        //   reason = "new"
+        // }else{
+        //   reason = "replied"
+        // }
+        
+        // await setDoc(notificationDoc,{
+        //   username: currentUser.displayName,
+        //   imageProfile: currentUser.photoURL,
+        //   reason: reason,
+        //   new: idNewPost,
+        //   id: parent_id
+        // })
+        
         setSaved("yes")
         handleSave("yes")
       }).catch(err =>{

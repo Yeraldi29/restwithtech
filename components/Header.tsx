@@ -9,7 +9,7 @@ import Profile from "./profile/Profile"
 import { useAuthValue } from "../store/AuthContext"
 import PostNew from "./header/PostNew"
 import { postNewExpand } from "../store/store"
-import { BiBell } from "react-icons/bi"
+import Notifications from "./header/Navbar/Notifications"
 
 const Header= () => {
   const { t } = useTranslation('header')
@@ -31,7 +31,7 @@ return (
             <Account />
           ): profile === "profile" &&(
             <>
-            <BiBell className=" w-6 h-6 xl:w-7 xl:h-7 mx-auto -rotate-12 lg:hover:rotateItem cursor-pointer " />
+            <Notifications />
             <div className={`${ NewExpand && "lg:hidden"}`}>
               <Profile />
             </div>

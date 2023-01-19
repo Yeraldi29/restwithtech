@@ -1,4 +1,5 @@
 import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { nanoid } from 'nanoid'
 import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
 import { BiLike, BiMessageDetail } from 'react-icons/bi'
@@ -61,10 +62,20 @@ const FooterComm = ({username, idNewPost, parent_id, commentRepliesLength, handl
     
     if(profile === "profile"){
       const verifyLikeComment = await getDocs(query(docsLikes, where("userId", "==", currentUser?.uid)))
-      if(verifyLikeComment.empty){
+      if(verifyLikeComment.empty && currentUser){
         setLoadingLike(true)
         await setDoc(setLike,{
-          userId: currentUser?.uid
+          userId: currentUser.uid
+        }).then(async () => {
+          // const notificationDoc = doc(db, `users/${currentUser.uid}/notifications/${nanoid()}`)
+
+          // await setDoc(notificationDoc,{
+          //   username: currentUser.displayName,
+          //   imageProfile: currentUser.photoURL,
+          //   reason: "like",
+          //   new: idNewPost,
+          //   id: parent_id
+          // })
         })
         setLikeComment(true)
         setLoadingLike(false)

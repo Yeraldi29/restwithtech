@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next"
 import Link from "next/link"
 import { useState, useEffect, useContext } from "react"
 import { useAuthValue } from "../../store/AuthContext"
-import { profileImage } from "../../store/store"
+import { menuClick, profileImage } from "../../store/store"
 import { useUserProfileContent } from "../../store/UserContext"
 import Bubbles from "../header/Navbar/Bubbles"
 import SignOut from "../header/SignOut"
@@ -12,10 +12,11 @@ const Profile = () => {
   const [ imageUser, setImageUser ] = useState("")
   
   const { currentUser } = useAuthValue() 
-  const [clickProfile, setClickProfile] = useState(false)
   const profileImg = useContext(profileImage)
   const { imageProfile } = profileImg
   const { changeImage } = useUserProfileContent()
+  const clickState = useContext(menuClick)
+  const { clickProfile, handleClickBell, handleClickProfile } = clickState
   const { t } = useTranslation("header")
 
   useEffect(()=>{
@@ -30,22 +31,27 @@ const Profile = () => {
     }
   },[changeImage])
 
+  const handleClick = () => {
+    handleClickProfile(!clickProfile)
+    handleClickBell(false)
+  }
+
   return (
     <>
     {
         currentUser?.photoURL && (
           <>
             <div className="hidden lg:block">
-              <div onClick={()=>setClickProfile(!clickProfile)} >
+              <div onClick={handleClick} >
                 <ImageProfile src={imageUser}/>
               </div>
-              <div className={`transition duration-500 ease-in absolute bg-DarkBlueGray border-4 border-Blue-Gray w-32 h-40 flex items-center justify-center flex-col rounded-2xl z-50 right-20 ${!clickProfile ? "opacity-0 -top-44 ": " top-28 "}`}>
-                <Link href="/user" onClick={()=>setClickProfile(!clickProfile)}>
+              <div className={`transition duration-500 ease-in absolute bg-DarkBlueGray border-4 border-Blue-Gray w-32 h-40 flex items-center justify-center flex-col rounded-2xl z-50 right-20 ${!clickProfile ? "opacity-0 -top-44 ": " top-28 xl:top-32"}`}>
+                <Link href="/user" onClick={()=>handleClickProfile(!clickProfile)}>
                   <div className=" border-2 rounded-lg p-3 cursor-pointer hover:opacity-50">
-                    <h2 className="text-lg">{t("profile")}</h2>
+                    <h2 className="text-lg xl:text-xl">{t("profile")}</h2>
                   </div>
                 </Link>
-                <div onClick={()=>setClickProfile(!clickProfile)} >
+                <div onClick={()=>handleClickProfile(!clickProfile)} >
                   <SignOut />
                 </div>
                 <Bubbles click={clickProfile}/>

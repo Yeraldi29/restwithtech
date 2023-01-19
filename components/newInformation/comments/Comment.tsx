@@ -24,9 +24,10 @@ interface commentProps {
   dataFather?: string
   replyUsername?: string
   author: boolean
+  userId: string
 }
 
-const Comment = ({ idNewPost, name, parent_id, parent, data, username,imageProfile, create_at, dataFather,replyUsername, author }: commentProps) => {
+const Comment = ({ idNewPost, name, parent_id, parent, data, username,imageProfile, create_at, dataFather,replyUsername, author, userId }: commentProps) => {
   const [ replyComment, setReplyComment ] = useState(false)
   const [ showReplies, setShowReplies ] = useState(false)
   const [ commentReplies, setCommentReplies ] = useState<QuerySnapshot<DocumentData> | null>(null)
@@ -66,7 +67,7 @@ const Comment = ({ idNewPost, name, parent_id, parent, data, username,imageProfi
 
   return (
     <>
-    <div className={` mt-3 ${parent >= 1 ? "ml-8 ": "lg:mx-0"} break-words `}>
+    <div className={` mt-3 ${parent >= 1 ? "ml-8 ": "lg:mx-0"} break-words `} id={`${parent_id}`} >
       <HeaderComm username={username} imageProfile={imageProfile} create_at={create_at} author={author} />
       <FeedComm username={username} parent={parent} replyUsername={replyUsername} dataFather={dataFather} data={data} />
       <FooterComm username={username} idNewPost={idNewPost} parent_id={parent_id} 
@@ -104,7 +105,7 @@ const Comment = ({ idNewPost, name, parent_id, parent, data, username,imageProfi
             {
             commentReplies?.docs.filter(doc => doc.data().parent_id === parent_id ).map((doc, index) => (
               <Comment key={index} idNewPost={idNewPost} name={name} parent_id={doc.data().id} parent={doc.data().parent_id} data={doc.data().data} username={doc.data().username} imageProfile={doc.data().imageProfile} 
-              create_at={doc.data().create_at} dataFather={doc.data().replyComment} replyUsername={doc.data().replyUsername} author={doc.data().author} />
+              create_at={doc.data().create_at} dataFather={doc.data().replyComment} replyUsername={doc.data().replyUsername} author={doc.data().author} userId={doc.data().userId} />
             ))
            }
             <LineThread /> 

@@ -15,7 +15,7 @@ const SignOut = () => {
   return (
     <div className=" border-2 rounded-lg bg-red-400 mx-auto w-24 mt-2 cursor-pointer lg:hover:opacity-50" 
     onClick={handleSignOut}>
-     <h2 className="text-center text-xl lg:text-lg py-2">{t("sign-out")}</h2>  
+     <h2 className="text-center text-xl lg:text-lg xl:text-xl py-2">{t("sign-out")}</h2>  
     </div>
   )
 }

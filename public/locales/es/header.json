@@ -13,5 +13,12 @@
     },
     "postNew":"Postea",
     "profile": "Perfil",
-    "chooseCategory": "Por favor escoge una categoría."
+    "chooseCategory": "Por favor escoge una categoría.",
+    "notifications":{
+        "to":"A",
+        "new":"comentó en tu noticia.",
+        "replied":"respondió a tu comentario.",
+        "liked":"le gustó tu comentario.",
+        "empty":"No tienes notificaciones."
+    }
 }
