@@ -1,4 +1,13 @@
-const Notification = () => {
+
+interface NotificationProps {
+  id: number
+  imageProfie: string
+  newTitle: string
+  reason: string
+  username: string
+}
+
+const Notification = ({ id, imageProfie, newTitle, reason, username }: NotificationProps) => {
   return (
     <div>
         {/* Profile's image */}

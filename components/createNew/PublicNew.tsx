@@ -65,7 +65,8 @@ const PublicNew = ({getDocValues, getDocumentName, getContentBody, published, ha
                     profileImage: currentUser.photoURL,
                     skill1: docUser.data()?.skill1,
                     skill2: docUser.data()?.skill2,
-                    skill3: docUser.data()?.skill3
+                    skill3: docUser.data()?.skill3,
+                    userId: currentUser.uid
                 }).then(async ()=>{
 
                     getContentBody.docs.map(async (docContent,index)=>{

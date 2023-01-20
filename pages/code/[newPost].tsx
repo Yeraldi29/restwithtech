@@ -49,7 +49,8 @@ const New: NextPageWithLayout = () => {
         <>
         {getData ? (
           <NewInformation image={getData.data()?.mainImage} title={getData.data()?.mainTitle} category={getData.data()?.category} name={getData.data()?.userName} option="data" time={getData.data()?.create_at} idNewPost={getData.data()?.mainTitle}
-          profession={getData.data()?.profession} descriptionProfile={getData.data()?.descriptionProfile} profileImage={getData.data()?.profileImage} skill1={getData.data()?.skill1} skill2={getData.data()?.skill2} skill3={getData.data()?.skill3} content={getContentData} />
+          profession={getData.data()?.profession} descriptionProfile={getData.data()?.descriptionProfile} profileImage={getData.data()?.profileImage} skill1={getData.data()?.skill1} skill2={getData.data()?.skill2} skill3={getData.data()?.skill3} content={getContentData}
+          userId={getData.data()?.userId} />
         ):falseData &&(
           <NewInformation image={falseData[0].image} title={falseData[0].title} category={falseData[0].category} name={falseData[0].name} option="fakeData" timeFake={falseData[0].time} idNewPost={falseData[0].idNewPost} />
         )}

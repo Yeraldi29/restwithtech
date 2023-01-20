@@ -71,7 +71,7 @@ const Comment = ({ idNewPost, name, parent_id, parent, data, username,imageProfi
       <HeaderComm username={username} imageProfile={imageProfile} create_at={create_at} author={author} />
       <FeedComm username={username} parent={parent} replyUsername={replyUsername} dataFather={dataFather} data={data} />
       <FooterComm username={username} idNewPost={idNewPost} parent_id={parent_id} 
-      commentRepliesLength={commentRepliesLength} handleReply={handleReply} replyComment={replyComment}/>
+      commentRepliesLength={commentRepliesLength} handleReply={handleReply} replyComment={replyComment} userId={userId} />
        {
         commentRepliesLength > 0 && (
           <div className={`${!showReplies ? "bg-BabyBlueEyes text-BlueDarker hover:bg-DarkBlueGray hover:text-white " : " bg-DarkBlueGray text-white hover:bg-BabyBlueEyes hover:text-BlueDarker hover:border-white"} 

@@ -21,9 +21,10 @@ interface newInformationProps extends itemProps{
   skill2?:string
   skill3?:string
   content?: QuerySnapshot<DocumentData> | null
+  userId?: string
 }
 
-const NewInformation = ({ image, title, category, name, time, timeFake, idNewPost, option, content, profession, profileImage, descriptionProfile, skill1, skill2, skill3 }:newInformationProps) => {
+const NewInformation = ({ image, title, category, name, time, timeFake, idNewPost, option, content, profession, profileImage, descriptionProfile, skill1, skill2, skill3, userId }:newInformationProps) => {
   const [ news, setNews ] = useState<QuerySnapshot<DocumentData>  | null >(null)
   const [categoryItem,setCategoryItem] = useState("")
   const [ loading, setLoading ] = useState(true)
@@ -122,7 +123,7 @@ const NewInformation = ({ image, title, category, name, time, timeFake, idNewPos
           </div>
           <PreviousInformationProfile name={name} option={option} profession={profession} profileImage={profileImage} descriptionProfile={descriptionProfile} skill1={skill1} skill2={skill2} skill3={skill3} />
         </div>
-        <Comments idNewPost={idNewPost} name={name}/>
+        <Comments idNewPost={idNewPost} name={name} userId={userId} />
         <div className="grid gap-6 mt-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
         {loading ? (<>
         {[...itemsLoading].map((noValues,index)=>(

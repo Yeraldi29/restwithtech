@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, Timestamp, where } from 'firebase/firestore'
 import { nanoid } from 'nanoid'
 import { useTranslation } from 'next-i18next'
 import React, { useEffect, useState } from 'react'
@@ -14,9 +14,10 @@ interface FooterCommProps {
     commentRepliesLength: number
     handleReply: () => void
     replyComment: boolean
+    userId: string
 }
 
-const FooterComm = ({username, idNewPost, parent_id, commentRepliesLength, handleReply, replyComment}:FooterCommProps) => {
+const FooterComm = ({ username, idNewPost, parent_id, commentRepliesLength, handleReply, replyComment, userId }:FooterCommProps) => {
   const [ likeComment, setLikeComment ] = useState(false)
   const [ loadingLike, setLoadingLike ] = useState(false)
   const [ likes, setLikes ] = useState(0)
@@ -67,15 +68,21 @@ const FooterComm = ({username, idNewPost, parent_id, commentRepliesLength, handl
         await setDoc(setLike,{
           userId: currentUser.uid
         }).then(async () => {
-          // const notificationDoc = doc(db, `users/${currentUser.uid}/notifications/${nanoid()}`)
-
-          // await setDoc(notificationDoc,{
-          //   username: currentUser.displayName,
-          //   imageProfile: currentUser.photoURL,
-          //   reason: "like",
-          //   new: idNewPost,
-          //   id: parent_id
-          // })
+          if(userId){
+            if(currentUser.uid !== userId){
+              const notificationDoc = doc(db, `users/${userId}/notifications/${nanoid()}`)
+    
+              await setDoc(notificationDoc,{
+                username: currentUser.displayName,
+                imageProfile: currentUser.photoURL,
+                reason: "like",
+                new: idNewPost,
+                id: parent_id,
+                read: false,
+                create_at: Timestamp.now(),
+              })
+            }
+          }
         })
         setLikeComment(true)
         setLoadingLike(false)

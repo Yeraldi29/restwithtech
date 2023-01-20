@@ -40,9 +40,10 @@ interface createParagraphProps {
   handleClickCancelParagraph?: (option: boolean) => void
   dataEdit?: Descendant[] | null
   order?: number
+  userId?: string
 }
 
-const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, dataFather, usernameFather, handleClickCancelParagraph, dataEdit, order }:createParagraphProps) => {
+const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, dataFather, usernameFather, handleClickCancelParagraph, dataEdit, order, userId }:createParagraphProps) => {
   
   const { t } = useTranslation("newPost")
 
@@ -52,7 +53,7 @@ const CreateParagraph = ({ option, idNewPost, placeholder, name, parent_id, data
   const [ keyword, setKeyword ] = useState("")
   const [ plainText, setPlainText ] = useState("")
   const [ editablecomponent, setEditableComponent ] = useState<JSX.Element | null>(null)
-  const { setContentComment, handleSaveComment, saved } = useCreateComment(idNewPost, name, parent_id, dataFather, usernameFather)
+  const { setContentComment, handleSaveComment, saved } = useCreateComment( idNewPost, name, parent_id, dataFather, usernameFather, userId )
   const { setContentParagraph, savedParagraph, handleCreateNewParagraph, handleEditParagraph } = useCreatenewParagraph( idNewPost, dataEdit, handleClickCancelParagraph, order)
   const { profile } = useAuthValue()
   const renderLeaf = useCallback((props: RenderLeafProps)=>{return <Leaf {...props} />  },[])

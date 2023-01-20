@@ -11,7 +11,7 @@ import { db } from "../../firebase"
 import { collection, DocumentData, getDocs, limit, orderBy, query, QuerySnapshot, where } from "firebase/firestore"
 import { useSlateSaveContent } from "../../store/CreateContentContext"
 
-const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: string}) => {
+const Comments = ({ idNewPost, name, userId }:{ idNewPost: string | undefined, name: string, userId?:string }) => {
     const { t } = useTranslation("newPost")
     const [ parentComments, setParentComments ] = useState<QuerySnapshot<DocumentData> | null>(null)
     const [ commentsLenght, setCommentsLenght ] = useState(0)
@@ -51,7 +51,7 @@ const Comments = ({ idNewPost, name }:{ idNewPost: string | undefined, name: str
       <div className="lg:grid lg:grid-cols-5 gap-x-8">
         <div className=" lg:col-span-3">
           <div className="relative border-4 border-DarkBlueGray rounded-xl p-4 sm:mx-16 sm:w-auto md:mx-36 lg:m-0 lg:h-fit " >
-            <CreateParagraph option="comment" idNewPost={idNewPost} name={name} parent_id={0} placeholder={t("createComment.placeholder")} />
+            <CreateParagraph option="comment" idNewPost={idNewPost} name={name} parent_id={0} placeholder={t("createComment.placeholder")} userId={userId} />
             {profile === "account" && (
               <CannotComment />
              )}
