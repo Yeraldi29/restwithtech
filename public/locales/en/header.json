@@ -19,6 +19,7 @@
         "new":"commented in your new.",
         "replied":"replied your comment.",
         "liked":"liked your comment.",
-        "empty":"You don't have notifications."
+        "empty":"You don't have notifications.",
+        "see":"See more."
     }
 }

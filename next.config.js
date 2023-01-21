@@ -5,7 +5,6 @@ const nextConfig = {
   i18n,
   reactStrictMode: true,
   swcMinify: true,
-  trailingSlash: true,
   images: {
     domains: [
       'avatars.githubusercontent.com',

@@ -19,6 +19,7 @@
         "new":"comentó en tu noticia.",
         "replied":"respondió a tu comentario.",
         "liked":"le gustó tu comentario.",
-        "empty":"No tienes notificaciones."
+        "empty":"No tienes notificaciones.",
+        "see":"Ver más."
     }
 }
