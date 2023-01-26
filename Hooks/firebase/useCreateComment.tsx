@@ -98,7 +98,7 @@ const useCreateComment = (
                 read: false,
                 create_at: Timestamp.now(),
                 idNotification: randomId,
-                category: category
+                category: category,
               });
             }
           }

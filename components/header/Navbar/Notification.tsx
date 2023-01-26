@@ -24,31 +24,36 @@ const Notification = ({
   const { handleClickBell } = clickState;
 
   return (
-    <Link href={`/${category}/${newTitle}`} onClick={()=>handleClickBell(false)}>
+    <Link
+      href={`/${category}/${newTitle}`}
+      onClick={() => handleClickBell(false)}
+    >
       <div className="flex items-center space-x-4 xl:text-lg text-white bg-BabyBlueEyes border-b-4 border-Blue-Gray border-dashed p-4 pl-2 break-all cursor-pointer group lg:hover:bg-white">
         <div className=" shrink-0">
           <ImageProfile src={imageProfile} />
         </div>
         <div>
           <div>
-            {reason === "like" && <p>{t("notifications.to")}</p>}
             <h3 className="mt-1 text-lg xl:text-xl text-BlueDarker ">
-              {username}
+              {username} <span> </span>
               {reason === "new" ? (
                 <span className="text-white group-hover:text-DarkBlueGray">
-                  {" "}
                   {t("notifications.new")}
                 </span>
               ) : reason === "replied" ? (
                 <span className="text-white group-hover:text-DarkBlueGray">
-                  {" "}
                   {t("notifications.replied")}
                 </span>
               ) : (
-                <span className="text-white group-hover:text-DarkBlueGray">
-                  {" "}
-                  {t("notifications.liked")}
-                </span>
+                reason === "like" && (
+                  <>
+                    <span>{t("notifications.to")}</span>
+                    <span> </span>
+                    <span className="text-white group-hover:text-DarkBlueGray">
+                      {t("notifications.liked")}
+                    </span>
+                  </>
+                )
               )}
             </h3>
           </div>

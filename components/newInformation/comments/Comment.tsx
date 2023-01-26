@@ -172,6 +172,7 @@ const Comment = ({
             usernameFather={username}
             placeholder={t("createComment.placeholder")}
             category={category}
+            userId={userId}
           />
           {profile === "account" && <CannotComment />}
           <div className="w-full my-4 border-2 border-dashed border-DarkBlueGray rounded-md"></div>
