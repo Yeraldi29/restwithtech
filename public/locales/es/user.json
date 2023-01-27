@@ -16,5 +16,6 @@
     "editProfile":"Editar Perfil",
     "cancel":"Cancelar",
     "noNews":"No tienes ninguna noticia aún.",
-    "changeImage":"Cambiar la imagen de tu perfil"
+    "changeImage":"Cambiar la imagen de tu perfil",
+    "editNew":"Editar noticia."
 }

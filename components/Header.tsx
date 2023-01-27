@@ -22,7 +22,7 @@ const Header = () => {
       <Logo />
       <Navbar />
       <div className="flex items-center space-x-4">
-        <Input placeholder={t("placeholder")} />
+        <Input />
         <div className={`${NewExpand && "lg:hidden"}`}>
           <Language />
         </div>

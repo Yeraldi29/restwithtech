@@ -1,5 +1,5 @@
 
-const LoadingItems = ({index,first}:{index:number, first: boolean}) => {
+const LoadingItems = ({index,first}:{index:number, first?: boolean}) => {
   return (
     <div className="h-full">
       <div className={`relative w-full h-96 md:h-[26rem] lg:h-[31rem] ${index % 2 === 0 ? "-rotate-1" : "even:rotate-1"} ${(index === 0 && first ) && "mt-4"} rounded-xl bg-Lavender-Blue/30 border-4 border-DarkBlueGray 

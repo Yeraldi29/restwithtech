@@ -16,5 +16,6 @@
     "editProfile":"Edit Profile",
     "cancel":"Cancel",
     "noNews":"You don't have any new yet.",
-    "changeImage":"Change your profile picture"
+    "changeImage":"Change your profile picture",
+    "editNew":"Edit new."
 }

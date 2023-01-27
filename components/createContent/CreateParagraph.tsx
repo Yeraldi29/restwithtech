@@ -59,7 +59,7 @@ interface createParagraphProps {
   dataEdit?: Descendant[] | null;
   order?: number;
   userId?: string;
-  category: string
+  category?: string
 }
 
 const CreateParagraph = ({
