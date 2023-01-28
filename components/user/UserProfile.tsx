@@ -33,6 +33,11 @@ const UserProfile = ({
       setImageUser(currentUser?.photoURL);
     }
   }, [currentUser]);
+  
+  useEffect(()=>{
+    console.log("🚀 ~ file: UserProfile.tsx:20 ~ descriptionProfile", descriptionProfile)
+
+  },[])
 
   useEffect(() => {
     if (imageProfile && updateImage) {
@@ -94,7 +99,7 @@ const UserProfile = ({
         {loading ? (
           <Loading />
         ) : (
-          descriptionProfile !== "" &&
+          descriptionProfile !== "" && descriptionProfile &&
           !loadingProfile && (
             <>
               {editProfile && (

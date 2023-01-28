@@ -3,18 +3,21 @@ import { useTranslation } from "next-i18next";
 import { BiPlus } from "react-icons/bi";
 import { menuClick, postNewExpand } from "../../store/store";
 import Link from "next/link";
+import { useEditOrCreate } from "../../store/CreateContentContext";
 
 const PostNew = () => {
   const { t } = useTranslation("header");
   const expand = useContext(postNewExpand);
   const { NewExpand, handleNewExpand } = expand;
   const clickState = useContext(menuClick);
-  const { handleClickProfile, handleClickBell } =  clickState;
+  const { handleClickProfile, handleClickBell } = clickState;
+  const { handleEditOrCreate } = useEditOrCreate();
 
   const handleClickPostNew = () => {
     handleClickBell(false);
     handleClickProfile(false);
-  }
+    handleEditOrCreate("create");
+  };
 
   return (
     <Link href={"/createNew"} onClick={handleClickPostNew}>

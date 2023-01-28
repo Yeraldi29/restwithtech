@@ -76,9 +76,7 @@ const User: NextPageWithLayout = () => {
               professionProfile={userProfile?.data().profession}
             />
           ) : (
-            <div className="lg:col-span-3 w-full border-4 border-DarkBlueGray border-dashed rounded-xl p-2 sm:p-4 sm:max-w-md sm:mx-auto lg:m-0 lg:h-fit lg:max-w-none lg:w-full">
-              <UserNews />
-            </div>
+            <UserNews />
           )}
         </div>
       )}

@@ -17,5 +17,6 @@
     "cancel":"Cancelar",
     "noNews":"No tienes ninguna noticia aún.",
     "changeImage":"Cambiar la imagen de tu perfil",
-    "editNew":"Editar noticia."
+    "editNew":"Editar noticia.",
+    "userNews":"Aquí puedes encontrar todas las noticias que has creado y puedes editarlas también."
 }

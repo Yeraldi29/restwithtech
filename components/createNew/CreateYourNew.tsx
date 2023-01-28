@@ -9,6 +9,7 @@ import {
   collection,
   doc,
   DocumentData,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -24,6 +25,7 @@ import CreateParagraph from "../createContent/CreateParagraph";
 import ContentBody from "./ContentBody";
 import {
   useCreateNew,
+  useEditOrCreate,
   useSlateSaveContent,
 } from "../../store/CreateContentContext";
 import ChooseCategory from "./ChooseCategory";
@@ -44,41 +46,19 @@ const CreateYourNew = () => {
   const { currentUser } = useAuthValue();
   const { loadContentBody } = useSlateSaveContent();
   const { errors } = useCreateNew();
+  const { editOrCreate, editNewID } = useEditOrCreate();
 
   useEffect(() => {
     const handleGetValuesCreateNew = async () => {
       if (currentUser?.uid) {
-        const docsUserCreateNew = await getDocs(
-          collection(db, "users", currentUser.uid, "userCreateNew")
-        );
-
-        if (docsUserCreateNew.empty) {
-          const randomId = nanoid();
-
-          setDocumentName(`${randomId}`);
-          const docUserCreateNew = doc(
-            db,
-            "users",
-            currentUser.uid,
-            "userCreateNew",
-            `${randomId}`
+        setDocumentName("");
+        setGetDocValues(null);
+        if (editOrCreate === "create") {
+          const docsUserCreateNew = await getDocs(
+            collection(db, "users", currentUser.uid, "userCreateNew")
           );
 
-          await setDoc(docUserCreateNew, {
-            idNewPost: `${randomId}`,
-            creating: true,
-          });
-          setGetDocValues(null);
-          setStopLoading(true);
-        } else {
-          const docCreateNew = await getDocs(
-            query(
-              collection(db, "users", currentUser.uid, "userCreateNew"),
-              where("creating", "==", true)
-            )
-          );
-
-          if (docCreateNew.empty) {
+          if (docsUserCreateNew.empty) {
             const randomId = nanoid();
 
             setDocumentName(`${randomId}`);
@@ -97,14 +77,54 @@ const CreateYourNew = () => {
             setGetDocValues(null);
             setStopLoading(true);
           } else {
-            setGetDocValues(docCreateNew.docs[0]);
-            setDocumentName(`${docCreateNew.docs[0].data().idNewPost}`);
+            const docCreateNew = await getDocs(
+              query(
+                collection(db, "users", currentUser.uid, "userCreateNew"),
+                where("creating", "==", true)
+              )
+            );
+
+            if (docCreateNew.empty) {
+              const randomId = nanoid();
+
+              setDocumentName(`${randomId}`);
+              const docUserCreateNew = doc(
+                db,
+                "users",
+                currentUser.uid,
+                "userCreateNew",
+                `${randomId}`
+              );
+
+              await setDoc(docUserCreateNew, {
+                idNewPost: `${randomId}`,
+                creating: true,
+              });
+              setGetDocValues(null);
+              setStopLoading(true);
+            } else {
+              setGetDocValues(docCreateNew.docs[0]);
+              setDocumentName(`${docCreateNew.docs[0].data().idNewPost}`);
+            }
           }
+        }
+        if (editOrCreate === "edit") {
+          const docEditNew = doc(
+            db,
+            "users",
+            currentUser.uid,
+            "userCreateNew",
+            editNewID
+          );
+          const getDocEditNew = await getDoc(docEditNew);
+
+          setDocumentName(getDocEditNew.data()?.idNewPost);
+          setGetDocValues(getDocEditNew);
         }
       }
     };
     handleGetValuesCreateNew();
-  }, [currentUser, errors]);
+  }, [currentUser, errors, editOrCreate]);
 
   useEffect(() => {
     const handleContentBody = async () => {
