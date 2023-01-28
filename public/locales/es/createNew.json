@@ -1,5 +1,6 @@
 {
-    "titlePage":"Crea una noticia",
+    "titlePageCreate":"Crea una noticia",
+    "titlePageEdit":"Edita tu noticia",
     "mainTitle":"Escribe aquí tu título principal.",
     "title":"Título",
     "mainImage":"Sube aquí tu imagen principal.",

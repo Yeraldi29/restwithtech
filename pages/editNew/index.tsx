@@ -1,16 +1,15 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { ReactElement, useEffect } from "react";
-import Layout from "../../components/Layout";
-import { useAuthValue } from "../../store/AuthContext";
-import { NextPageWithLayout } from "../_app";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
+import { ReactElement, useEffect } from "react";
 import CreateYourNew from "../../components/createNew/CreateYourNew";
+import Layout from "../../components/Layout";
+import { db } from "../../firebase";
+import { useAuthValue } from "../../store/AuthContext";
 
-const CreateNew: NextPageWithLayout = () => {
+const EditNew = () => {
   const { currentUser } = useAuthValue();
   const router = useRouter();
   const { t } = useTranslation("createNew");
@@ -40,10 +39,10 @@ const CreateNew: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>{t("titlePageCreate")}</title>
+        <title>{t("titlePageEdit")}</title>
         <link rel="icon" href="/icon.png" />
       </Head>
-      <CreateYourNew editOrCreate="create" />
+      <CreateYourNew editOrCreate="edit" />
     </>
   );
 };
@@ -58,8 +57,8 @@ export const getStaticProps = async ({ locale }: { locale: string }) => ({
   },
 });
 
-CreateNew.getLayout = function getLayout(page: ReactElement) {
+EditNew.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export default CreateNew;
+export default EditNew;

@@ -25,8 +25,6 @@ const initialValuesCreateNew = {
 };
 
 const initialValuesEditOrCreateNew = {
-  editOrCreate: "create",
-  handleEditOrCreate: () => {},
   editNewID: "",
   handleEditNewID: () => {},
 };
@@ -56,8 +54,6 @@ interface createNewProps {
 }
 
 interface editOrCreateNewProps {
-  editOrCreate: string;
-  handleEditOrCreate: (option: string) => void;
   editNewID: string;
   handleEditNewID: (newID: string) => void;
 }
@@ -86,7 +82,6 @@ export const CreateContentContext = ({
     contentBody1: false,
     contentBody2: false,
   });
-  const [editOrCreate, setEditOrCreate] = useState("create");
   const [editNewID, setEditNewID] = useState("");
 
   const handleAppear = (option: boolean) => {
@@ -115,10 +110,6 @@ export const CreateContentContext = ({
     });
   };
 
-  const handleEditOrCreate = (option: string) => {
-    setEditOrCreate(option);
-  };
-
   const handleEditNewID = (newID: string) => {
     setEditNewID(newID);
   }
@@ -132,7 +123,7 @@ export const CreateContentContext = ({
           value={{ errors, handleErrors, handleNoErrors }}
         >
           <editOrCreateContent.Provider
-            value={{ editOrCreate, handleEditOrCreate, editNewID, handleEditNewID }}
+            value={{ editNewID, handleEditNewID }}
           >
             {children}
           </editOrCreateContent.Provider>

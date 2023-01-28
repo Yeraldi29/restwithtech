@@ -30,8 +30,9 @@ import {
 } from "../../store/CreateContentContext";
 import ChooseCategory from "./ChooseCategory";
 import PublicNew from "./PublicNew";
+import { useRouter } from "next/router";
 
-const CreateYourNew = () => {
+const CreateYourNew = ({ editOrCreate }: { editOrCreate: string }) => {
   const [getDocumentName, setDocumentName] = useState("");
   const [getDocValues, setGetDocValues] = useState<DocumentData | null>(null);
   const [getContentBody, setGetContentBody] =
@@ -46,13 +47,12 @@ const CreateYourNew = () => {
   const { currentUser } = useAuthValue();
   const { loadContentBody } = useSlateSaveContent();
   const { errors } = useCreateNew();
-  const { editOrCreate, editNewID } = useEditOrCreate();
+  const { editNewID } = useEditOrCreate();
+  const router = useRouter();
 
   useEffect(() => {
     const handleGetValuesCreateNew = async () => {
       if (currentUser?.uid) {
-        setDocumentName("");
-        setGetDocValues(null);
         if (editOrCreate === "create") {
           const docsUserCreateNew = await getDocs(
             collection(db, "users", currentUser.uid, "userCreateNew")
@@ -109,17 +109,21 @@ const CreateYourNew = () => {
           }
         }
         if (editOrCreate === "edit") {
-          const docEditNew = doc(
-            db,
-            "users",
-            currentUser.uid,
-            "userCreateNew",
-            editNewID
-          );
-          const getDocEditNew = await getDoc(docEditNew);
-
-          setDocumentName(getDocEditNew.data()?.idNewPost);
-          setGetDocValues(getDocEditNew);
+          if(editNewID !== ""){
+            const docEditNew = doc(
+              db,
+              "users",
+              currentUser.uid,
+              "userCreateNew",
+              editNewID
+            );
+            const getDocEditNew = await getDoc(docEditNew);
+  
+            setDocumentName(getDocEditNew.data()?.idNewPost);
+            setGetDocValues(getDocEditNew);
+          }else{
+            router.push("/user");
+          }
         }
       }
     };
@@ -180,10 +184,16 @@ const CreateYourNew = () => {
             {!previewContent && (
               <>
                 <div className="flex items-center space-x-1 justify-center">
-                  <h1 className=" text-4xl text-center mb-4">
-                    {t("titlePage")}
-                  </h1>
-                  <BiPencil className="w-12 h-12 mx-auto -rotate-12" />
+                  {editOrCreate === "create" ? (
+                    <h1 className=" text-4xl text-center mb-4">
+                      {t("titlePageCreate")}
+                    </h1>
+                  ) : (
+                    <h1 className=" text-4xl text-center mb-4">
+                      {t("titlePageEdit")}
+                    </h1>
+                  )}
+                  <BiPencil className="-mt-4 w-12 h-12 mx-auto -rotate-12" />
                 </div>
               </>
             )}
@@ -268,7 +278,11 @@ const CreateYourNew = () => {
       <div className=" max-w-sm h-[22rem] sm:h-96 mx-auto -rotate-1 my-3  sm:my-6 lg:col-span-2 lg:m-0 lg:mb-6 lg:mt-10 xl:max-w-md xl:h-[28rem] sticky top-20">
         <Image
           className="border-4 border-DarkBlueGray bg-DarkBlueGray rounded-xl mx-auto "
-          src="/giftCreatingNew.gif"
+          src={
+            editOrCreate === "create"
+              ? "/giftCreatingNew.gif"
+              : "/giftEditingNew.gif"
+          }
           alt="a person listen music"
           fill
         />

@@ -24,7 +24,7 @@ const UserNews = () => {
 
   const { currentUser } = useAuthValue();
   const { t } = useTranslation("user");
-  const { handleEditOrCreate,handleEditNewID } = useEditOrCreate();
+  const { handleEditNewID } = useEditOrCreate();
   const itemsLoading = new Array(1);
 
   useEffect(() => {
@@ -82,11 +82,13 @@ const UserNews = () => {
                     title={data.data().mainTitle}
                   />
                 </div>
-                <Link href={"/createNew"} className="w-full "
-                onClick={()=>{
-                  handleEditOrCreate("edit")
-                  handleEditNewID(data.data().idNewPost)
-                }}>
+                <Link
+                  href={"/editNew"}
+                  className="w-full "
+                  onClick={() => {
+                    handleEditNewID(data.data().idNewPost);
+                  }}
+                >
                   <div className="w-fit mx-auto mt-4 p-2 flex items-center space-x-2 bg-Lavender-Blue border-4 border-DarkBlueGray lg:hover:bg-DarkBlueGray lg:hover:text-white lg:hover:border-Blue-Gray rounded-xl -rotate-1 text-3xl xl:text-4xl text-DarkBlueGray cursor-pointer  transform ease-out duration-300 ">
                     <p>{t("editNew")}</p>
                     <BiPencil className="w-12 h-12 mx-auto -rotate-12" />
