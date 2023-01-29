@@ -48,7 +48,8 @@ const User: NextPageWithLayout = () => {
 
     if (currentUser && profile === "profile") {
       handleDocUser();
-    } else if (profile === "account") {
+    } 
+    if(!currentUser){
       router.push("/");
     }
   }, [currentUser, done]);

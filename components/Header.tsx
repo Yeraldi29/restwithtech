@@ -1,7 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Logo from "./header/Logo";
 import Input from "./header/Input";
-import { useTranslation } from "next-i18next";
 import Account from "./header/Account";
 import Navbar from "./header/Navbar";
 import Language from "./header/Language";
@@ -12,7 +11,6 @@ import { postNewExpand } from "../store/store";
 import Notifications from "./header/Navbar/Notifications";
 
 const Header = () => {
-  const { t } = useTranslation("header");
   const { profile } = useAuthValue();
   const expand = useContext(postNewExpand);
   const { NewExpand } = expand;

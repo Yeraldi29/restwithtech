@@ -28,21 +28,25 @@ const EditNew = () => {
             router.push("/user");
           }
         }
-        if (!currentUser) {
-          router.push("/");
-        }
-      }
+    }
     };
     handleurlPost();
-  }, [currentUser]);
+    if (!currentUser) {
+      router.push("/");
+    }
+}, [currentUser]);
 
   return (
     <>
-      <Head>
-        <title>{t("titlePageEdit")}</title>
-        <link rel="icon" href="/icon.png" />
-      </Head>
-      <CreateYourNew editOrCreate="edit" />
+      {currentUser && (
+        <>
+          <Head>
+            <title>{t("titlePageEdit")}</title>
+            <link rel="icon" href="/icon.png" />
+          </Head>
+          <CreateYourNew editOrCreate="edit" />
+        </>
+      )}
     </>
   );
 };

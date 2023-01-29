@@ -29,21 +29,25 @@ const CreateNew: NextPageWithLayout = () => {
             router.push("/user");
           }
         }
-        if (!currentUser) {
-          router.push("/");
-        }
       }
     };
     handleurlPost();
+    if (!currentUser) {
+      router.push("/");
+    }
   }, [currentUser]);
 
   return (
     <>
-      <Head>
-        <title>{t("titlePageCreate")}</title>
-        <link rel="icon" href="/icon.png" />
-      </Head>
-      <CreateYourNew editOrCreate="create" />
+      {currentUser && (
+        <>
+          <Head>
+            <title>{t("titlePageCreate")}</title>
+            <link rel="icon" href="/icon.png" />
+          </Head>
+          <CreateYourNew editOrCreate="create" />
+        </>
+      )}
     </>
   );
 };
