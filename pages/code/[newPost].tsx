@@ -118,16 +118,14 @@ export const getStaticPaths = async ({locales}: {locales: Array<string>}) => {
     query(collection(db, "news"), where("category", "==", "code"))
   );
 
-  const paths = data.docs
-    .flatMap((item) => {
+  const paths = data.docs.flatMap((item) => {
       return locales.map((locale) => {
         return {
           params: { newPost: `${item.data().mainTitle}` },
           locale: locale,
         };
       });
-    })
-    .concat(
+    }).concat(
       code.flatMap((item) => {
         return locales.map((locale) => {
           return {
