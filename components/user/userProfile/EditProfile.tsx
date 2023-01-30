@@ -1,4 +1,4 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { useTranslation } from "next-i18next";
 import { useState, useEffect } from "react";
 import { db } from "../../../firebase";
@@ -15,6 +15,7 @@ interface EditProfileProps {
   skill2Profile: string;
   skill3Profile: string;
   professionProfile: string;
+  docUserNoExist: boolean;
 }
 
 const EditProfile = ({
@@ -23,6 +24,7 @@ const EditProfile = ({
   skill2Profile,
   skill3Profile,
   professionProfile,
+  docUserNoExist,
 }: EditProfileProps) => {
   const initialValues = {
     description: descriptionProfile,
@@ -104,13 +106,17 @@ const EditProfile = ({
       setLoading(true);
       if (currentUser?.uid) {
         const userDoc = doc(db, "users", currentUser.uid);
-        await updateDoc(userDoc, {
-          descriptionProfile: profileValues.description,
-          skill1: profileValues.skill1,
-          skill2: profileValues.skill2,
-          skill3: profileValues.skill3,
-          profession: profileValues.profession,
-        })
+
+        if (docUserNoExist) {
+          await setDoc(userDoc, {
+            uid: currentUser.uid,
+            userName: currentUser.displayName,
+            descriptionProfile: profileValues.description,
+            skill1: profileValues.skill1,
+            skill2: profileValues.skill2,
+            skill3: profileValues.skill3,
+            profession: profileValues.profession,
+          })
           .then(() => {
             handleDone(true);
             handleEditProfile(false);
@@ -119,6 +125,23 @@ const EditProfile = ({
             handleDone(false);
             handleEditProfile(true);
           });
+        } else {
+          await updateDoc(userDoc, {
+            descriptionProfile: profileValues.description,
+            skill1: profileValues.skill1,
+            skill2: profileValues.skill2,
+            skill3: profileValues.skill3,
+            profession: profileValues.profession,
+          })
+            .then(() => {
+              handleDone(true);
+              handleEditProfile(false);
+            })
+            .catch(() => {
+              handleDone(false);
+              handleEditProfile(true);
+            });
+        }
       }
       setLoading(false);
     }
@@ -127,7 +150,7 @@ const EditProfile = ({
   return (
     <div className="lg:w-[38rem] xl:w-[52rem] lg:flex lg:justify-center ">
       <div className="border-4 border-DarkBlueGray text-BlueDarker rounded-xl mt-4 p-2 sm:max-w-md sm:mx-auto lg:m-0 ">
-        {descriptionProfile === "" && (
+        {(profileValues.description === "" || docUserNoExist) && (
           <h3 className="text-red-500 text-lg text-center">
             {t("warningEdit")}
           </h3>

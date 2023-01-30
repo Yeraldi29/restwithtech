@@ -1,28 +1,32 @@
-import { getAuth, GithubAuthProvider, signInWithRedirect } from 'firebase/auth'
-import { useState } from 'react'
+import { getAuth, GithubAuthProvider, signInWithRedirect } from "firebase/auth";
+import { useState } from "react";
 
 const useGithubSession = () => {
-    const [isPending, setIsPending] = useState(false)
-    const [error, setError] = useState("")
-    
-    const auth = getAuth()
-    const provider = new GithubAuthProvider()
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState("");
 
-    const github = async () => {
-        setError("")
-        setIsPending(true)
+  const auth = getAuth();
+  const provider = new GithubAuthProvider();
 
-        await signInWithRedirect(auth, provider).then(()=>{
-            setIsPending(false)
-        }).catch(err => {
-            console.log("🚀 ~ file: useGithubSession.tsx ~ line 19 ~ awaitsignInWithRedirect ~ err.message ",err.message)
-            setError(err.message)
-            setIsPending(false)
-        })
-    }
+  const github = async () => {
+    setError("");
+    setIsPending(true);
 
-    return { github, isPending, error}
-  
-}
+    await signInWithRedirect(auth, provider)
+      .then(() => {
+        setIsPending(false);
+      })
+      .catch((err) => {
+        console.log(
+          "🚀 ~ file: useGithubSession.tsx ~ line 19 ~ awaitsignInWithRedirect ~ err.message ",
+          err.message
+        );
+        setError(err.message);
+        setIsPending(false);
+      });
+  };
 
-export default useGithubSession
+  return { github, isPending, error };
+};
+
+export default useGithubSession;

@@ -9,10 +9,12 @@ import { db } from "../../firebase";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import CreateYourNew from "../../components/createNew/CreateYourNew";
+import { useUserProfileContent } from "../../store/UserContext";
 
 const CreateNew: NextPageWithLayout = () => {
   const { currentUser } = useAuthValue();
   const router = useRouter();
+  const { handleEditProfile } = useUserProfileContent();
   const { t } = useTranslation("createNew");
 
   useEffect(() => {
@@ -24,9 +26,13 @@ const CreateNew: NextPageWithLayout = () => {
         );
         const getDocUser = await getDocs(docUser);
 
-        if (!getDocUser.empty) {
+        if (getDocUser.empty) {
+          router.push("/user");
+          handleEditProfile(true);
+        } else {
           if (getDocUser.docs[0].data().descriptionProfile === "") {
             router.push("/user");
+            handleEditProfile(true);
           }
         }
       }

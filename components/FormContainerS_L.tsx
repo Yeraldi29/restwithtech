@@ -25,7 +25,6 @@ const FormContainerS_L = ({ title, tryAccount, account, change, option, forgotPa
     })
     const { github, isPending,error } = useGithubSession()
     const { google, isPending2, error2 } = useGoogleSession()
-    const router = useRouter()
 
     const handleGithub = () => {
         setAnimation({animation:true,icon:1})

@@ -9,13 +9,16 @@ import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { storage } from "../../firebase";
 import Loading from "../Loading";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 const UserProfile = ({
   descriptionProfile,
   loadingProfile,
+  userProfile,
 }: {
   descriptionProfile: string;
   loadingProfile: boolean;
+  userProfile: QueryDocumentSnapshot<DocumentData> | null;
 }) => {
   const [imageUser, setImageUser] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,11 +36,6 @@ const UserProfile = ({
       setImageUser(currentUser?.photoURL);
     }
   }, [currentUser]);
-  
-  useEffect(()=>{
-    console.log("🚀 ~ file: UserProfile.tsx:20 ~ descriptionProfile", descriptionProfile)
-
-  },[])
 
   useEffect(() => {
     if (imageProfile && updateImage) {
@@ -99,28 +97,31 @@ const UserProfile = ({
         {loading ? (
           <Loading />
         ) : (
-          descriptionProfile !== "" && descriptionProfile &&
           !loadingProfile && (
             <>
-              {editProfile && (
-                <div
-                  className={`w-fit mx-auto -mb-4${
-                    loading ? "-mt-2" : " -mt-8"
-                  }`}
-                >
-                  <UploadImage
-                    handleUpdateImage={handleUpdateImage}
-                    message={t("changeImage")}
-                  />
-                </div>
+              {descriptionProfile !== "" && descriptionProfile && (
+                <>
+                  {editProfile && (
+                    <div
+                      className={`w-fit mx-auto -mb-4${
+                        loading ? "-mt-2" : " -mt-8"
+                      }`}
+                    >
+                      <UploadImage
+                        handleUpdateImage={handleUpdateImage}
+                        message={t("changeImage")}
+                      />
+                    </div>
+                  )}
+                  <div
+                    className={`text-white xl:text-lg bg-DarkBlueGray mb-2 ${
+                      !editProfile && "mt-4"
+                    } p-2 border-4 border-Blue-Gray rounded-xl`}
+                  >
+                    <p>{descriptionProfile}</p>
+                  </div>
+                </>
               )}
-              <div
-                className={`text-white xl:text-lg bg-DarkBlueGray mb-2 ${
-                  !editProfile && "mt-4"
-                } p-2 border-4 border-Blue-Gray rounded-xl`}
-              >
-                <p>{descriptionProfile}</p>
-              </div>
               {!editProfile && (
                 <div
                   className="w-fit mx-auto mb-3 p-2 border-4 border-DarkBlueGray bg-Lavender-Blue hover:bg-DarkBlueGray hover:text-white hover:border-Blue-Gray rounded-xl -rotate-1 text-xl xl:text-2xl text-DarkBlueGray cursor-pointer  transform ease-out duration-300"

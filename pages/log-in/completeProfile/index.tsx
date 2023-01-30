@@ -46,8 +46,8 @@ const CompleteProfile:NextPageWithLayout = () => {
         if(docs.length === 0){
           const docRef = doc(db, `users/${uid}`)
           await setDoc(docRef,{
-              userName,
-              uid,
+              userName: userName,
+              uid: uid,
               descriptionProfile:"",
               skill1:"",
               skill2:"",

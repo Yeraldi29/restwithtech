@@ -25,6 +25,7 @@ const User: NextPageWithLayout = () => {
   const [userProfile, setUserProfile] =
     useState<QueryDocumentSnapshot<DocumentData> | null>(null);
   const [loading, setLoading] = useState(true);
+  const [docUserNoExist, setDocUserNoExist] = useState(false);
 
   const { currentUser, profile } = useAuthValue();
 
@@ -41,15 +42,20 @@ const User: NextPageWithLayout = () => {
           where("uid", "==", currentUser.uid)
         );
         const getDocUser = await getDocs(docUser);
-        setUserProfile(getDocUser.docs[0]);
+
+        if (getDocUser.empty) {
+          setDocUserNoExist(true)
+        } else {
+          setUserProfile(getDocUser.docs[0]);
+          setDocUserNoExist(false)
+        }
         setLoading(false);
       }
     };
 
     if (currentUser && profile === "profile") {
       handleDocUser();
-    } 
-    if(!currentUser){
+    }else if (profile === "account") {
       router.push("/");
     }
   }, [currentUser, done]);
@@ -60,22 +66,37 @@ const User: NextPageWithLayout = () => {
         <title>{t("user")}</title>
         <link rel="icon" href="/icon.png" />
       </Head>
-      {currentUser && profile && (
+      {currentUser && profile === "profile" && (
         <div className="lg:grid md:mt-4 xl:mt-8 lg:gap-x-2 lg:grid-cols-5 ">
           <div className="relative lg:flex lg:space-x-3 lg:col-span-2 ">
             <UserProfile
-              descriptionProfile={userProfile?.data().descriptionProfile}
+              descriptionProfile={userProfile?.data()?.descriptionProfile}
               loadingProfile={loading}
+              userProfile={userProfile}
             />
           </div>
           {editProfile && !loading ? (
+           <>
+           {docUserNoExist ? (
+             <EditProfile
+             descriptionProfile={""}
+             skill1Profile={""}
+             skill2Profile={""}
+             skill3Profile={""}
+             professionProfile={""}
+             docUserNoExist={docUserNoExist}
+           />
+           ):(
             <EditProfile
-              descriptionProfile={userProfile?.data().descriptionProfile}
-              skill1Profile={userProfile?.data().skill1}
-              skill2Profile={userProfile?.data().skill2}
-              skill3Profile={userProfile?.data().skill3}
-              professionProfile={userProfile?.data().profession}
-            />
+            descriptionProfile={userProfile?.data()?.descriptionProfile}
+            skill1Profile={userProfile?.data()?.skill1}
+            skill2Profile={userProfile?.data()?.skill2}
+            skill3Profile={userProfile?.data()?.skill3}
+            professionProfile={userProfile?.data()?.profession}
+            docUserNoExist={docUserNoExist}
+          />
+           )}
+           </>
           ) : (
             <UserNews />
           )}
