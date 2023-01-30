@@ -1,4 +1,5 @@
 import { getAuth, GithubAuthProvider, signInWithRedirect } from "firebase/auth";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const useGithubSession = () => {
@@ -6,6 +7,7 @@ const useGithubSession = () => {
   const [error, setError] = useState("");
 
   const auth = getAuth();
+  const router = useRouter();
   const provider = new GithubAuthProvider();
 
   const github = async () => {
