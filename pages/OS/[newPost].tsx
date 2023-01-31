@@ -22,6 +22,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import LoadingNew from "../../components/loading/LoadingNew";
+import i18nextConfig from '../../next-i18next.config';
 
 const New: NextPageWithLayout = () => {
   const router = useRouter();
@@ -109,7 +110,7 @@ const New: NextPageWithLayout = () => {
 
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ["header", "newPost", "common"])),
+    ...(await serverSideTranslations(locale, ["header", "newPost", "common"],i18nextConfig)),
   },
 });
 
