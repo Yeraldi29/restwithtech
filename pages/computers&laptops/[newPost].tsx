@@ -1,7 +1,6 @@
 import { ReactElement, useState, useEffect } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { NextPageWithLayout } from "../_app";
 import { C_L } from "../../arrays/feedImages/C_L";
@@ -18,14 +17,12 @@ import {
   orderBy,
   query,
   QuerySnapshot,
-  where,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import LoadingNew from "../../components/loading/LoadingNew";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-const New: NextPageWithLayout = () => {
-  const router = useRouter();
-  const { newPost } = router.query;
+const New: NextPageWithLayout = ({newPost}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [getData, setGetData] = useState<DocumentSnapshot<DocumentData> | null>(
     null
   );
@@ -38,13 +35,13 @@ const New: NextPageWithLayout = () => {
 
   useEffect(() => {
     const handleGetDoc = async () => {
-      const falseData = await C_L.filter((data) => data.title === newPost);
+      const falseData = await C_L.filter((data) => data.title === newPost.newPost);
 
       if (falseData.length === 0) {
-        const docData = await getDoc(doc(db, `news/${newPost}`));
+        const docData = await getDoc(doc(db, `news/${newPost.newPost}`));
         const contentData = await getDocs(
           query(
-            collection(db, "news", `${newPost}`, "content"),
+            collection(db, "news", `${newPost.newPost}`, "content"),
             orderBy("order")
           )
         );
@@ -63,7 +60,7 @@ const New: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>{newPost}</title>
+        <title>{newPost.newPost}</title>
         <link rel="icon" href="/icon.png" />
       </Head>
       {loading ? (
@@ -107,31 +104,15 @@ const New: NextPageWithLayout = () => {
   );
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ["header", "newPost", "common"])),
-  },
-});
-
-export const getStaticPaths = async ({locales}: {locales: Array<string>}) => {
-  const data = await getDocs(
-    query(collection(db, "news"), where("category", "==", "computers&laptops"))
-  );
-
-  const paths = data.docs.flatMap((item) => (
-    locales.map((locale) => ({
-       params: { newPost: item.data().mainTitle },
-       locale: locale,
-    }))
-  )).concat(
-      C_L.flatMap((item) => (
-        locales.map((locale) => ({
-           params: { newPost: item.title },
-           locale: locale,
-        }))
-      ))
-    );
-  return { paths, fallback: true };
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { locale, params } = context
+  
+  return {
+    props: {
+      ...await serverSideTranslations(locale as string, ["header", "newPost", "common"]),
+       newPost : params
+    }
+  }
 };
 
 New.getLayout = function getLayout(page: ReactElement) {

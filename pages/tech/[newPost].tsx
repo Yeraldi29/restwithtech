@@ -1,7 +1,6 @@
 import { ReactElement, useState, useEffect } from "react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import { NextPageWithLayout } from "../_app";
 import { tech } from "../../arrays/feedImages/tech";
@@ -18,15 +17,12 @@ import {
   orderBy,
   query,
   QuerySnapshot,
-  where,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import LoadingNew from "../../components/loading/LoadingNew";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
 const New: NextPageWithLayout = ({newPost}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const router = useRouter();
-  // const { newPost } = router.query;
   const [getData, setGetData] = useState<DocumentSnapshot<DocumentData> | null>(
     null
   );
@@ -118,43 +114,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
   }
 };
-
-// export const getStaticProps = async ({ locale }: { locale: string }) => ({
-//   props: {
-//     ...(await serverSideTranslations(locale, ["header", "newPost", "common"])),
-//   },
-// });
-
-// export const getStaticPaths = async ({locales}: {locales: Array<string>}) => {
-//   const data = await getDocs(query(collection(db, "news"), where("category", "==", "tech")));
-
-//   let paths:{
-//     params: {
-//         newPost: any;
-//     };
-//     locale: string;
-//   }[] = []
-  
-//   data.docs.map((item) => {
-//     return locales.map(locale => {
-//       return paths.push({
-//         params: { newPost: `${item.data().mainTitle}` },
-//         locale: locale,
-//       })
-//     })
-//   }).concat(
-//     tech.map((item) => {
-//       return locales.map(locale => {
-//         return paths.push({
-//           params: { newPost: `${item.title}` },
-//           locale: locale,
-//         })
-//       })
-//     })
-//   )
-
-//   return { paths, fallback: true };
-// };
 
 New.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
