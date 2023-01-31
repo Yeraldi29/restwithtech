@@ -22,10 +22,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 import LoadingNew from "../../components/loading/LoadingNew";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
-const New: NextPageWithLayout = () => {
+const New: NextPageWithLayout = ({newPost}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const { newPost } = router.query;
+  // const { newPost } = router.query;
   const [getData, setGetData] = useState<DocumentSnapshot<DocumentData> | null>(
     null
   );
@@ -38,13 +39,13 @@ const New: NextPageWithLayout = () => {
 
   useEffect(() => {
     const handleGetDoc = async () => {
-      const falseData = await tech.filter((data) => data.title === newPost);
+      const falseData = await tech.filter((data) => data.title === newPost.newPost);
 
       if (falseData.length === 0) {
-        const docData = await getDoc(doc(db, `news/${newPost}`));
+        const docData = await getDoc(doc(db, `news/${newPost.newPost}`));
         const contentData = await getDocs(
           query(
-            collection(db, "news", `${newPost}`, "content"),
+            collection(db, "news", `${newPost.newPost}`, "content"),
             orderBy("order")
           )
         );
@@ -63,7 +64,7 @@ const New: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>{newPost}</title>
+        <title>{newPost.newPost}</title>
         <link rel="icon" href="/icon.png" />
       </Head>
       {loading ? (
@@ -107,42 +108,53 @@ const New: NextPageWithLayout = () => {
   );
 };
 
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, [ "header", "newPost", "common" ])),
-  },
-});
-
-export const getStaticPaths = async ({locales}: {locales: Array<string>}) => {
-  const data = await getDocs(query(collection(db, "news"), where("category", "==", "tech")));
-
-  let paths:{
-    params: {
-        newPost: any;
-    };
-    locale: string;
-  }[] = []
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { locale, params } = context
   
-  data.docs.map((item) => {
-    return locales.map(locale => {
-      return paths.push({
-        params: { newPost: `${item.data().mainTitle}` },
-        locale: locale,
-      })
-    })
-  }).concat(
-    tech.map((item) => {
-      return locales.map(locale => {
-        return paths.push({
-          params: { newPost: `${item.title}` },
-          locale: locale,
-        })
-      })
-    })
-  )
-
-  return { paths, fallback: 'blocking' };
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, [ "header", "newPost", "common" ])),
+       newPost : params
+    }
+  }
 };
+
+// export const getStaticProps = async ({ locale }: { locale: string }) => ({
+//   props: {
+//     ...(await serverSideTranslations(locale, ["header", "newPost", "common"])),
+//   },
+// });
+
+// export const getStaticPaths = async ({locales}: {locales: Array<string>}) => {
+//   const data = await getDocs(query(collection(db, "news"), where("category", "==", "tech")));
+
+//   let paths:{
+//     params: {
+//         newPost: any;
+//     };
+//     locale: string;
+//   }[] = []
+  
+//   data.docs.map((item) => {
+//     return locales.map(locale => {
+//       return paths.push({
+//         params: { newPost: `${item.data().mainTitle}` },
+//         locale: locale,
+//       })
+//     })
+//   }).concat(
+//     tech.map((item) => {
+//       return locales.map(locale => {
+//         return paths.push({
+//           params: { newPost: `${item.title}` },
+//           locale: locale,
+//         })
+//       })
+//     })
+//   )
+
+//   return { paths, fallback: true };
+// };
 
 New.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
