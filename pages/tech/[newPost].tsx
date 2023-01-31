@@ -141,7 +141,7 @@ export const getStaticPaths = async ({locales}: {locales: Array<string>}) => {
     })
   )
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 New.getLayout = function getLayout(page: ReactElement) {
