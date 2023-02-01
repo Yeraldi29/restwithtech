@@ -24,5 +24,6 @@
         "hours":"{{currentHours}} hours ago",
         "yesterday":"Yesterday",
         "beforeYesterday":"Before yesterday"
-    }
+    },
+    "messageNew":"Read new."
 }

@@ -24,5 +24,6 @@
         "hours":"Hace {{currentHours}} horas",
         "yesterday":"Ayer",
         "beforeYesterday":"Antes de ayer"
-    }
+    },
+    "messageNew":"Leer noticia."
 }
