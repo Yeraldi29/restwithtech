@@ -53,9 +53,7 @@ const ItemPost = ({
           <Link
             href={`/${category}/${title}`}
             locale={router.locale}
-            className={`relative group bg-DarkBlueGray w-full h-96 md:h-[26rem] lg:h-[31rem] ${
-              index % 2 === 0 ? "-rotate-1" : "even:rotate-1"
-            }  rounded-xl cursor-pointer border-4 border-Blue-Gray `}
+            className={`relative group bg-DarkBlueGray w-full h-96 md:h-[26rem] lg:h-[31rem] rounded-xl cursor-pointer border-4 border-Blue-Gray `}
             onMouseOver={() => setAnimation({ ...animation, hover: true })}
             onMouseLeave={() => setAnimation({ ...animation, hover: false })}
             onClick={() => setAnimation({ ...animation, clicked: true })}

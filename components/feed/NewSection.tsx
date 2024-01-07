@@ -30,7 +30,7 @@ const NewSection = ({ fakeData, data, title, message,presentationImage, loading 
      {( message && presentationImage)  && (<Presentation message={message} presentationImage={presentationImage} title={title}/>)}
 
       <div className={`md:col-span-2 mx-auto ${(title === t("recent")) ? "hidden": router.asPath !== "/" ? "hidden ":"lg:col-span-3 mt-4"}`}>      
-        <h2 className="text-Blue-Gray text-2xl rotate-1 px-2 border-b-4 border-DarkBlueGray  w-fit">{title}</h2>
+        <h2 className="text-Blue-Gray text-2xl px-2 border-b-4 border-DarkBlueGray  w-fit">{title}</h2>
       </div>
       {loading ? (<>
         {[...itemsLoading].map((noValues,index)=>(

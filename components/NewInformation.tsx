@@ -132,7 +132,7 @@ const NewInformation = ({
               profileImage && <ImageProfile src={profileImage} />
             )}
           </div>
-          <div className=" col-span-3 relative bg-DarkBlueGray w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl rotate-1  border-4 border-DarkBlueGray">
+          <div className=" col-span-3 relative bg-DarkBlueGray w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl  border-4 border-DarkBlueGray">
             <picture className="w-full h-full">
               <img
                 className="w-full h-full rounded-lg"

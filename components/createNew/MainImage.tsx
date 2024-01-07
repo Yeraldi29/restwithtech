@@ -82,8 +82,8 @@ const MainImage = ({ getDocumentName, getDocValues, previewContent }:createNewPr
       {!previewContent && (<>
         <div className="  mb-4 w-fit p-1 bg-DarkBlueGray rounded-xl flex items-center space-x-1 text-white border-4 border-Blue-Gray edit " 
         onClick={handleClickFile} >
-          <BiEdit className="w-12 h-12 -rotate-12" />
-          <h3 className="text-xl rotate-12">{t("edit")}</h3>
+          <BiEdit className="w-12 h-12" />
+          <h3 className="text-xl">{t("edit")}</h3>
         </div> 
         <input onChange={addMainImage} ref={inputFileRef} type="file" name="file" hidden/>
       </>)}

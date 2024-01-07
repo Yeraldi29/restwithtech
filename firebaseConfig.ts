@@ -4,6 +4,6 @@ const firebaseConfig = {
     projectId:process.env.PROJECTID,
     storageBucket:process.env.STORAGEBUCKET,
     messagingSenderId:process.env.MESAGGINSENDERID,
-    appId:process.env.APPID
+    appId:process.env.APPID,
 }
 export default firebaseConfig

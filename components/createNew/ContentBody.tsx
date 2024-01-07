@@ -154,7 +154,7 @@ const ContentBody = ({ dataParagraph, dataImage, option, order, getDocumentName,
       )} 
       {(dataImage && option === "image") && (
         <div className={`${previewContent && "mx-2"}`}>
-        <div className={`${!previewContent ? "mt-4" :" my-4 "} col-span-3 relative bg-DarkBlueGray w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl rotate-1  border-4 border-DarkBlueGray break-words `}>
+        <div className={`${!previewContent ? "mt-4" :" my-4 "} col-span-3 relative bg-DarkBlueGray w-full h-[22rem] sm:h-[27rem] md:h-[30rem] lg:h-[28rem] xl:h-[32rem] rounded-xl  border-4 border-DarkBlueGray break-words `}>
             <div className="relative w-full h-full">
                 <Image className="rounded-lg" src={dataImage} alt={"image content"} fill />
             </div>
